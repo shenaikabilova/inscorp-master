@@ -1,7 +1,7 @@
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import kabilova.tu.inscorp.user.User;
+import kabilova.tu.inscorp.model.user.User;
 
 import java.util.List;
 

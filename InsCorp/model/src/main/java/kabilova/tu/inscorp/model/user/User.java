@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.user;
+package kabilova.tu.inscorp.model.user;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

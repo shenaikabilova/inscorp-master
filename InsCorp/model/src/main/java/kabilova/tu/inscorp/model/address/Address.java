@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.address;
+package kabilova.tu.inscorp.model.address;
 
 /**
  * Created by ShenaiKabilova

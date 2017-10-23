@@ -1,6 +1,6 @@
-package kabilova.tu.inscorp.claim;
+package kabilova.tu.inscorp.model.claim;
 
-import kabilova.tu.inscorp.tariff.Tariff;
+import kabilova.tu.inscorp.model.tariff.Tariff;
 
 /**
  * Created by ShenaiKabilova

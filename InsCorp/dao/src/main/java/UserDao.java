@@ -1,4 +1,4 @@
-import kabilova.tu.inscorp.user.User;
+import kabilova.tu.inscorp.model.user.User;
 
 /**
  * Created by ShenaiKabilova

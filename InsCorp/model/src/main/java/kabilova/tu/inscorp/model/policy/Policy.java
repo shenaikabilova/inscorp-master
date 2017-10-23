@@ -1,7 +1,7 @@
-package kabilova.tu.inscorp.policy;
+package kabilova.tu.inscorp.model.policy;
 
-import kabilova.tu.inscorp.user.Insurer;
-import kabilova.tu.inscorp.tariff.Tariff;
+import kabilova.tu.inscorp.model.user.Insurer;
+import kabilova.tu.inscorp.model.tariff.Tariff;
 
 import java.util.Calendar;
 

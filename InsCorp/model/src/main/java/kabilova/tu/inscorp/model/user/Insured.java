@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.user;
+package kabilova.tu.inscorp.model.user;
 
 /**
  * Created by ShenaiKabilova

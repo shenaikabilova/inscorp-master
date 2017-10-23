@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="kabilova.tu.inscorp.address.Address" table="address">
+    <class name="kabilova.tu.inscorp.model.address.Address" table="address">
         <id name="id" column="id" access="property">
             <generator class="increment"/>
         </id>

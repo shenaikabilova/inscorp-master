@@ -1,4 +1,4 @@
-import kabilova.tu.inscorp.web.Login;
+import kabilova.tu.inscorp.server.web.Login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

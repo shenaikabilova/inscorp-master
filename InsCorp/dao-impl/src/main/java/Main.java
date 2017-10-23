@@ -1,4 +1,4 @@
-import kabilova.tu.inscorp.user.Admin;
+import kabilova.tu.inscorp.model.user.Admin;
 
 /**
  * Created by ShenaiKabilova

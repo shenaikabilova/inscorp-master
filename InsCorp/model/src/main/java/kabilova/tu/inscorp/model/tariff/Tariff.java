@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.tariff;
+package kabilova.tu.inscorp.model.tariff;
 
 /**
  * Created by ShenaiKabilova

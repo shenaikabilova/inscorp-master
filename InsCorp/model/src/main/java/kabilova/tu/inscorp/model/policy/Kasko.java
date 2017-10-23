@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.policy;
+package kabilova.tu.inscorp.model.policy;
 
 /**
  * Created by ShenaiKabilova

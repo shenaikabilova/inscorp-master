@@ -4,12 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="kabilova.tu.inscorp.vehicle.Vehicle" table="vehicle">
+    <class name="kabilova.tu.inscorp.model.vehicle.Vehicle" table="vehicle">
         <id name="vehicleID" column="ID" type="int" access="property">
             <generator class="increment"/>
         </id>
 
-        <one-to-one name="insured" class="kabilova.tu.inscorp.user.Insured" access="property"/>
+        <one-to-one name="insured" class="kabilova.tu.inscorp.model.user.Insured" access="property"/>
 
         <property name="type" column="TYPE" type="string" access="property"/>
         <property name="brand" column="BRAND" type="string" access="property"/>

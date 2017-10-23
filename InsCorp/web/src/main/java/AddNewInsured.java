@@ -1,5 +1,3 @@
-import kabilova.tu.inscorp.user.Insured;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +19,7 @@ public class AddNewInsured extends HttpServlet {
         String country = request.getParameter("country");
         String city = request.getParameter("city");
         String address = request.getParameter("address");
+
 
     }
 }

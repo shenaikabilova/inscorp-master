@@ -1,6 +1,6 @@
-package kabilova.tu.inscorp.web;
+package kabilova.tu.inscorp.server.web;
 
-import kabilova.tu.inscorp.user.User;
+import kabilova.tu.inscorp.model.user.User;
 
 /**
  * Created by ShenaiKabilova

@@ -1,6 +1,6 @@
-package kabilova.tu.inscorp.vehicle;
+package kabilova.tu.inscorp.model.vehicle;
 
-import kabilova.tu.inscorp.user.Insured;
+import kabilova.tu.inscorp.model.user.Insured;
 
 import java.util.Calendar;
 
