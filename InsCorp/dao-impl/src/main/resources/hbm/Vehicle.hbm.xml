@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="kabilova.tu.inscorp.vehicle.Vehicle" table="vehicle">
+        <id name="vehicleID" column="ID" type="int" access="property">
+            <generator class="increment"/>
+        </id>
+
+        <one-to-one name="insured" class="kabilova.tu.inscorp.user.Insured" access="property"/>
+
+        <property name="type" column="TYPE" type="string" access="property"/>
+        <property name="brand" column="BRAND" type="string" access="property"/>
+        <property name="model" column="MODEL" type="string" access="property"/>
+        <property name="regNum" column="REGNUM" type="string" access="property"/>
+        <property name="RAMA" column="RAMA" type="string" access="property"/>
+        <property name="firstReg" column="FIRSTREG" type="calendar" access="property"/>
+        <property name="year" column="YEAR" type="int" access="property"/>
+        <property name="color" column="COLOR" type="string" access="property"/>
+        <property name="engine" column="ENGINE" type="float" access="property"/>
+        <property name="placeNumber" column="PLACENUMBER" type="int" access="property"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="kabilova.tu.inscorp.user.User" table="user">
+        <id name="id" column="ID" type="int" access="property">
+            <generator class="increment"/>
+        </id>
+
+        <discriminator column="USERTYPE" type="string"/>
+
+        <property name="firstName" column="FIRSTNAME" type="string" access="property"/>
+        <property name="secondName" column="SECONDNAME" type="string" access="property"/>
+        <property name="lastName" column="LASTNAME" type="string" access="property"/>
+        <property name="username" column="USERNAME" type="string" access="property"/>
+        <property name="password" column="PASSWORD" type="string" access="property"/>
+        <property name="phoneNumber" column="PHONENUMBER" type="string" access="property"/>
+        <property name="email" column="EMAIL" type="string" access="property"/>
+
+        <subclass name="kabilova.tu.inscorp.user.Insurer" discriminator-value="INSURER">
+            <property name="insurerID" column="INSURERID" type="int" access="property"/>
+        </subclass>
+
+        <subclass name="kabilova.tu.inscorp.user.Admin" discriminator-value="ADMIN">
+        </subclass>
+
+        <subclass name="kabilova.tu.inscorp.user.Insured" discriminator-value="INSURED">
+            <property name="egn" column="EGN" type="string" access="property"/>
+            <property name="phone" column="PHONE" type="string" access="property"/>
+            <property name="postCode" column="POSTCODE" type="int" access="property"/>
+            <property name="country" column="COUNTRY" type="string" access="property"/>
+            <property name="city" column="CITY" type="string" access="property"/>
+            <property name="address" column="ADDRESS" type="string" access="property"/>
+        </subclass>
+    </class>
+</hibernate-mapping>

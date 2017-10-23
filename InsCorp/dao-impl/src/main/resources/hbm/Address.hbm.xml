@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="kabilova.tu.inscorp.address.Address" table="address">
+        <id name="id" column="id" access="property">
+            <generator class="increment"/>
+        </id>
+
+        <property name="country" column="COUNTRY" type="string" access="property"/>
+        <property name="city" column="CITY" type="string" access="property"/>
+        <property name="street" column="STREET" type="string" access="property"/>
+        <property name="block" column="BLOCK" type="int" access="property"/>
+        <property name="floor" column="FLOOR" type="int" access="property"/>
+    </class>
+</hibernate-mapping>

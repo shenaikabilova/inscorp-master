@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>kabilova.tu.inscorp</groupId>
-    <artifactId>inscprp</artifactId>
+    <artifactId>inscorp</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -23,39 +23,54 @@
         <dependencies>
             <!--Modules dependencies-->
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>model</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>dao-imp</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>web</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>kabilova.tu.upr.imu</groupId>
+                <groupId>kabilova.tu.inscorp</groupId>
                 <artifactId>business-logic</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!--Other dependencies for current module-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.1</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
