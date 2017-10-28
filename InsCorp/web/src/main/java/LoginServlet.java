@@ -17,7 +17,7 @@ public class LoginServlet {
 
         Login login = new Login();
 //        try {
-//            UserDao dao = new UserDaoImpl();
+//            kabilova.tu.inscorp.dao.UserDao dao = new UserDaoImpl();
 //            if(dao.loadUser(username, password) instanceof Admin) {
 //                Cookie loginCookie = new Cookie("user", username);
 //                loginCookie.setMaxAge(60*60*24);

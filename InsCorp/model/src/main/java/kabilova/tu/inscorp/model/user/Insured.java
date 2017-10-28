@@ -5,7 +5,6 @@ package kabilova.tu.inscorp.model.user;
  */
 public class Insured extends User {
     private String egn;
-    private String phone;
     private int postCode;
     private String country;
     private String city;
@@ -15,11 +14,9 @@ public class Insured extends User {
     }
 
     public Insured(int id, String firstName, String secondName, String lastName, String username, String password,
-                   String phoneNumber, String email, String egn, String phone,
-                   int postCode, String country, String city, String address ) {
+                   String egn, int postCode, String country, String city, String address, String phoneNumber, String email ) {
         super(id, firstName, secondName, lastName, username, password, phoneNumber, email);
         this.egn = egn;
-        this.phone = phone;
         this.postCode = postCode;
         this.country = country;
         this.country = city;
@@ -27,11 +24,9 @@ public class Insured extends User {
     }
 
     public Insured(String firstName, String secondName, String lastName, String username, String password,
-                   String phoneNumber, String email, String egn, String phone,
-                   int postCode, String country, String city, String address ) {
+                   String egn, int postCode, String country, String city, String address, String phoneNumber, String email ) {
         super(firstName, secondName, lastName, username, password, phoneNumber, email);
         this.egn = egn;
-        this.phone = phone;
         this.postCode = postCode;
         this.country = country;
         this.country = city;
@@ -55,14 +50,6 @@ public class Insured extends User {
 
     public void setEgn(String egn) {
         this.egn = egn;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getCity() {

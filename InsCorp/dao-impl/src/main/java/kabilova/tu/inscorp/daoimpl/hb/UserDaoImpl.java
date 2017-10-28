@@ -1,3 +1,7 @@
+package kabilova.tu.inscorp.daoimpl.hb;
+
+import kabilova.tu.inscorp.dao.UserDao;
+import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -8,7 +12,7 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     @Override
     public User loadUser(String username, String password) {
         if (username == null || username.equals("")) {
@@ -61,7 +65,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void dalete(User user) {
+    public void delete(User user) {
 
     }
 }

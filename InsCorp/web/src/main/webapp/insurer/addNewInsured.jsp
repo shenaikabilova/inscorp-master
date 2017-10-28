@@ -71,7 +71,7 @@
             </div>
         </div>
 
-    <form action="addNewInsured" method="post">
+    <form action="/addNewInsured" method="post">
         Добавяне на нов клиент<br>
         <label>Име</label>
         <input type="text" id="firstName" name="firstName" placeholder="Име" maxlength="50">
@@ -79,6 +79,11 @@
         <input type="text" id="secondName" name="secondName" placeholder="Презиме" maxlength="50">
         <label>Фамилия</label>
         <input type="text" id="lastName" name="lastName" placeholder="Фамилия" maxlength="50"><br>
+
+        <label>Потребителско име</label>
+        <input type="text" id="username" name="username" placeholder="Потребителско име" maxlength="50">
+        <label>Парола</label>
+        <input type="text" id="password" name="password" placeholder="Парола" maxlength="50">
 
         <label>ЕГН</label>
         <input type="number" id="EGN" name="EGN" placeholder="ЕГН" maxlength="10">

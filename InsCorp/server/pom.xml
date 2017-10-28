@@ -13,9 +13,16 @@
 
     <dependencies>
         <!--Depedencies for other modules-->
+
         <dependency>
             <groupId>kabilova.tu.inscorp</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>business-logic</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>kabilova.tu.inscorp</groupId>
+            <artifactId>dao-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

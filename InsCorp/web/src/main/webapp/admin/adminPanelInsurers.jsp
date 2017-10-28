@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <%@page import="kabilova.tu.inscorp.model.user.Insurer"%>
-<%--<%@page import="UserDaoImpl"%>--%>
+<%--<%@page import="kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl"%>--%>
 <%--<%@page import="dao_api.InsurerDAO"%>--%>
 
 <%
