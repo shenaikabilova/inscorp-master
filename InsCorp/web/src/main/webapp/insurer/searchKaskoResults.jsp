@@ -29,7 +29,6 @@
         }
     %>
     <title><%=userName %></title>
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
 

@@ -8,21 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%--<%--%>
-    <%--String userName = null;--%>
-    <%--Cookie[] cookies = request.getCookies();--%>
-    <%--if(cookies != null) {--%>
-    <%--for(Cookie cookie: cookies) {--%>
-    <%--if(cookie.getName().equals("user")) {--%>
-    <%--userName = cookie.getValue();--%>
-    <%--}--%>
-    <%--}--%>
-    <%--}--%>
-    <%--if(userName == null) {--%>
-    <%--response.sendRedirect("login.jsp");--%>
-    <%--}--%>
-    <%--%>--%>
-    <%--<title><%=userName %></title>--%>
+    <%
+    String userName = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies != null) {
+    for(Cookie cookie: cookies) {
+    if(cookie.getName().equals("user")) {
+    userName = cookie.getValue();
+    }
+    }
+    }
+    if(userName == null) {
+    response.sendRedirect("login.jsp");
+    }
+    %>
+    <title><%=userName %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">

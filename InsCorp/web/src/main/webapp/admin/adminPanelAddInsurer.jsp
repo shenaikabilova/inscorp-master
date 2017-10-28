@@ -9,21 +9,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%--%>
-            <%--String userName = null;--%>
-            <%--Cookie[] cookies = request.getCookies();--%>
-            <%--if(cookies != null) {--%>
-                <%--for(Cookie cookie: cookies) {--%>
-                    <%--if(cookie.getName().equals("user")) {--%>
-                        <%--userName = cookie.getValue();--%>
-                    <%--}--%>
-                <%--}--%>
-            <%--}--%>
-            <%--if(userName == null) {--%>
-                <%--response.sendRedirect("login.jsp");--%>
-            <%--}--%>
-        <%--%>--%>
-        <%--<title><%=userName %></title>--%>
+        <%
+            String userName = null;
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null) {
+                for(Cookie cookie: cookies) {
+                    if(cookie.getName().equals("user")) {
+                        userName = cookie.getValue();
+                    }
+                }
+            }
+            if(userName == null) {
+                response.sendRedirect("login.jsp");
+            }
+        %>
+        <title><%=userName %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
         <script src="js/validate.js"></script>
@@ -54,6 +54,12 @@
                             <li><a href="tariffKasko.jsp">Каско</a></li>
                         </ul>
                     </li>
+                    <li><a href="#">МПС</a>
+                        <lu>
+                            <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                            <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                        </lu>
+                    </li>
                     <li><a href="AdminLogout">Изход</a></li>
                 </ul>
             </div>
@@ -73,15 +79,19 @@
                         </tr>
                         <tr>
                             <td><label>Име</label></td>
-                            <td><input type="text" class="field" name="insurerName" placeholder="Име" size="30" maxlength="50"></td>
+                            <td><input type="text" class="field" name="insurerFirstName" placeholder="Име" size="30" maxlength="50"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Презиме</label></td>
+                            <td><input type="text" id="secondName" name="insurerSecondName" placeholder="Презиме" size="50" maxlength="50"></td>
                         </tr>
                         <tr>
                             <td><label>Фамилия</label></td>
-                            <td><input type="text" class="field" name="insurerFamily" placeholder="Фамилия" size="30" maxlength="50"></td>
+                            <td><input type="text" class="field" name="insurerLastName" placeholder="Фамилия" size="30" maxlength="50"></td>
                         </tr>
                         <tr>
-                            <td><label>Е-майл</label></td>
-                            <td><input id="e-mail" type="text" class="field" placeholder="Е-майл" name="e-mail" size="30" onchange="validateEmail();" maxlength="100"></td>
+                            <td><label>Потребителско име</label></td>
+                            <td><input type="text" id="username" name="username" placeholder="Потребителско име" maxlength="50"></td>
                         </tr>
                         <tr>
                             <td><label>Парола</label></td>
@@ -90,6 +100,14 @@
                         <tr>
                             <td><label>Повторете парола</label></td>
                             <td><input type="password" class="field" name="password2" placeholder="Повторете паролата" size="30" maxlength="50"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Телфонен №</label></td>
+                            <td><input type="number" id="phoneNumber" name="phoneNumber" placeholder="Телефонен №"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Е-майл</label></td>
+                            <td><input id="e-mail" type="text" class="field" placeholder="Е-майл" name="e-mail" size="30" onchange="validateEmail();" maxlength="100"></td>
                         </tr>
                         <tr>
                             <td></td>

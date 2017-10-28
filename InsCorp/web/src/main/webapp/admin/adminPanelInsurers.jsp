@@ -7,18 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%@page import="kabilova.tu.inscorp.model.user.Insurer"%>
+<%--<%@page import="kabilova.tu.inscorp.model.user.Insurer"%>--%>
 <%--<%@page import="kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl"%>--%>
 <%--<%@page import="dao_api.InsurerDAO"%>--%>
 
-<%
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-    }
-    catch (Exception e) {
-        throw new UnavailableException(e.getMessage());
-    }
-%>
+<%--<%--%>
+    <%--try {--%>
+        <%--Class.forName("com.mysql.jdbc.Driver");--%>
+    <%--}--%>
+    <%--catch (Exception e) {--%>
+        <%--throw new UnavailableException(e.getMessage());--%>
+    <%--}--%>
+<%--%>--%>
 
 <html>
 <head>
@@ -37,7 +37,6 @@
         }
     %>
     <title><%=userName %></title>
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
 
@@ -56,6 +55,18 @@
                 <li><a href="adminPanelUpdateUser.jsp">Промени</a></li>
                 <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
             </ul>
+        </li>
+        <li><a href="#">МПС</a>
+            <lu>
+                <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+            </lu>
+        </li>
+        <li><a href="#">МПС</a>
+            <lu>
+                <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+            </lu>
         </li>
         <li><a href="AdminLogout">Изход</a></li>
     </ul>

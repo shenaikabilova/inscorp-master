@@ -11,14 +11,14 @@
 <%--<%@page import="model.GrajdanskaOtgovornost"%>--%>
 <%--<%@page import="dao_jdbc.GrajdanskaOtgovornostDAOImpl"%>--%>
 <%--<%@page import="dao_api.GrajdanskaOtgovornostDAO"%>--%>
-<%
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-    }
-    catch (Exception e) {
-        throw new UnavailableException(e.getMessage());
-    }
-%>
+<%--<%--%>
+    <%--try {--%>
+        <%--Class.forName("com.mysql.jdbc.Driver");--%>
+    <%--}--%>
+    <%--catch (Exception e) {--%>
+        <%--throw new UnavailableException(e.getMessage());--%>
+    <%--}--%>
+<%--%>--%>
 
 <html>
 <head>

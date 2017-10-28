@@ -1,19 +1,22 @@
 package kabilova.tu.inscorp.model.tariff;
 
+import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
+import kabilova.tu.inscorp.model.vehicle.VehicleType;
+
 /**
  * Created by ShenaiKabilova
  */
 public class Tariff {
     private int tariffID;
     private int zone;
-    private String vechileType;
-    private String vehicleSubtype;
+    private VehicleType vechileType;
+    private VehicleSubtype vehicleSubtype;
     private double value;
 
     public Tariff() {
     }
 
-    public Tariff(int tariffID, double value, String vechileType, String vehicleSubtype, int zone) {
+    public Tariff(int tariffID, double value, VehicleType vechileType, VehicleSubtype vehicleSubtype, int zone) {
         this.tariffID = tariffID;
         this.value = value;
         this.vechileType = vechileType;
@@ -37,19 +40,19 @@ public class Tariff {
         this.value = value;
     }
 
-    public String getVechileType() {
+    public VehicleType getVechileType() {
         return vechileType;
     }
 
-    public void setVechileType(String vechileType) {
+    public void setVechileType(VehicleType vechileType) {
         this.vechileType = vechileType;
     }
 
-    public String getVehicleSubtype() {
+    public VehicleSubtype getVehicleSubtype() {
         return vehicleSubtype;
     }
 
-    public void setVehicleSubtype(String vehicleSubtype) {
+    public void setVehicleSubtype(VehicleSubtype vehicleSubtype) {
         this.vehicleSubtype = vehicleSubtype;
     }
 

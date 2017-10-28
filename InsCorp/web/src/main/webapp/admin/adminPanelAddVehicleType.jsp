@@ -47,6 +47,12 @@
                         <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
                     </lu>
                 </li>
+                <li><a href="#">МПС</a>
+                    <lu>
+                        <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                        <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                    </lu>
+                </li>
                 <li><a href="AdminLogout">Изход</a></li>
             </ul>
         </div>
@@ -56,7 +62,7 @@
                 <form action="adminPanelAddVehicleType" method="post">
                     <label>Тип МПС</label>
                     <input type="text" name="vehicleType" placeholder="Тип МПС" maxlength="50">
-                    <input type="submit" value="Добави" name="adminPanelAddvehicleType">
+                    <input type="submit" value="Добави">
                 </form>
             </div>
         </div>

@@ -8,21 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <%--<%--%>
-            <%--String userName = null;--%>
-            <%--Cookie[] cookies = request.getCookies();--%>
-            <%--if(cookies != null) {--%>
-                <%--for(Cookie cookie: cookies) {--%>
-                    <%--if(cookie.getName().equals("user")) {--%>
-                        <%--userName = cookie.getValue();--%>
-                    <%--}--%>
-                <%--}--%>
-            <%--}--%>
-            <%--if(userName == null) {--%>
-                <%--response.sendRedirect("login.jsp");--%>
-            <%--}--%>
-        <%--%>--%>
-        <%--<title><%=userName %></title>--%>
+        <%
+            String userName = null;
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null) {
+                for(Cookie cookie: cookies) {
+                    if(cookie.getName().equals("user")) {
+                        userName = cookie.getValue();
+                    }
+                }
+            }
+            if(userName == null) {
+                response.sendRedirect("login.jsp");
+            }
+        %>
+        <title><%=userName %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
     </head>
 
@@ -41,6 +41,12 @@
                         <li><a href="adminPanelUpdateUser.jsp">Промени</a></li>
                         <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
                     </ul>
+                </li>
+                <li><a href="#">МПС</a>
+                    <lu>
+                        <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                        <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                    </lu>
                 </li>
                 <li><a href="AdminLogout">Изход</a></li>
             </ul>

@@ -5,12 +5,14 @@ package kabilova.tu.inscorp.model.vehicle;
  */
 public class VehicleSubtype {
     private int id;
+    private VehicleType vehicleType;
     private String subtype;
 
     public VehicleSubtype() { }
 
-    public VehicleSubtype(int id, String subtype) {
+    public VehicleSubtype(int id, VehicleType vehicleType, String subtype) {
         this.id = id;
+        this.vehicleType = vehicleType;
         this.subtype = subtype;
     }
 
@@ -20,6 +22,14 @@ public class VehicleSubtype {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getSubtype() {

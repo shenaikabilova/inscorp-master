@@ -25,7 +25,6 @@
         }
     %>
     <title><%=userName %></title>
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
 
@@ -44,6 +43,12 @@
                 <li><a href="adminPanelUpdateUser.jsp">Промени</a></li>
                 <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
             </ul>
+        </li>
+        <li><a href="#">МПС</a>
+            <lu>
+                <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+            </lu>
         </li>
         <li><a href="AdminLogout">Изход</a></li>
     </ul>

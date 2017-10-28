@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="kabilova.tu.inscorp.model.policy.Policy" table="policy">
+        <id name="policaID" column="ID" type="int" access="property">
+            <generator class="increment"/>
+        </id>
+
+        <discriminator column="POLICYTYPE" type="string"/>
+
+        <property name="dateFrom" column="DATEFROM" type="calendar" access="property"/>
+        <property name="dateTo" column="DATETO" type="calendar" access="property"/>
+        <one-to-one name="insurer" class="kabilova.tu.inscorp.model.user.Insurer" access="property"/>
+        <one-to-one name="tariff" class="kabilova.tu.inscorp.model.tariff.Tariff" access="property"/>
+    </class>
+</hibernate-mapping>

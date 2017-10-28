@@ -8,7 +8,6 @@ import java.util.Set;
 public class VehicleType {
     private int id;
     private String vehicleType;
-    private Set<VehicleSubtype> subtype;
 
     public VehicleType() { }
 
@@ -31,13 +30,5 @@ public class VehicleType {
 
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
-    }
-
-    public Set<VehicleSubtype> getSubtype() {
-        return subtype;
-    }
-
-    public void setSubtype(Set<VehicleSubtype> subtype) {
-        this.subtype = subtype;
     }
 }

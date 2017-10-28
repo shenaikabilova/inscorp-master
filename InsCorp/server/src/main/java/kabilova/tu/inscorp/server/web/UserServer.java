@@ -13,6 +13,8 @@ public class UserServer {
     private User user;
     private UserDao dao = new UserDaoImpl();
 
+    public UserServer() { }
+
     public UserServer(User user) {
         this.user = user;
         loginEP = new LoginEP(user, dao);
@@ -20,5 +22,9 @@ public class UserServer {
 
     public void createUser() {
         dao.create(user);
+    }
+
+    public User loadUser(String username, String password) {
+        return dao.loadUser(username, password);
     }
 }

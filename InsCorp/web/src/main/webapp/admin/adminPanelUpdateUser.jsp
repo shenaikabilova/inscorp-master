@@ -42,6 +42,12 @@
                 <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
             </ul>
         </li>
+        <li><a href="#">МПС</a>
+            <lu>
+                <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+            </lu>
+        </li>
         <li><a href="AdminLogout">Изход</a></li>
     </ul>
 </div>

@@ -26,7 +26,7 @@ public class AdminLogin extends HttpServlet {
             out.println("<table>");
             out.println("<tr>");
             out.println("<td><label for='userName'>Потребителско име</label></td>");
-            out.println("<td><input type='text' class='field' name='userName' placeholder='Потребителско име' maxlength='50'><br/></td>");
+            out.println("<td><input type='text' class='field' name='username' placeholder='Потребителско име' maxlength='50'><br/></td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td><label for='password'>Парола</label></td>");

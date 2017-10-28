@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="kabilova.tu.inscorp.model.tariff.Tariff" table="TARIFF">
+        <id name="tariffID" column="ID" type="int" access="property">
+            <generator class="increment"/>
+        </id>
+        
+        <property name="zone" column="ZONE" type="int" access="property"/>
+        <one-to-one name="vechileType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>
+        <one-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" access="property"/>
+        <property name="value" column="VALUE" type="double" access="property"/>
+    </class>
+</hibernate-mapping>

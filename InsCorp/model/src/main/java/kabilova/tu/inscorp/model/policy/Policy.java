@@ -10,8 +10,8 @@ import java.util.Calendar;
  */
 public abstract class Policy {
     private int policaID;
-    private Calendar dateTo;
     private Calendar dateFrom;
+    private Calendar dateTo;
     private Insurer insurer;
     private Tariff tariff;
 
