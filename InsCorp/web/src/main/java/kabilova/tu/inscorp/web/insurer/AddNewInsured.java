@@ -1,6 +1,9 @@
+package kabilova.tu.inscorp.web.insurer;
+
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.server.web.UserServer;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +16,10 @@ import java.io.IOException;
  */
 @WebServlet("/addNewInsured")
 public class AddNewInsured extends HttpServlet {
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         

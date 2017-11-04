@@ -1,3 +1,5 @@
+package kabilova.tu.inscorp.web.admin;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +27,7 @@ public class AdminLogin extends HttpServlet {
             out.println("<h3><center>Вход за аминистратор</center></h3>");
             out.println("<table>");
             out.println("<tr>");
-            out.println("<td><label for='userName'>Потребителско име</label></td>");
+            out.println("<td><label for='username'>Потребителско име</label></td>");
             out.println("<td><input type='text' class='field' name='username' placeholder='Потребителско име' maxlength='50'><br/></td>");
             out.println("</tr>");
             out.println("<tr>");

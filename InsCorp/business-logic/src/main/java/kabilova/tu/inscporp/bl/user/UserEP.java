@@ -8,17 +8,17 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-public class LoginEP {
+public class UserEP {
     private User user;
     private UserDao dao;
 
-    public LoginEP(User user, UserDao dao){
+    public UserEP(User user, UserDao dao){
         this.user = user;
         this.dao = dao;
     }
 
-    public User loadUser() {
-        return dao.loadUser(user.getUsername(), user.getPassword());
+    public User loadUser(String username, String password) {
+        return dao.loadUser(username, password);
     }
 
     public void createUser() {

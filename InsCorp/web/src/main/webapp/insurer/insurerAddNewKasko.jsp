@@ -10,7 +10,7 @@
 <%--<%@page import="dao_jdbc.KaskoDAOImpl"%>--%>
 <%--<%@page import="dao_api.KaskoDAO"%>--%>
 <%--<%@page import="dao_jdbc.VehicleTypeDAOImpl"%>--%>
-<%--<%@page import="model.VehicleType"%>--%>
+<%--<%@page import="model.VehicleTypeServer"%>--%>
 <%--<%@page import="dao_api.VehicleTypeDAO"%>--%>
 <%--<%@page import="dao_jdbc.InsurerTypeDAOImpl"%>--%>
 <%--<%@page import="dao_api.InsurerTypeDAO"%>--%>
@@ -200,7 +200,7 @@
                         <%--<select id="vehicleType" class="field" name="vehicleType" onchange="change();">--%>
                             <%--<%--%>
                                 <%--VehicleTypeDAO vTypes = new VehicleTypeDAOImpl();--%>
-                                <%--for(VehicleType type : vTypes.listVehicleTypes()) { %>--%>
+                                <%--for(VehicleTypeServer type : vTypes.listVehicleTypes()) { %>--%>
                             <%--<option><%=type.getVehicleType() %></option>--%>
                             <%--<%} %>--%>
                         <%--</select>--%>

@@ -1,5 +1,9 @@
 package kabilova.tu.inscorp.model.policy;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import kabilova.tu.inscorp.model.user.Admin;
+import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 
@@ -8,6 +12,15 @@ import java.util.Calendar;
 /**
  * Created by ShenaiKabilova
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property="type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Admin.class, name="go"),
+        @JsonSubTypes.Type(value = Insured.class, name="kasko")
+})
 public abstract class Policy {
     private int policaID;
     private Calendar dateFrom;

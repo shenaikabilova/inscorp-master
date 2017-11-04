@@ -26,7 +26,7 @@
         <title><%=userName %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
-        <script src="js/validate.js"></script>
+        <%--<script src="js/validate.js"></script>--%>
     </head>
 
     <body>
@@ -55,10 +55,10 @@
                         </ul>
                     </li>
                     <li><a href="#">МПС</a>
-                        <lu>
+                        <ul>
                             <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
                             <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
-                        </lu>
+                        </ul>
                     </li>
                     <li><a href="AdminLogout">Изход</a></li>
                 </ul>
@@ -75,7 +75,7 @@
                         </tr>
                         <tr>
                             <td><label id="insurerID" for="insurerID">ID</label></td>
-                            <td><input type="text" class="field" name="insurerID" placeholder="ID" size="30" maxlength="6"></td>
+                            <td><input type="number" class="field" name="insurerID" placeholder="ID" size="30" maxlength="6"></td>
                         </tr>
                         <tr>
                             <td><label>Име</label></td>

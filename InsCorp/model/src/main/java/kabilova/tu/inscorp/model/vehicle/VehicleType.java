@@ -16,6 +16,10 @@ public class VehicleType {
         this.vehicleType = vehicleType;
     }
 
+    public VehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
     public int getId() {
         return id;
     }

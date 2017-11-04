@@ -55,17 +55,42 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> read() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
 
-        return null;
+        List<User> user = session
+                .createCriteria(User.class)
+                .list();
+        return user;
     }
 
     @Override
     public void update(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
 
+        try {
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            HibernateUtil.shutdown();
+        }
     }
 
     @Override
     public void delete(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
 
+        try {
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            HibernateUtil.shutdown();
+        }
     }
 }

@@ -1,30 +1,32 @@
 package kabilova.tu.inscorp.server.web;
 
-import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl;
 import kabilova.tu.inscorp.model.user.User;
-import kabilova.tu.inscporp.bl.user.LoginEP;
+import kabilova.tu.inscporp.bl.user.UserEP;
 
 /**
  * Created by ShenaiKabilova
  */
 public class UserServer {
-    private LoginEP loginEP;
+    private UserEP userEP;
     private User user;
-    private UserDao dao = new UserDaoImpl();
 
     public UserServer() { }
 
     public UserServer(User user) {
         this.user = user;
-        loginEP = new LoginEP(user, dao);
+        userEP = new UserEP(user, new UserDaoImpl());
     }
 
     public void createUser() {
-        dao.create(user);
+        userEP.createUser();
     }
 
     public User loadUser(String username, String password) {
-        return dao.loadUser(username, password);
+        return userEP.loadUser(username, password);
     }
+
+    public void update() { userEP.update(); }
+
+    public void delete() { userEP.delete(); }
 }

@@ -57,10 +57,10 @@
                 </ul>
             </li>
             <li><a href="#">МПС</a>
-                <lu>
+                <ul>
                     <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
                     <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
-                </lu>
+                </ul>
             </li>
             <li><a href="AdminLogout">Изход</a></li>
         </ul>
