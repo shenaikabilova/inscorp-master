@@ -10,33 +10,51 @@ import java.util.Calendar;
 public class Vehicle {
     private int      vehicleID;
     private Insured  insured;
-    private String   type;
-    private String   brand;
-    private String   model;
+    private VehicleType vehicleType;
+    private VehicleSubtype vehicleSubtype;
     private String   regNum;
     private String   RAMA;
+    private String   brand;
+    private String   model;
     private Calendar firstReg;
-    private int      year;
-    private String   color;
+    private int      years;
     private float    engine;
+    private String   color;
     private int      placeNumber;
 
     public Vehicle() {
     }
 
-    public Vehicle(int vehicleID, String brand, String color, float engine, Calendar firstReg, String model, int placeNumber,
-                   String RAMA, String regNum, String type, int year) {
+    public Vehicle(int vehicleID, Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
+                    Calendar firstReg, int years, float engine, String color, int placeNumber) {
         this.vehicleID = vehicleID;
-        this.brand = brand;
-        this.color = color;
-        this.engine = engine;
-        this.firstReg = firstReg;
-        this.model = model;
-        this.placeNumber = placeNumber;
-        this.RAMA = RAMA;
+        this.insured = insured;
+        this.vehicleType = vehicleType;
+        this.vehicleSubtype = vehicleSubtype;
         this.regNum = regNum;
-        this.type = type;
-        this.year = year;
+        this.RAMA = RAMA;
+        this.brand = brand;
+        this.model = model;
+        this.firstReg = firstReg;
+        this.years = years;
+        this.engine = engine;
+        this.color = color;
+        this.placeNumber = placeNumber;
+    }
+
+    public Vehicle(Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
+                   Calendar firstReg, int years, float engine, String color, int placeNumber) {
+        this.insured = insured;
+        this.vehicleType = vehicleType;
+        this.vehicleSubtype = vehicleSubtype;
+        this.RAMA = RAMA;
+        this.brand = brand;
+        this.model = model;
+        this.firstReg = firstReg;
+        this.years = years;
+        this.engine = engine;
+        this.color = color;
+        this.placeNumber = placeNumber;
     }
 
     public int getVehicleID() {
@@ -53,6 +71,22 @@ public class Vehicle {
 
     public void setInsured(Insured insured) {
         this.insured = insured;
+    }
+
+    public VehicleSubtype getVehicleSubtype() {
+        return vehicleSubtype;
+    }
+
+    public void setVehicleSubtype(VehicleSubtype vehicleSubtype) {
+        this.vehicleSubtype = vehicleSubtype;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getBrand() {
@@ -119,19 +153,12 @@ public class Vehicle {
         this.regNum = regNum;
     }
 
-    public String getType() {
-        return type;
+
+    public int getYears() {
+        return years;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    public void setYears(int years) {
+        this.years = years;
     }
 }

@@ -1,10 +1,12 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.server.web.VehicleTypeServer" %>
+<%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleType" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 20.10.2017 г.
-  Time: 12:10
+  Date: 4.11.2017 г.
+  Time: 23:01
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -19,16 +21,15 @@
 //                }
 //            }
 //            if(userName == null) {
-//                response.sendRedirect("/AdminLogin");
+//                response.sendRedirect("login.jsp");
 //            }
             String username = session.getAttribute("username").toString();
             String password = session.getAttribute("password").toString();
         %>
-        <title><%=username %></title>
+        <title><%=userName %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
     </head>
-
-    <body>
+        <body>
         <div class="menu">
             <ul class="menu-nav">
                 <li><a href="adminPanel.jsp">Добави</a>
@@ -52,6 +53,27 @@
                 </li>
                 <li><a href="AdminLogout">Изход</a></li>
             </ul>
+        </div>
+
+        <div>
+            <div class="shell">
+                <form action="/adminPanelAddVehicleSubtype" method="post">
+
+                    <label>Тип МПС</label>
+                    <select class="field" id="vehicleType" name="vehicleType">
+                        <%
+                            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
+                            for(VehicleType vehicleType : vehicleTypeServer.read()) {
+                        %>
+                        <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
+                        <% } %>
+                    </select>
+
+                    <label>Подтип МПС</label>
+                    <input type="text" name="vehicleSubtype" placeholder="Подтип МПС" maxlength="50">
+                    <input type="submit" value="Добави">
+                </form>
+            </div>
         </div>
     </body>
 </html>

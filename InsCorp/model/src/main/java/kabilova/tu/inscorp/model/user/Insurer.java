@@ -21,6 +21,10 @@ public class Insurer extends User {
         this.insurerID = insurerID;
     }
 
+    public Insurer(String username, String password) {
+        super(username, password);
+    }
+
     public int getInsurerID() {
         return insurerID;
     }

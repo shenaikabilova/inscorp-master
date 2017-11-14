@@ -16,6 +16,11 @@ public class VehicleSubtype {
         this.subtype = subtype;
     }
 
+    public VehicleSubtype(VehicleType vehicleType, String subtype) {
+        this.vehicleType = vehicleType;
+        this.subtype = subtype;
+    }
+
     public int getId() {
         return id;
     }

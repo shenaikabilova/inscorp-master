@@ -10,20 +10,22 @@
 <html>
 <head>
     <%
-        String userName = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
-            for(Cookie cookie: cookies) {
-                if(cookie.getName().equals("user")) {
-                    userName = cookie.getValue();
-                }
-            }
-        }
-        if(userName == null) {
-            response.sendRedirect("login.jsp");
-        }
+//        String userName = null;
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null) {
+//            for(Cookie cookie: cookies) {
+//                if(cookie.getName().equals("user")) {
+//                    userName = cookie.getValue();
+//                }
+//            }
+//        }
+//        if(userName == null) {
+//            response.sendRedirect("login.jsp");
+//        }
+        String username = session.getAttribute("username").toString();
+        String password = session.getAttribute("password").toString();
     %>
-    <title><%=userName %></title>
+    <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
 
@@ -34,12 +36,12 @@
             <li><a href="#">Добави</a>
                 <ul>
                     <li><a href="addNewInsured.jsp">Нов клиент</a></li>
-                    <li><a href="addNewMPS.jsp">Ново МПС</a></li>
+                    <li><a href="loadClient.jsp">Ново МПС</a></li>
                 </ul>
             </li>
             <li><a href="#">Нова застраховка</a>
                 <ul>
-                    <li><a href="insurerAddNewGO.jsp">Гражданска отговорност</a></li>
+                    <li><a href="loadMps.jsp">Гражданска отговорност</a></li>
                     <li><a href="insurerAddNewKasko.jsp">Каско</a></li>
                 </ul>
             </li>

@@ -8,4 +8,6 @@ import kabilova.tu.inscorp.model.user.User;
  */
 public interface UserDao extends CrudDao<User> {
     User loadUser(String username, String password);
+    User loadByUsername(String username);
+    User loadByEGN (String egn);
 }

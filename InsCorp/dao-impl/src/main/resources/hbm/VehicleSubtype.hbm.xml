@@ -4,12 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" table="vechiclesubtype">
+    <class name="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" table="vehiclesubtype">
         <id name="id" column="ID" type="int" access="property">
             <generator class="increment"/>
         </id>
 
-        <one-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>
+        <!--<one-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>-->
+        <many-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" column="IDVEHICLE"/>
         <property name="subtype" column="SUBTYPE" type="string" access="property"/>
     </class>
 </hibernate-mapping>

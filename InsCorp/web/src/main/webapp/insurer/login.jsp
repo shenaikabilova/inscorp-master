@@ -16,12 +16,12 @@
     <body>
         <div class="login">
             <div class="shell">
-                <form action="login" method="post">
+                <form action="/insurerlogin" method="post">
                     <h3>Вход за служители</h3>
                     <table width="100%">
                         <tr>
                             <td><label>Потребителско име </label></td>
-                            <td><input type="text" class="field" name="userName" placeholder="Потребителско име" maxlength="50"><br/></td>
+                            <td><input type="text" class="field" name="username" placeholder="Потребителско име" maxlength="50"><br/></td>
                         </tr>
                         <tr>
                             <td><label>Парола</label></td>
@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input type="submit" value="Вход" name="login"></td>
+                            <td><input type="submit" value="Вход"></td>
                         </tr>
                     </table>
                 </form>

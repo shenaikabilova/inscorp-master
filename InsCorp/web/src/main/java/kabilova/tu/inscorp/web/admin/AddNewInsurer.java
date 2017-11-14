@@ -26,7 +26,7 @@ public class AddNewInsurer extends HttpServlet{
         String pass1 = request.getParameter("password1");
         String pass2 = request.getParameter("password2");
         if(pass1.equals(pass2)) {
-            int insurerID = Integer.getInteger(request.getParameter("insurerID"));
+            int insurerID = Integer.parseInt(request.getParameter("insurerID"));
             String firstName = request.getParameter("insurerFirstName");
             String secondName = request.getParameter("insurerSecondName");
             String lastName = request.getParameter("insurerLastName");
@@ -38,6 +38,8 @@ public class AddNewInsurer extends HttpServlet{
                                                        phoneNumber, email));
             userServer.createUser();
         }
-
+        else {
+            System.out.print("pass1 not equals to pass2");
+        }
     }
 }

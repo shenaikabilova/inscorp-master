@@ -10,20 +10,22 @@
 <html>
     <head>
         <%
-            String userName = null;
-            Cookie[] cookies = request.getCookies();
-            if(cookies != null) {
-                for(Cookie cookie: cookies) {
-                    if(cookie.getName().equals("user")) {
-                        userName = cookie.getValue();
-                    }
-                }
-            }
-            if(userName == null) {
-                response.sendRedirect("login.jsp");
-            }
+//            String userName = null;
+//            Cookie[] cookies = request.getCookies();
+//            if(cookies != null) {
+//                for(Cookie cookie: cookies) {
+//                    if(cookie.getName().equals("user")) {
+//                        userName = cookie.getValue();
+//                    }
+//                }
+//            }
+//            if(userName == null) {
+//                response.sendRedirect("login.jsp");
+//            }
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
         %>
-        <title><%=userName %></title>
+        <title><%=username %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
         <%--<script src="js/validate.js"></script>--%>
@@ -44,7 +46,7 @@
                     <li><a href="#">Застрахователни агенти</a>
                         <ul>
                             <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
-                            <li><a href="adminPanelUpdateUser.jsp">Промени</a></li>
+                            <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
                             <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
                         </ul>
                     </li>
@@ -67,7 +69,7 @@
 
         <div class="addInsurer">
             <div class="shell">
-                <form action="adminPanelAddInsurer" method="post">
+                <form action="/adminPanelAddInsurer" method="post">
                     <table width="100%">
                         <tr>
                             <td></td>

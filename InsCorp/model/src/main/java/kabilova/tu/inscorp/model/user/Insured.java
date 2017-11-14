@@ -19,7 +19,7 @@ public class Insured extends User {
         this.egn = egn;
         this.postCode = postCode;
         this.country = country;
-        this.country = city;
+        this.city = city;
         this.address = address;
     }
 
@@ -29,7 +29,7 @@ public class Insured extends User {
         this.egn = egn;
         this.postCode = postCode;
         this.country = country;
-        this.country = city;
+        this.city = city;
         this.address = address;
     }
 //    public void myMethod(int insuredID, Vehicle vehicle) {

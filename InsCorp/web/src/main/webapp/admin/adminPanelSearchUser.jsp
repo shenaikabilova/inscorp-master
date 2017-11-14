@@ -1,26 +1,11 @@
-<%@ page import="kabilova.tu.inscorp.server.web.UserServer" %>
-<%@ page import="kabilova.tu.inscorp.model.user.Insurer" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
-  Time: 12:40
+  Time: 12:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<%--<%@page import="kabilova.tu.inscorp.model.user.Insurer"%>--%>
-<%--<%@page import="kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl"%>--%>
-<%--<%@page import="dao_api.InsurerDAO"%>--%>
-
-<%--<%--%>
-    <%--try {--%>
-        <%--Class.forName("com.mysql.jdbc.Driver");--%>
-    <%--}--%>
-    <%--catch (Exception e) {--%>
-        <%--throw new UnavailableException(e.getMessage());--%>
-    <%--}--%>
-<%--%>--%>
-
 <html>
 <head>
     <%
@@ -69,34 +54,19 @@
     </ul>
 </div>
 
-<div class="viewInsurers shell">
-    <form action = "updateInsurer" method="get">
-        <table border="1">
-            <th>Служебен №</th>
-            <th>Потребителско име</th>
-            <th>Име</th>
-            <th>Презиме</th>
-            <th>Фамилия</th>
-            <th>Телефонен №</th>
-            <th>Е-майл</th>
-            <th>Парола</th>
 
-                <%
-					UserServer<Insurer> userServer = new UserServer(new Insurer());
-					for(Insurer insurer : userServer.readAll()) { %>
-            <tr>
-                <td><%=insurer.getInsurerID()%></td>
-                <td><%=insurer.getUsername()%></td>
-                <td><%=insurer.getFirstName()%></td>
-                <td><%=insurer.getSecondName()%></td>
-                <td><%=insurer.getLastName()%></td>
-                <td><%=insurer.getPhoneNumber()%></td>
-                <td><%=insurer.getEmail()%></td>
-                <td><%=insurer.getPassword()%></td>
-            </tr>
-    </form>
-    <% } %>
-    </table>
+<div class="updateUser">
+    <div class="shell">
+        <form action="/searchUser" method="get">
+            <div class="form-section">
+                <div class="form-row">
+                    <label>ID на застраховател</label>
+                    <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
+                    <input type="submit" value="Търсене" name="searchUser">
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

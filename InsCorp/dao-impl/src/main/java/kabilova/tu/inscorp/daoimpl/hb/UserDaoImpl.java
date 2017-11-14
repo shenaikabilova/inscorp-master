@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> read() {
+    public List read() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -92,5 +92,47 @@ public class UserDaoImpl implements UserDao {
         } finally {
             HibernateUtil.shutdown();
         }
+    }
+
+    @Override
+    public User loadByUsername(String username) {
+        if (username == null || username.equals("")) {
+            throw new IllegalArgumentException("Invalid username");
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<User> user = session
+                .createCriteria(User.class)
+                .add(Restrictions.like("username", username))
+                .list();
+
+        if (user.size() > 1) {
+            throw new IllegalArgumentException("..."); //TODO
+        }
+
+        return user.get(0);
+    }
+
+    @Override
+    public User loadByEGN(String egn) {
+        if (egn == null || egn.equals("")) {
+            throw new IllegalArgumentException("Invalid egn");
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<User> user = session
+                .createCriteria(User.class)
+                .add(Restrictions.like("egn", egn))
+                .list();
+
+        if (user.size() > 1) {
+            throw new IllegalArgumentException("..."); //TODO
+        }
+
+        return user.get(0);
     }
 }

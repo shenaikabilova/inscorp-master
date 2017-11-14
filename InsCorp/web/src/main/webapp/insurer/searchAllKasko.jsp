@@ -7,36 +7,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<%@page import="model.Kasko"%>--%>
-<%--<%@page import="dao_jdbc.KaskoDAOImpl"%>--%>
-<%--<%@page import="dao_api.KaskoDAO"%>--%>
-
-<%--<%--%>
-    <%--try {--%>
-        <%--Class.forName("com.mysql.jdbc.Driver");--%>
-    <%--}--%>
-    <%--catch (Exception e) {--%>
-        <%--throw new UnavailableException(e.getMessage());--%>
-    <%--}--%>
-<%--%>--%>
-
 <html>
 <head>
     <%
-        String userName = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
-            for(Cookie cookie: cookies) {
-                if(cookie.getName().equals("user")) {
-                    userName = cookie.getValue();
-                }
-            }
-        }
-        if(userName == null) {
-            response.sendRedirect("login.jsp");
-        }
+//        String userName = null;
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null) {
+//            for(Cookie cookie: cookies) {
+//                if(cookie.getName().equals("user")) {
+//                    userName = cookie.getValue();
+//                }
+//            }
+//        }
+//        if(userName == null) {
+//            response.sendRedirect("login.jsp");
+//        }
+        String username = session.getAttribute("username").toString();
+        String password = session.getAttribute("password").toString();
     %>
-    <title><%=userName %></title>
+    <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
 

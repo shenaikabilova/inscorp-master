@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 20.10.2017 г.
-  Time: 13:02
+  Date: 11.11.2017 г.
+  Time: 20:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
     <%
@@ -27,12 +26,22 @@
     %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
-</head>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+</head>
 <body>
 <div class="menu">
     <div class="menu-nav">
         <ul>
+            <li><a href="#">Добави</a>
+                <ul>
+                    <li><a href="addNewInsured.jsp">Нов клиент</a></li>
+                    <li><a href="addNewMPS.jsp">Ново МПС</a></li>
+                </ul>
+            </li>
             <li><a href="#">Нова застраховка</a>
                 <ul>
                     <li><a href="insurerAddNewGO.jsp">Гражданска отговорност</a></li>
@@ -69,62 +78,11 @@
     </div>
 </div>
 
-<div class="searchInsurers viewInsurers shell">
-    <h3>Застраховка "Каско" - търсене по № на полица</h3>
-    <table border="1">
-        <th>Застраховател</th>
-        <th>Полица №</th>
-        <th>Име</th>
-        <th>Презиме</th>
-        <th>Фамилия</th>
-        <th>ЕГН</th>
-        <th>Мобилен телефон</th>
-        <th>Адрес</th>
-        <th>Пощенски код</th>
-        <th>Регистрационен №</th>
-        <th>Тип</th>
-        <th>Рама</th>
-        <th>Марка</th>
-        <th>Модел</th>
-        <th>Цвят</th>
-        <th>Година на производство</th>
-        <th>Първа регистрация</th>
-        <th>Двигател</th>
-        <th>Брой места</th>
-        <th>Начална дата</th>
-        <th>Крайна дата</th>
-        <th>Застрахователна стойност</th>
-        <th>Застрахователна премия</th>
-
-        <%--<% List<Kasko> list = (List<Kasko>)request.getAttribute("result");--%>
-            <%--for(Kasko i : list) { %>--%>
-        <tr>
-            <%--<td><%=i.getInsurerId()%></td>--%>
-            <%--<td><%=i.getInsKaskoId()%></td>--%>
-            <%--<td><%=i.getInsurenceFirstName()%></td>--%>
-            <%--<td><%=i.getInsurenceSecondName()%></td>--%>
-            <%--<td><%=i.getInsurenceFamily()%></td>--%>
-            <%--<td><%=i.getInsurenceEGN()%></td>--%>
-            <%--<td><%=i.getInsurenceMobilePhone()%></td>--%>
-            <%--<td><%=i.getInsurenceAddress()%></td>--%>
-            <%--<td><%=i.getInsurencePK()%></td>--%>
-            <%--<td><%=i.getVehicleRegistrationNumber()%></td>--%>
-            <%--<td><%=i.getVehicleType()%></td>--%>
-            <%--<td><%=i.getVehicleRama()%></td>--%>
-            <%--<td><%=i.getVehicleBrand()%></td>--%>
-            <%--<td><%=i.getVehicleModel()%></td>--%>
-            <%--<td><%=i.getVehicleColor()%></td>--%>
-            <%--<td><%=i.getVehicleYear()%></td>--%>
-            <%--<td><%=i.getVehicleFirstRegistration()%></td>--%>
-            <%--<td><%=i.getVehicleEngine()%></td>--%>
-            <%--<td><%=i.getVehiclePlaceNumber()%></td>--%>
-            <%--<td><%=i.getInsurenceDateFrom()%></td>--%>
-            <%--<td><%=i.getInsurenceDateTo()%></td>--%>
-            <%--<td><%=i.getVehicleInsurenceValue()%></td>--%>
-            <%--<td><%=i.getVehicleInsurencePremiq()%></td>--%>
-        </tr>
-        <%--<% } %>--%>
-    </table>
-</div>
+<form action="/loadClient" method="post">
+    <label>Собственик</label><br>
+    <label>ЕГН</label>
+    <input type="number" name="searchEGN" placeholder="ЕГН" maxlength="10">
+    <input type="submit" value="Зареди клиент"><br>
+</form>
 </body>
 </html>

@@ -7,50 +7,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<%@page import="dao_jdbc.KaskoDAOImpl"%>--%>
-<%--<%@page import="dao_api.KaskoDAO"%>--%>
-<%--<%@page import="dao_jdbc.VehicleTypeDAOImpl"%>--%>
-<%--<%@page import="model.VehicleTypeServer"%>--%>
-<%--<%@page import="dao_api.VehicleTypeDAO"%>--%>
-<%--<%@page import="dao_jdbc.InsurerTypeDAOImpl"%>--%>
-<%--<%@page import="dao_api.InsurerTypeDAO"%>--%>
-<%--<%@page import="model.InsurerType"%>--%>
-<%--<%@page import="dao_jdbc.CountryDAOImpl"%>--%>
-<%--<%@page import="dao_api.CountryDAO"%>--%>
-<%--<%@page import="model.Country"%>--%>
-<%--<%@page import="model.VehicleBrand"%>--%>
-<%--<%@page import="dao_jdbc.VehicleBrandDAOImpl"%>--%>
-<%--<%@page import="dao_api.VehicleBrandDAO"%>--%>
-<%--<%@page import="model.VehicleColor"%>--%>
-<%--<%@page import="dao_jdbc.VehicleColorDAOImpl"%>--%>
-<%--<%@page import="dao_api.VehicleColorDAO"%>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>--%>
-
-<%
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-    }
-    catch (Exception e) {
-        throw new UnavailableException(e.getMessage());
-    }
-%>
 <html>
 <head>
     <%
-        String userName = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
-            for(Cookie cookie: cookies) {
-                if(cookie.getName().equals("user")) {
-                    userName = cookie.getValue();
-                }
-            }
-        }
-        if(userName == null) {
-            response.sendRedirect("login.jsp");
-        }
+//        String userName = null;
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null) {
+//            for(Cookie cookie: cookies) {
+//                if(cookie.getName().equals("user")) {
+//                    userName = cookie.getValue();
+//                }
+//            }
+//        }
+//        if(userName == null) {
+//            response.sendRedirect("login.jsp");
+//        }
+        String username = session.getAttribute("username").toString();
+        String password = session.getAttribute("password").toString();
     %>
-    <title><%=userName %></title>
+    <title><%=username %></title>
     <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 

@@ -9,20 +9,22 @@
 <html>
     <head>
         <%
-            String userName = null;
-            Cookie[] cookies = request.getCookies();
-            if(cookies != null) {
-                for(Cookie cookie: cookies) {
-                    if(cookie.getName().equals("user")) {
-                        userName = cookie.getValue();
-                    }
-                }
-            }
-            if(userName == null) {
-                response.sendRedirect("login.jsp");
-            }
+//            String userName = null;
+//            Cookie[] cookies = request.getCookies();
+//            if(cookies != null) {
+//                for(Cookie cookie: cookies) {
+//                    if(cookie.getName().equals("user")) {
+//                        userName = cookie.getValue();
+//                    }
+//                }
+//            }
+//            if(userName == null) {
+//                response.sendRedirect("login.jsp");
+//            }
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
         %>
-        <title><%=userName %></title>
+        <title><%=username %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
     </head>
 
@@ -38,7 +40,7 @@
                 <li><a href="#">Застрахователни агенти</a>
                     <ul>
                         <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
-                        <li><a href="adminPanelUpdateUser.jsp">Промени</a></li>
+                        <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
                         <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
                     </ul>
                 </li>

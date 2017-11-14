@@ -1,4 +1,5 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.model.user.Insured" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 21.10.2017 г.
@@ -9,20 +10,23 @@
 <html>
 <head>
     <%
-    String userName = null;
-    Cookie[] cookies = request.getCookies();
-    if(cookies != null) {
-    for(Cookie cookie: cookies) {
-    if(cookie.getName().equals("user")) {
-    userName = cookie.getValue();
-    }
-    }
-    }
-    if(userName == null) {
-    response.sendRedirect("login.jsp");
-    }
+//    String userName = null;
+//    Cookie[] cookies = request.getCookies();
+//    if(cookies != null) {
+//    for(Cookie cookie: cookies) {
+//    if(cookie.getName().equals("user")) {
+//    userName = cookie.getValue();
+//    }
+//    }
+//    }
+//    if(userName == null) {
+//    response.sendRedirect("login.jsp");
+//    }
+
+        String username = session.getAttribute("username").toString();
+        String password = session.getAttribute("password").toString();
     %>
-    <title><%=userName %></title>
+    <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -37,7 +41,7 @@
             <li><a href="#">Добави</a>
                 <ul>
                     <li><a href="addNewInsured.jsp">Нов клиент</a></li>
-                    <li><a href="addNewMPS.jsp">Ново МПС</a></li>
+                    <li><a href="loadClient.jsp">Ново МПС</a></li>
                 </ul>
             </li>
             <li><a href="#">Нова застраховка</a>
@@ -76,56 +80,84 @@
     </div>
 </div>
 
-    <form action="addNewMps" method="post">
-        Добавяне на ново МПС <br>
-        <label>Собственик</label><br>
-        <label>ЕГН</label>
-        <input type="number" id="searchEGN" name="searchEGN" placeholder="ЕГН" maxlength="10">
-        <input type="submit" value="Зареди клиент"><br>
+    <%--<form action="/loadClient" method="post">--%>
+        <%--Добавяне на ново МПС <br>--%>
+        <%--<label>Собственик</label><br>--%>
+        <%--<label>ЕГН</label>--%>
+        <%--<input type="number" name="searchEGN" placeholder="ЕГН" maxlength="10">--%>
+        <%--<input type="submit" value="Зареди клиент"><br>--%>
+    <%--</form>--%>
 
+    <form action="/addNewMps" method="post">
+        <%
+            List<Insured> insurers = (List<Insured>)request.getAttribute("result");
+            for(Insured insured : insurers) {
+        %>
         Данни за собственик
+
+        <label>ID</label>
+        <input type="text" class="field" name="insuredID" value=<%=insured.getId()%>>
         <label>Име</label>
-        <input type="text" id="firstName" name="firstName" placeholder="Име" maxlength="50">
-        <label>Презиме</label>
-        <input type="text" id="secondName" name="secondName" placeholder="Презиме" maxlength="50">
-        <label>Фамилия</label>
-        <input type="text" id="lastName" name="lastName" placeholder="Фамилия" maxlength="50"><br>
+        <input type="text" class="field" name="insuredFirstName" value=<%=insured.getFirstName()%> maxlength="50">
+
+        <label>Презиме</label></td>
+        <input type="text" id="secondName" name="insuredSecondName" value=<%=insured.getSecondName()%> size="50" maxlength="50">
+
+        <label>Фамилия</label></td>
+        <input type="text" class="field" name="insuredLastName" value=<%=insured.getLastName()%> size="30" maxlength="50">
+
 
         <label>ЕГН</label>
-        <input type="number" id="EGN" name="EGN" placeholder="ЕГН" maxlength="10">
+        <input type="number" id="EGN" name="EGN" value=<%=insured.getEgn()%> maxlength="10">
         <label>Държава</label>
-        <input type="text" id="country" name="country" placeholder="Държава" maxlength="50"><br>
+        <input type="text" id="country" name="country" value=<%=insured.getCountry()%> maxlength="50"><br>
 
         <label>Град/Село</label>
-        <input type="text" id="city" name="city" placeholder="Град/Село" maxlength="50">
+        <input type="text" id="city" name="city" value=<%=insured.getCity()%> maxlength="50">
         <label>Адрес</label>
-        <input type="text" id="address" name="address" placeholder="ж.к./ул/бл/вх/ет/ап" maxlength="100">
+        <input type="text" id="address" name="address" value=<%=insured.getAddress()%> maxlength="100">
+
+        <% } %>
 
         МПС
         <label>Регистрационен №</label>
-        <input type="text" id="regNum" name="RegNum" placeholder="Регистрационен №" maxlength="7">
+        <input type="text" id="regNum" name="regNum" placeholder="Регистрационен №" maxlength="7">
         <label>РАМА</label>
         <input type="text" id="rama" name="rama" placeholder="РАМА" maxlength="17">
+
+        <label>Тип</label>
+        <%--TODO type from db--%>
+        <select id="vehicleType" name="vehicleType">
+            <option></option>
+        </select>
+        <label>Кубици</label>
+        <%--TODO subtype from db--%>
+        <select id="vehicleSubtype" name="vehicleSubtype">
+            <option></option>
+        </select>
+
         <label>Регистрация</label>
         <select name="country">
             <option>България</option>
             <option>Чужбина</option>
         </select> <br>
 
-        <label>Тип</label>
-        <%--TODO type from db--%>
-        <label>Кубици</label>
-        <%--TODO subtype from db--%>
-
         <br>
         <label>Марка</label>
         <label>Модел</label>
+
         <label>Първа регистрация</label>
         <input type="text" placeholder="Първа регистрация" id="datepicker1" name="firstReg">
         <label>Години</label>
         <input type="number" id="years" name="years" placeholder="Години">
         <br>
 
+        <label>Двигател</label>
+        <select id="engine" name="engine">
+            <option>1.2</option>
+            <option>1.4</option>
+            <option>1.6</option>
+        </select>
         <label>Цвят</label>
         <%--TODO color--%>
         <label>Брой места</label>

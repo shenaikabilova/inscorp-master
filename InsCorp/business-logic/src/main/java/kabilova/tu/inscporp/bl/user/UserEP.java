@@ -8,9 +8,12 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-public class UserEP {
+public class UserEP<T> {
     private User user;
     private UserDao dao;
+
+    public UserEP() {
+    }
 
     public UserEP(User user, UserDao dao){
         this.user = user;
@@ -25,7 +28,7 @@ public class UserEP {
         dao.create(user);
     }
 
-    public List<User> readUsers() {
+    public List readUsers() {
         return dao.read();
     }
 
@@ -36,4 +39,6 @@ public class UserEP {
     public void delete() {
         dao.delete(user);
     }
+
+    public User loadByUsername() { return dao.loadByUsername(user.getUsername()); }
 }

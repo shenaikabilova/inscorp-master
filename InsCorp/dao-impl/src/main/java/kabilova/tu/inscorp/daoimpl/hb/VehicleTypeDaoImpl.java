@@ -33,7 +33,8 @@ public class VehicleTypeDaoImpl implements CrudDao<VehicleType> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        return session.createCriteria(VehicleType.class).list();
+        List<VehicleType> vehicleTypes = session.createCriteria(VehicleType.class).list();
+        return vehicleTypes;
     }
 
     @Override

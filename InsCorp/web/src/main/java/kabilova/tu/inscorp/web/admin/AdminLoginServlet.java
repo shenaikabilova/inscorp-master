@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by ShenaiKabilova
  */
 //@WebServlet(urlPatterns = {"/login", "/adminLogin"})@
-    @WebServlet("/adminLogin")
+@WebServlet("/adminLogin")
 public class AdminLoginServlet extends HttpServlet{
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -26,12 +26,14 @@ public class AdminLoginServlet extends HttpServlet{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-
         UserServer userServer = new UserServer(new Admin(username, password));
         if(userServer.loadUser(username, password) instanceof Admin){
-            Cookie loginCookie = new Cookie("user", username);
-            loginCookie.setMaxAge(60*60*24);
-            response.addCookie(loginCookie);
+//            Cookie loginCookie = new Cookie("user", username);
+//            loginCookie.setMaxAge(60*60*24);
+//            response.addCookie(loginCookie);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", username);
+            session.setAttribute("password", password);
             response.sendRedirect("admin/adminPanel.jsp");
         }
 // else if(userServer.loadUser(username, password) instanceof Insurer) {

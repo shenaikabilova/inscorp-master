@@ -7,37 +7,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<%@page import="model.GrajdanskaOtgovornost"%>--%>
-<%--<%@page import="java.util.List"%>--%>
-<%--<%@page import="dao_jdbc.VehicleBrandDAOImpl"%>--%>
-<%--<%@page import="dao_api.VehicleBrandDAO"%>--%>
-<%--<%@page import="model.VehicleBrand"%>--%>
-<%--<%@page import="dao_jdbc.VehicleTypeDAOImpl"%>--%>
-<%--<%@page import="model.Country"%>--%>
-<%--<%@page import="dao_jdbc.CountryDAOImpl"%>--%>
-<%--<%@page import="dao_api.CountryDAO"%>--%>
-<%--<%@page import="model.InsurerType"%>--%>
-<%--<%@page import="dao_jdbc.InsurerTypeDAOImpl"%>--%>
-<%--<%@page import="dao_api.InsurerTypeDAO"%>--%>
-<%--<%@page import="model.VehicleTypeServer"%>--%>
-<%--<%@page import="dao_api.VehicleTypeDAO"%>--%>
 <html>
 <head>
     <%
-        String userName = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
-            for(Cookie cookie: cookies) {
-                if(cookie.getName().equals("user")) {
-                    userName = cookie.getValue();
-                }
-            }
-        }
-        if(userName == null) {
-            response.sendRedirect("login.jsp");
-        }
+//        String userName = null;
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null) {
+//            for(Cookie cookie: cookies) {
+//                if(cookie.getName().equals("user")) {
+//                    userName = cookie.getValue();
+//                }
+//            }
+//        }
+//        if(userName == null) {
+//            response.sendRedirect("login.jsp");
+//        }
+        String username = session.getAttribute("username").toString();
+        String password = session.getAttribute("password").toString();
     %>
-    <title><%=userName %></title>
+    <title><%=username %></title>
     <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
