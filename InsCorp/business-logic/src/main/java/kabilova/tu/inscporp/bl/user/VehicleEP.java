@@ -1,6 +1,6 @@
 package kabilova.tu.inscporp.bl.user;
 
-import kabilova.tu.inscorp.dao.CrudDao;
+import kabilova.tu.inscorp.dao.VehicleDao;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class VehicleEP {
     private Vehicle vehicle;
-    private CrudDao dao;
+    private VehicleDao dao;
 
-    public VehicleEP(Vehicle vehicle, CrudDao dao) {
+    public VehicleEP(Vehicle vehicle, VehicleDao dao) {
         this.vehicle = vehicle;
         this.dao = dao;
     }
@@ -24,4 +24,6 @@ public class VehicleEP {
     public void update() { dao.update(vehicle); }
 
     public void delete() { dao.delete(vehicle); }
+
+    public Vehicle loadVehicle() { return dao.loadVehicle(vehicle.getRegNum()); }
 }

@@ -111,6 +111,8 @@
         <input type="number" id="EGN" name="EGN" value=<%=insured.getEgn()%> maxlength="10">
         <label>Държава</label>
         <input type="text" id="country" name="country" value=<%=insured.getCountry()%> maxlength="50"><br>
+        <label >Пощенски код</label>
+        <input type="text" class="field" name="pKod" value=<%=insured.getPostCode()%> size="20" maxlength="4">
 
         <label>Град/Село</label>
         <input type="text" id="city" name="city" value=<%=insured.getCity()%> maxlength="50">

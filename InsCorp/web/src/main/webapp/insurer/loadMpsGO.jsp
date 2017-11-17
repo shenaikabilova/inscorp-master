@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<form action="/loadMps" method="post">
+<form action="/loadMpsGO" method="post">
     <label>Намери МПС</label><br>
     <input type="text" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
     <input type="submit" value="Зареди МПС"><br>

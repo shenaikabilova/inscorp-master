@@ -12,8 +12,7 @@ public class UserEP<T> {
     private User user;
     private UserDao dao;
 
-    public UserEP() {
-    }
+    public UserEP() { }
 
     public UserEP(User user, UserDao dao){
         this.user = user;

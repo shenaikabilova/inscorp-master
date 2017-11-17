@@ -1,4 +1,6 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.server.web.VehicleServer" %>
+<%@ page import="java.util.List" %>
+<%@ page import="kabilova.tu.inscorp.model.vehicle.Vehicle" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -89,31 +91,14 @@
                     <div class="form-row">
                         <label>№ на полица</label>
                         <%
-                            GrajdanskaOtgovornostDAO insID = new GrajdanskaOtgovornostDAOImpl();
-                            String id = insID.getLastInsID();
-                            int countZeros=0;
-                            int max=0;
-                            for(int i=0; i<id.length(); i++) {
-                                char c = id.charAt(i);
-                                if(c == '0') {
-                                    countZeros++;
-                                    max=countZeros;
-                                }
-                                else countZeros=0;
-                            }
-                            int i = Integer.parseInt(id);
-                            System.out.println(max);
-                            System.out.println(i);
-                            i++;
-                            max = max + String.valueOf(i).length();
-                            String newID = String.format("%0"+max+"d", i);
+
                         %>
                         <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6"
-                               value=<%=newID%>>
+                               value="">
                     </div>
                     <div class="form-row">
                         <label>Застраховател</label>
-                        <input class="field" type="text" value=<%=userName%> name="userName" readonly="readonly" maxlength="6">
+                        <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
                     </div>
                 </div>
                 <div class="form-section">
@@ -121,48 +106,42 @@
                     <div class="form-row">
                         <label>Тип на клиента:</label>
                         <select id="insType" class="field" name="insType">
-                            <%
-                                InsurerTypeDAO insTypes = new InsurerTypeDAOImpl();
-                                for(InsurerType type : insTypes.listInsurerTypes()) { %>
-                            <option><%=type.getInsurerType() %></option>
-                            <%} %>
+
+                            <option></option>
                         </select>
                     </div>
+                    <%
+                        List<Vehicle> vehicles = (List<Vehicle>) request.getAttribute("result");
+                        for(Vehicle vehicle : vehicles) {
+                    %>
+                    <label>ID</label>
+                    <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>
                     <div class="form-row">
                         <label>Собственик</label>
-                        <input type="text" class="field" name="insuredFirstName" placeholder="Име" size="30" maxlength="50">
-                        <input type="text" class="field" name="insuredSecondName" placeholder="Презиме" size="30" maxlength="50">
-                        <input type="text" class="field" name="insuredLastName" placeholder="Фамилия" size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%>" size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
                     </div>
                     <div class="form-row">
                         <label>ЕГН</label>
-                        <input type="text" id="EGN" class="field" name="EGN" placeholder="ЕГН" maxlength="10" onchange="isValidateEGN();">
+                        <input type="text" id="EGN" class="field" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
                     </div>
-                    <div class="form-row">
-                        <label>Държава</label>
-                        <select class="field" name="country">
-                            <%
-                                CountryDAO countries = new CountryDAOImpl();
-                                for(Country country : countries.listCountries()) { %>
-                            <option><%=country.getCountry()%></option>
-                            <%} %>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-row-inner">
-                            <label for="address">Адрес на собственика</label>
-                            <input type="text" class="field" name="address" placeholder="гр. ж.к. ул. бл. вх. ет. ап." size="50" maxlength="200">
-                        </div>
-                        <div class="form-row-inner">
-                            <label for="pKod">Пощенски код</label>
-                            <input type="text" class="field" name="pKod" placeholder="Пощенски код" size="20" maxlength="4">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label>Мобилен телефон</label>
-                        <input type="text" class="field" name="mobilePhone" placeholder="Мобилен телефон" size="30" maxlength="10">
-                    </div>
+                <input type="text" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> maxlength="50"><br>
+                <div class="form-row-inner">
+                    <label >Пощенски код</label>
+                    <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%> size="20" maxlength="4">
                 </div>
+                <label>Град/Село</label>
+                <input type="text" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> maxlength="50">
+                <label>Адрес</label>
+                <input type="text" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
+
+
+                <div class="form-row">
+                    <label>Мобилен телефон</label>
+                    <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> size="30" maxlength="10">
+                </div>
+
             </div>
             <div class="form-section">
                 <h4>Данни за МПС</h4>
@@ -170,15 +149,15 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="registrationNumber">Регистрационен №</label>
-                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" placeholder="Регистрационен №" size="20" onchange="isValidRegNumber();" maxlength="8">
+                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" value=<%=vehicle.getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
                     </div>
 
                     <div class="form-row-inner">
                         <label for="zone">Зона</label>
                         <select id="zone" class="field" name="zone" onchange="sum();">
-                            <option>Зона І - София</option>
-                            <option>Зона IІ - Пловдив, Варна и Бургас</option>
-                            <option>Зона ІІІ - Други</option>
+                            <option value="1">Зона І - София</option>
+                            <option value="2">Зона IІ - Пловдив, Варна и Бургас</option>
+                            <option value="3">Зона ІІІ - Други</option>
                         </select>
                     </div>
                 </div>
@@ -186,41 +165,35 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="vehicleType">Вид МПС</label>
-                        <select id="vehicleType" class="field" name="vehicleType" onchange="change();">
-                            <%
-                                VehicleTypeDAO vTypes = new VehicleTypeDAOImpl();
-                                for(VehicleTypeServer type : vTypes.listVehicleTypes()) { %>
-                            <option><%=type.getVehicleType() %></option>
-                            <%} %>
+                        <select id="vehicleType" class="field" name="vehicleType">
+                            <option value=<%=vehicle.getVehicleType().getId()%>><%=vehicle.getVehicleType().getVehicleType()%></option>
                         </select>
                     </div>
                     <div class="form-row-inner">
-                        <label for="kubici">Кубици</label>
-                        <select id="kubici" class="field" name="kubici" onchange="sum();"></select>
+                        <label>Кубици</label>
+                        <select id="vehicleSubtype" class="field" name="vehicleSubtype">
+                            <option value=<%=vehicle.getVehicleSubtype().getId()%>><%=vehicle.getVehicleSubtype().getSubtype()%>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label for="ramaN">Рама №</label>
-                        <input type="text" class="field" name="ramaN" placeholder="Рама №" size="30" maxlength="17">
+                        <label>Рама №</label>
+                        <input type="text" class="field" name="ramaN" value=<%=vehicle.getRAMA()%> size="30" maxlength="17">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label for="vehicleBrand">Марка</label>
+                        <label>Марка</label>
                         <select id="vehicleBrand" class="field" name="vehicleBrand">
-                            <%
-                                VehicleBrandDAO brands = new VehicleBrandDAOImpl();
-                                for(VehicleBrand brand : brands.listAllVehicleBrand()) { %>
-                            <option><%=brand.getVehicleBrand() %></option>
-                            <%} %>
+                            <option><%=vehicle.getBrand()%></option>
                         </select>
                     </div>
                     <div class="form-row-inner">
                         <label>Модел</label>
-                        <input type="text" class="field" name="vehicleModel" placeholder="Модел" size="30" maxlength="50">
+                        <input type="text" class="field" name="vehicleModel" value=<%=vehicle.getModel()%> size="30" maxlength="50">
                     </div>
                 </div>
 
