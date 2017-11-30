@@ -10,8 +10,8 @@
         </id>
         
         <property name="zone" column="ZONE" type="int" access="property"/>
-        <one-to-one name="vechileType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>
-        <one-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" access="property"/>
+        <many-to-one name="vechileType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" column="VEHICLETYPE"/>
+        <many-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" column="VEHICLESUBTYPE"/>
         <property name="value" column="VALUE" type="double" access="property"/>
     </class>
 </hibernate-mapping>

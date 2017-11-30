@@ -14,7 +14,9 @@ public class PolicyEP {
     private Policy policy;
     private PolicyDao dao;
 
-    public PolicyEP() { }
+    public PolicyEP(PolicyDao dao) {
+        this.dao = dao;
+    }
 
     public PolicyEP(Policy policy, PolicyDao dao) {
         this.policy = policy;

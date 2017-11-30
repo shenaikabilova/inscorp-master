@@ -9,10 +9,9 @@
             <generator class="increment"/>
         </id>
 
-        <one-to-one name="insured" class="kabilova.tu.inscorp.model.user.Insured" access="property"/>
-
-        <one-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>
-        <one-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" access="property"/>
+        <many-to-one name="insured" class="kabilova.tu.inscorp.model.user.Insured" column="INSURED"/>
+        <many-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" column="VEHICLETYPE"/>
+        <many-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" column="VEHICLESUBTYPE"/>
         <property name="brand" column="BRAND" type="string" access="property"/>
         <property name="model" column="MODEL" type="string" access="property"/>
         <property name="regNum" column="REGNUM" type="string" access="property"/>

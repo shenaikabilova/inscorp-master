@@ -12,9 +12,7 @@ import java.util.List;
 public class UserServer<T> {
     private UserEP userEP;
 
-    public UserServer() {
-
-    }
+    public UserServer() { }
 
     public UserServer(User user) {
         userEP = new UserEP(user, new UserDaoImpl());

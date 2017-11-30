@@ -13,7 +13,16 @@
 
         <property name="dateFrom" column="DATEFROM" type="calendar" access="property"/>
         <property name="dateTo" column="DATETO" type="calendar" access="property"/>
-        <one-to-one name="insurer" class="kabilova.tu.inscorp.model.user.Insurer" access="property"/>
-        <one-to-one name="tariff" class="kabilova.tu.inscorp.model.tariff.Tariff" access="property"/>
+        <many-to-one name="insurer" class="kabilova.tu.inscorp.model.user.Insurer" column="INSURER"/>
+        <many-to-one name="insured" class="kabilova.tu.inscorp.model.user.Insured" column="INSURED"/>
+        <many-to-one name="vehicle" class="kabilova.tu.inscorp.model.vehicle.Vehicle" column="VEHICLE"/>
+        <many-to-one name="tariff" class="kabilova.tu.inscorp.model.tariff.Tariff" column="TARIFF" />
+
+        <subclass name="kabilova.tu.inscorp.model.policy.GO" discriminator-value="GO">
+        </subclass>
+
+        <subclass name="kabilova.tu.inscorp.model.policy.Kasko" discriminator-value="KASKO">
+            <property name="kaskoType" column="KASKOTYPE" type="string" access="property"/>
+        </subclass>
     </class>
 </hibernate-mapping>
