@@ -9,6 +9,7 @@ import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
+import kabilova.tu.inscorp.model.vehicle.Vehicle;
 
 /**
  * Created by ShenaiKabilova.
@@ -24,6 +25,7 @@ public class ParcelablePolicyKasko extends Kasko implements Parcelable {
         super.setInsurer((Insurer) in.readParcelable(Insurer.class.getClassLoader()));
         super.setInsured((Insured) in.readParcelable(Insured.class.getClassLoader()));
         super.setTariff((Tariff) in.readParcelable(Tariff.class.getClassLoader()));
+        super.setVehicle((Vehicle) in.readParcelable(Vehicle.class.getClassLoader()));
         super.setKaskoType(in.readString());
     }
 
@@ -51,6 +53,7 @@ public class ParcelablePolicyKasko extends Kasko implements Parcelable {
         dest.writeParcelable((Parcelable) super.getInsurer(), flags);
         dest.writeParcelable((Parcelable) super.getInsured(), flags);
         dest.writeParcelable((Parcelable) super.getTariff(), flags);
+        dest.writeParcelable((Parcelable) super.getVehicle(), flags);
         dest.writeString(super.getKaskoType());
     }
 }

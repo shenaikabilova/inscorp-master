@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                         parcelableInsured.setCity(myObject.getString("city"));
                         parcelableInsured.setAddress(myObject.getString("address"));
 
-                        intent = new Intent(LoginActivity.this, AfterLoginActivity.class);
+//                        intent = new Intent(LoginActivity.this, AfterLoginActivity.class);
+                        intent = new Intent(LoginActivity.this, MenuActivity.class);
                         intent.putExtra("insured", parcelableInsured);
                         startActivity(intent);
                     }

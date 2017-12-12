@@ -10,14 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kabilova.inscorpclient.AfterLoginActivity">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="54dp"
-        android:id="@+id/lvActivePolicies" />
-
     <TextView
         android:text="Клиент:"
         android:layout_width="wrap_content"
@@ -37,5 +29,32 @@
         android:layout_toEndOf="@+id/tvWelcomeText"
         android:layout_marginStart="26dp"
         android:id="@+id/etClient" />
+
+    <TextView
+        android:text="Видове застраховки"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/etClient"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Гражданска отговрност"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView18"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/bGO" />
+
+    <Button
+        android:text="Каско"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/bKasko"
+        android:layout_below="@+id/bGO"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -2,18 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_vehicles"
+        android:id="@+id/action_logout"
         android:orderInCategory="100"
-        android:title="МПС"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_ins"
-        android:orderInCategory="100"
-        android:title="Застраховки"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="Настройки"
+        android:title="action_logout"
         app:showAsAction="never" />
 </menu>

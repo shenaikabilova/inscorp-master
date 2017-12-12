@@ -5,16 +5,18 @@ import android.os.Parcelable;
 
 import java.util.Calendar;
 
+import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
+import kabilova.tu.inscorp.model.vehicle.Vehicle;
 
 /**
  * Created by ShenaiKabilova.
  */
 
-public class ParcelablePolicyGO extends Policy implements Parcelable{
+public class ParcelablePolicyGO extends GO implements Parcelable{
     public ParcelablePolicyGO() { }
 
     public ParcelablePolicyGO(Parcel in) {
@@ -23,6 +25,7 @@ public class ParcelablePolicyGO extends Policy implements Parcelable{
         super.setDateTo((Calendar) in.readValue(getClass().getClassLoader()));
         super.setInsurer((Insurer) in.readParcelable(Insurer.class.getClassLoader()));
         super.setInsured((Insured) in.readParcelable(Insured.class.getClassLoader()));
+        super.setVehicle((Vehicle) in.readParcelable(Vehicle.class.getClassLoader()));
         super.setTariff((Tariff) in.readParcelable(Tariff.class.getClassLoader()));
     }
 
@@ -49,6 +52,7 @@ public class ParcelablePolicyGO extends Policy implements Parcelable{
 //        dest.writeParcelable(super.getInsurer(), Insurer.class.getClassLoader());
         dest.writeParcelable((Parcelable) super.getInsurer(), flags);
         dest.writeParcelable((Parcelable) super.getInsured(), flags);
+        dest.writeParcelable((Parcelable) super.getVehicle(), flags);
         dest.writeParcelable((Parcelable) super.getTariff(), flags);
     }
 }
