@@ -1,6 +1,8 @@
 package kabilova.tu.inscporp.bl.user;
 
 import kabilova.tu.inscorp.dao.PolicyDao;
+import kabilova.tu.inscorp.model.policy.GO;
+import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
 
@@ -31,5 +33,7 @@ public class PolicyEP {
 
     public void delete() { dao.delete(policy); }
 
-    public List<Policy> loadActivePolicies(Insured insured, Calendar currentDate) { return dao.loadActivePolicies(insured, currentDate); }
+    public List<GO> loadActivePoliciesGO(Insured insured, Calendar currentDate) { return dao.loadActivePoliciesGO(insured, currentDate); }
+
+    public List<Kasko> loadActivePoliciesKasko(Insured insured, Calendar currentDate) { return dao.loadActivePoliciesKasko(insured, currentDate); }
 }

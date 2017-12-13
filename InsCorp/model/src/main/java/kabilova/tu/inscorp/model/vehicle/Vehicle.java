@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.model.vehicle;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kabilova.tu.inscorp.model.user.Insured;
 
 import java.util.Calendar;
@@ -16,9 +17,10 @@ public class Vehicle {
     private String   RAMA;
     private String   brand;
     private String   model;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC+2")
     private Calendar firstReg;
     private int      years;
-    private float    engine;
+    private double    engine;
     private String   color;
     private int      placeNumber;
 
@@ -26,7 +28,7 @@ public class Vehicle {
     }
 
     public Vehicle(int vehicleID, Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
-                    Calendar firstReg, int years, float engine, String color, int placeNumber) {
+                    Calendar firstReg, int years, double engine, String color, int placeNumber) {
         this.vehicleID = vehicleID;
         this.insured = insured;
         this.vehicleType = vehicleType;
@@ -43,7 +45,7 @@ public class Vehicle {
     }
 
     public Vehicle(Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
-                   Calendar firstReg, int years, float engine, String color, int placeNumber) {
+                   Calendar firstReg, int years, double engine, String color, int placeNumber) {
         this.insured = insured;
         this.vehicleType = vehicleType;
         this.vehicleSubtype = vehicleSubtype;
@@ -105,11 +107,11 @@ public class Vehicle {
         this.color = color;
     }
 
-    public float getEngine() {
+    public double getEngine() {
         return engine;
     }
 
-    public void setEngine(float engine) {
+    public void setEngine(double engine) {
         this.engine = engine;
     }
 

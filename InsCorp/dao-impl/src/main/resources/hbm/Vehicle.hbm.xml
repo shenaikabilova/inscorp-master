@@ -19,7 +19,7 @@
         <property name="firstReg" column="FIRSTREG" type="calendar" access="property"/>
         <property name="years" column="YEARS" type="int" access="property"/>
         <property name="color" column="COLOR" type="string" access="property"/>
-        <property name="engine" column="ENGINE" type="float" access="property"/>
+        <property name="engine" column="ENGINE" type="double" access="property"/>
         <property name="placeNumber" column="PLACENUMBER" type="int" access="property"/>
     </class>
 </hibernate-mapping>

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
+import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscporp.bl.user.PolicyEP;
@@ -21,15 +22,17 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-@Path("/loadActivePolicies")
-public class LoadActivePolicies {
+@Path("/loadActivePoliciesGO")
+public class LoadActivePoliciesGO {
     @POST
-    public String loadActivePolicies(@FormParam("insured") int user) {
+    public String loadActivePoliciesGO(@FormParam("insured") int user) {
         Insured insured = new Insured();
         insured.setId(user);
 
+        System.out.println(user);
+
         PolicyEP policyEP = new PolicyEP(new PolicyDaoImpl());
-        List<Policy> policies =  policyEP.loadActivePolicies(insured, Calendar.getInstance());
+        List<GO> policies =  policyEP.loadActivePoliciesGO(insured, Calendar.getInstance());
 //
 //        for(Policy p : )) {
 //            System.out.println(p.getPolicaID());
@@ -37,9 +40,9 @@ public class LoadActivePolicies {
 //        }
 
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        Gson gson = gsonBuilder.create();
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+//        Gson gson = gsonBuilder.create();
 //        try {
 //            System.out.println(gson.toJson(policies));
 //            return gson.toJson(policies);

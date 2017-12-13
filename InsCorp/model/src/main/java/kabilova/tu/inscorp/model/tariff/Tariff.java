@@ -1,14 +1,27 @@
 package kabilova.tu.inscorp.model.tariff;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import kabilova.tu.inscorp.model.user.Admin;
+import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 
 /**
  * Created by ShenaiKabilova
  */
-public class Tariff {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property="type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = TariffGO.class, name="tariffgo"),
+        @JsonSubTypes.Type(value = TariffKasko.class, name="tariffkasko")
+})
+public abstract class Tariff {
     private int tariffID;
-    private int zone;
     private VehicleType vechileType;
     private VehicleSubtype vehicleSubtype;
     private double value;
@@ -16,12 +29,17 @@ public class Tariff {
     public Tariff() {
     }
 
-    public Tariff(int tariffID, double value, VehicleType vechileType, VehicleSubtype vehicleSubtype, int zone) {
+    public Tariff(int tariffID, VehicleType vechileType, VehicleSubtype vehicleSubtype, double value) {
         this.tariffID = tariffID;
-        this.value = value;
         this.vechileType = vechileType;
         this.vehicleSubtype = vehicleSubtype;
-        this.zone = zone;
+        this.value = value;
+    }
+
+    public Tariff(VehicleType vechileType, VehicleSubtype vehicleSubtype, double value) {
+        this.vechileType = vechileType;
+        this.vehicleSubtype = vehicleSubtype;
+        this.value = value;
     }
 
     public int getTariffID() {
@@ -54,13 +72,5 @@ public class Tariff {
 
     public void setVehicleSubtype(VehicleSubtype vehicleSubtype) {
         this.vehicleSubtype = vehicleSubtype;
-    }
-
-    public int getZone() {
-        return zone;
-    }
-
-    public void setZone(int zone) {
-        this.zone = zone;
     }
 }

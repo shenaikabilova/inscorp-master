@@ -3,6 +3,8 @@ package kabilova.tu.inscorp.model.policy;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import kabilova.tu.inscorp.model.user.Admin;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
@@ -26,9 +28,10 @@ import java.util.TimeZone;
 })
 public abstract class Policy {
     private int policaID;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss", timezone = "UTC+2")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC+2")
+//    @JsonDeserialize(using = JsonDeserializer.class, as=Calendar.class)
     private Calendar dateFrom;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Calendar dateTo;
     private Insurer insurer;
     private Insured insured;
