@@ -21,10 +21,6 @@
         <activity android:name=".PoliciesHistoryActivity" />
         <activity android:name=".PolicyActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PolicyGOActivity" />
         <activity android:name=".ActiveGOActivity" />
         <activity android:name=".PolicyKaskoActivity" />

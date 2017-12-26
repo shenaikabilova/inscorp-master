@@ -159,9 +159,9 @@ public class ActiveGOActivity extends AppCompatActivity {
 
                             go.setVehicle(vehicle);
 
-                            Tariff tariff = new Tariff();
-                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
-                            go.setTariff(tariff);
+//                            Tariff tariff = new Tariff();
+//                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
+//                            go.setTariff(tariff);
 
                             policiesGO.add(go);
                             list.add(String.valueOf(jsonObject.getString("policytype")) + " " + vObj.getString("regNum"));

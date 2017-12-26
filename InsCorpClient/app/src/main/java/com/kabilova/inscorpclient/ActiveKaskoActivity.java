@@ -158,9 +158,9 @@ public class ActiveKaskoActivity extends AppCompatActivity {
 
                             kasko.setVehicle(vehicle);
 
-                            Tariff tariff = new Tariff();
-                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
-                            kasko.setTariff(tariff);
+//                            Tariff tariff = new Tariff();
+//                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
+//                            kasko.setTariff(tariff);
 
                             policiesKasko.add(kasko);
                             list.add(String.valueOf(jsonObject.getString("policytype")) + " " + vObj.getString("regNum"));

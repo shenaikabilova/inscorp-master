@@ -3,6 +3,8 @@ package com.kabilova.inscorpclient;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,5 +95,29 @@ public class AfterLoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+//            case R.id.action_vehicles:
+//                startActivity(new Intent(AfterLoginActivity.this, AdminPanelAddSubject.class));
+//                break;
+//            case R.id.action_ins:
+//                startActivity(new Intent(AfterLoginActivity.this, AdminPanelSearchStudent.class));
+//                break;
+            case R.id.action_settings:
+                startActivity(new Intent(AfterLoginActivity.this, SettingsActivity.class));
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
     }
 }
