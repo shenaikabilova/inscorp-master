@@ -58,6 +58,7 @@
                     <li><a href="loadVehicle.jsp">Промени</a></li>
                     <li><a href="deleteVehicle.jsp">Изтрий</a></li>
                     <li><a href="loadAllVehicles.jsp">Изведи всички</a></li>
+                    <li><a href="changeOwner.jsp">Смени собственик</a></li>
                 </ul>
             </li>
             <li><a href="#">Нова застраховка</a>

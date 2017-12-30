@@ -48,6 +48,7 @@
                     <li><a href="loadInsuredForUpdate.jsp">Промени</a></li>
                     <li><a href="deleteInsured.jsp">Изтрий</a></li>
                     <li><a href="loadAllClients.jsp">Изведи всички</a></li>
+                    <li><a href="changeOwner.jsp">Смени собственик</a></li>
                 </ul>
             </li>
             <li><a href="#">МПС</a>

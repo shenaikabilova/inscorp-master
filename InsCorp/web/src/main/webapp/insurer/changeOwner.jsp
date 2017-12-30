@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 14.11.2017 г.
-  Time: 23:28
+  Date: 30.12.2017 г.
+  Time: 20:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <%
@@ -24,6 +25,7 @@
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
+
 <body>
 <div class="menu">
     <div class="menu-nav">
@@ -81,10 +83,12 @@
     </div>
 </div>
 
-<form action="/loadMpsKasko" method="post">
-    <label>Намери МПС</label><br>
-    <input type="text" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
-    <input type="submit" value="Зареди МПС"><br>
+<form action="/changeOwner" method="post">
+<label>Регистрационен №</label>
+<input type="text" id="regNum" name="regNum">
+<label>ЕГН на собственик</label>
+<input type="text" id="egn" name="egn">
+<input type="submit" value="Запиши">
 </form>
 </body>
 </html>
