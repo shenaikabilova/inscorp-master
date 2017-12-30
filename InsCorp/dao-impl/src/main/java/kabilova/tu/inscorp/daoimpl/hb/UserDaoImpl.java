@@ -2,6 +2,8 @@ package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
+import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.model.user.Insurer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -58,7 +60,7 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        List<User> user = session
+        List user = session
                 .createCriteria(User.class)
                 .list();
         return user;
@@ -134,5 +136,27 @@ public class UserDaoImpl implements UserDao {
         }
 
         return user.get(0);
+    }
+
+    @Override
+    public List<Insurer> readInsurers() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Insurer> user = session
+                .createCriteria(Insurer.class)
+                .list();
+        return user;
+    }
+
+    @Override
+    public List<Insured> readInsured() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Insured> insureds = session
+                .createCriteria(Insured.class)
+                .list();
+        return insureds;
     }
 }

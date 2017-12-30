@@ -27,8 +27,6 @@ public class LoadActivePoliciesKasko {
         Insured insured = new Insured();
         insured.setId(user);
 
-        System.out.println(user);
-
         PolicyEP policyEP = new PolicyEP(new PolicyDaoImpl());
         List<Kasko> policies =  policyEP.loadActivePoliciesKasko(insured, Calendar.getInstance());
         ObjectMapper objectMapper = new ObjectMapper();

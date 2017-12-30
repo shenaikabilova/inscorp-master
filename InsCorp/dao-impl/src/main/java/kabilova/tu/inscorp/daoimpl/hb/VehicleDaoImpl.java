@@ -3,6 +3,8 @@ package kabilova.tu.inscorp.daoimpl.hb;
 import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.dao.VehicleDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
+import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.model.user.User;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -81,10 +83,27 @@ public class VehicleDaoImpl implements VehicleDao {
                                .add(Restrictions.like("regNum", regNumber))
                                .list();
 
-        if(vehicle.size() > 1 ){
-            throw  new IllegalArgumentException("..."); //TODO
+        if(vehicle.size() < 1 ){
+            throw  new IllegalArgumentException("cannot find vehicle"); //TODO
         }
 
         return vehicle.get(0);
+    }
+
+    @Override
+    public List<Vehicle> loadVehicleByUser(Insured insured) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Vehicle> vehicles = session
+                .createCriteria(Vehicle.class)
+                .add(Restrictions.like("insured", insured))
+                .list();
+
+        if(vehicles.size() < 1) {
+            throw new IllegalArgumentException("not result");
+        }
+
+        return vehicles;
     }
 }

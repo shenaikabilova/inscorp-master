@@ -5,24 +5,29 @@
 
 <hibernate-mapping>
     <class name="kabilova.tu.inscorp.model.policy.Policy" table="policy">
-        <id name="policaID" column="ID" type="int" access="property">
+        <id name="id" column="ID" type="int" access="property">
             <generator class="increment"/>
         </id>
 
         <discriminator column="POLICYTYPE" type="string"/>
 
+        <property name="policaID" column="POLICAID" type="string" access="property"/>
         <property name="dateFrom" column="DATEFROM" type="calendar" access="property"/>
         <property name="dateTo" column="DATETO" type="calendar" access="property"/>
         <many-to-one name="insurer" class="kabilova.tu.inscorp.model.user.Insurer" column="INSURER"/>
         <many-to-one name="insured" class="kabilova.tu.inscorp.model.user.Insured" column="INSURED"/>
         <many-to-one name="vehicle" class="kabilova.tu.inscorp.model.vehicle.Vehicle" column="VEHICLE"/>
-        <many-to-one name="tariff" class="kabilova.tu.inscorp.model.tariff.Tariff" column="TARIFF" />
+        <property name="period" column="PERIOD" type="int" access="property"/>
+        <property name="value" column="VALUE" type="double" access="property"/>
 
         <subclass name="kabilova.tu.inscorp.model.policy.GO" discriminator-value="GO">
+            <many-to-one name="tariffGO" class="kabilova.tu.inscorp.model.tariff.TariffGO" column="TARIFF" />
         </subclass>
 
         <subclass name="kabilova.tu.inscorp.model.policy.Kasko" discriminator-value="KASKO">
+            <many-to-one name="tariffKasko" class="kabilova.tu.inscorp.model.tariff.TariffKasko" column="TARIFF" />
             <property name="kaskoType" column="KASKOTYPE" type="string" access="property"/>
+            <property name="vehicleValue" column="VEHICLEVALUE" type="double" access="property"/>
         </subclass>
     </class>
 </hibernate-mapping>

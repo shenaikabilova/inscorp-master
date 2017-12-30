@@ -1,6 +1,8 @@
-<%@ page import="kabilova.tu.inscorp.server.web.VehicleServer" %>
-<%@ page import="java.util.List" %>
-<%@ page import="kabilova.tu.inscorp.model.vehicle.Vehicle" %><%--
+<%@ page import="kabilova.tu.inscorp.model.vehicle.Vehicle" %>
+<%@ page import="kabilova.tu.inscorp.server.web.PolicyServer" %>
+<%@ page import="kabilova.tu.inscorp.model.tariff.TariffGO" %>
+<%@ page import="kabilova.tu.inscorp.model.policy.GO" %>
+<%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -12,20 +14,17 @@
 <html>
 <head>
     <%
-//        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) {
-//            response.sendRedirect("login.jsp");
-//        }
-        String username = session.getAttribute("username").toString();
-        String password = session.getAttribute("password").toString();
+        int id = 0;
+        String username = null;
+        String password = null;
+        if(!request.getSession().isNew()) {
+            id = Integer.parseInt(session.getAttribute("id").toString());
+            username = session.getAttribute("username").toString();
+            password = session.getAttribute("password").toString();
+        }
+        else {
+            response.sendRedirect("login.jsp");
+        }
     %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
@@ -34,21 +33,35 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="js/GO/calendarGO.js"></script>
-    <script src="js/GO/setKubici.js"></script>
-    <script src="js/GO/setGOValue.js"></script>
-    <script src="js/validate.js"></script>
-    <script src="js/GO/onLoad.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/setPremiq.js"></script>
+    <script src="../js/validate.js"></script>
 </head>
 
-<body onload="onLoad();">
+<body>
 <div class="menu">
     <div class="menu-nav">
         <ul>
-            <li><a href="insurer.jsp">Нова застраховка</a>
+            <li><a href="#">Клиент</a>
                 <ul>
-                    <li><a href="insurerAddNewGO.jsp">Гражданска отговорност</a></li>
-                    <li><a href="insurerAddNewKasko.jsp">Каско</a></li>
+                    <li><a href="addNewInsured.jsp">Добави</a></li>
+                    <li><a href="loadInsuredForUpdate.jsp">Промени</a></li>
+                    <li><a href="deleteInsured.jsp">Изтрий</a></li>
+                    <li><a href="loadAllClients.jsp">Изведи всички</a></li>
+                </ul>
+            </li>
+            <li><a href="#">МПС</a>
+                <ul>
+                    <li><a href="loadClient.jsp">Добави</a></li>
+                    <li><a href="loadVehicle.jsp">Промени</a></li>
+                    <li><a href="deleteVehicle.jsp">Изтрий</a></li>
+                    <li><a href="loadAllVehicles.jsp">Изведи всички</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Нова застраховка</a>
+                <ul>
+                    <li><a href="loadMpsGO.jsp">Гражданска отговорност</a></li>
+                    <li><a href="loadMpsKasko.jsp">Каско</a></li>
                 </ul>
             </li>
             <li><a href="#">Търсене</a>
@@ -64,7 +77,7 @@
                         <ul>
                             <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
-                            <li><a href="searchAllKasko.jsp">Изведи всички</a></li>
+                            <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -84,42 +97,52 @@
 <div class="newGO">
     <div class="shell">
         <h3>Сключване на застраховка "Гражданеска отговорност"</h3>
-        <form action="addNewGO" method="post">
+        <form action="/addNewGO" method="post">
             <div class="form-section">
                 <div class="form-section">
                     <h4>Застрахователна полица ГО на МПС</h4>
                     <div class="form-row">
                         <label>№ на полица</label>
                         <%
-
+                            PolicyServer policyServer = new PolicyServer(new GO());
+                            String policyLastID = policyServer.getLastPolicyID();
+                            int countZeros=0;
+                            int max=0;
+                            for(int i=0; i<policyLastID.length(); i++) {
+                                char c = policyLastID.charAt(i);
+                                if(c == '0') {
+                                    countZeros++;
+                                    max=countZeros;
+                                }
+                                else countZeros=0;
+                            }
+                            int i = Integer.parseInt(policyLastID);
+                            i++;
+                            max = max + String.valueOf(i).length();
+                            String newPolicyID = String.format("%0"+max+"d", i);
                         %>
                         <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6"
-                               value="">
+                               value=<%=newPolicyID%> readonly>
                     </div>
                     <div class="form-row">
+                        <label>Застраховател ID</label>
+                        <input type="text" id="insID" name="insID" value=<%=id%>>
                         <label>Застраховател</label>
                         <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
                     </div>
                 </div>
                 <div class="form-section">
                     <h4>Застрахован</h4>
-                    <div class="form-row">
-                        <label>Тип на клиента:</label>
-                        <select id="insType" class="field" name="insType">
 
-                            <option></option>
-                        </select>
-                    </div>
-                    <%
-                        List<Vehicle> vehicles = (List<Vehicle>) request.getAttribute("result");
-                        for(Vehicle vehicle : vehicles) {
+                    <% Vehicle vehicle = (Vehicle) request.getAttribute("result");
+                        TariffGO tariffGO = (TariffGO) request.getAttribute("tariff");
                     %>
                     <label>ID</label>
                     <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>
                     <div class="form-row">
                         <label>Собственик</label>
                         <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50">
-                        <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%>" size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="30" maxlength="50">
                         <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
                     </div>
                     <div class="form-row">
@@ -136,7 +159,6 @@
                 <label>Адрес</label>
                 <input type="text" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
 
-
                 <div class="form-row">
                     <label>Мобилен телефон</label>
                     <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> size="30" maxlength="10">
@@ -145,7 +167,8 @@
             </div>
             <div class="form-section">
                 <h4>Данни за МПС</h4>
-
+                <label>МПС - id</label>
+                <input type="text" id="vehicleID" name="vehicleID" value=<%=vehicle.getVehicleID()%>>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="registrationNumber">Регистрационен №</label>
@@ -172,7 +195,7 @@
                     <div class="form-row-inner">
                         <label>Кубици</label>
                         <select id="vehicleSubtype" class="field" name="vehicleSubtype">
-                            <option value=<%=vehicle.getVehicleSubtype().getId()%>><%=vehicle.getVehicleSubtype().getSubtype()%>
+                            <option value=<%=vehicle.getVehicleSubtype().getId()%>><%=vehicle.getVehicleSubtype().getSubtype()%></option>
                         </select>
                     </div>
                 </div>
@@ -207,23 +230,25 @@
                     </div>
                     <div class="form-row-inner">
                         <label>Край</label>
-                        <input class="field" type="text" placeholder="Крайна датва" id="datepicker2" name="toDate">
+                        <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate">
                     </div>
                 </div>
                 <div class="form-row">
                     <label>Срок</label>
-                    <select id="months" class="field" name="months">
+                    <select id="period" class="field" name="period">
                         <option>12</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-section">
+                <label>Тарифа ID</label>
+                <input type="text" id="tariffID" name="tariffID" value=<%=tariffGO.getTariffID()%>>
                 <h4>Застрахователна сума</h4>
                 <div class="form-row">
                     <label>Застрахоателна сума</label>
                     <input type="text"
-                           class="field" id="vehicleInsValue" name="vehicleInsValue" size="30" readonly="readonly">
+                           class="field" id="vehicleInsValue" name="vehicleInsValue" size="30" readonly="readonly" value=<%=tariffGO.getValue()%> readonly>
                 </div>
                 <div class="form-row">
                     <label>Отстъпки</label>
@@ -239,7 +264,7 @@
                 </div>
                 <div class="form-row">
                     <label>Застрахователна премия</label>
-                    <input class="field" id="insPremiq" type="text" name="insPremiq">
+                    <input class="field" id="value" type="text" name="value" value=<%=tariffGO.getValue()%> readonly>
                 </div>
             </div>
 

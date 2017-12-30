@@ -22,8 +22,15 @@
 //        if(userName == null) {
 //            response.sendRedirect("login.jsp");
 //        }
-        String username = session.getAttribute("username").toString();
-        String password = session.getAttribute("password").toString();
+        String username = null;
+        String password = null;
+        if(!request.getSession().isNew()) {
+            username = session.getAttribute("username").toString();
+            password = session.getAttribute("password").toString();
+        }
+        else {
+            response.sendRedirect("/AdminLogin");
+        }
     %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
@@ -32,25 +39,37 @@
 <body>
 <div class="menu">
     <ul class="menu-nav">
-        <li><a href="adminPanel.jsp">Добави</a>
-            <ul>
-                <li><a href="adminPanelAddInsurer.jsp">Застрахователен агент</a></li>
-            </ul>
-        </li>
-        <li><a href="adminPanelSettings.jsp">Настройки</a></li>
         <li><a href="#">Застрахователни агенти</a>
             <ul>
+                <li><a href="adminPanelAddInsurer.jsp">Добави</a></li>
                 <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
                 <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
                 <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
             </ul>
         </li>
         <li><a href="#">МПС</a>
-            <lu>
+            <ul>
                 <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
                 <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
-            </lu>
+            </ul>
         </li>
+        <li><a href="#">Тарифиране</a>
+            <ul>
+                <li><a href="#">ГО</a>
+                    <ul>
+                        <li><a href="loadTariffGO.jsp">Добави тарифа ГО</a></li>
+                        <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
+                    </ul>
+                </li>
+                <li><a href="tariffKasko.jsp">Каско</a>
+                    <ul>
+                        <li><a href="addTariffKasko.jsp">Добави тарифа Каско</a></li>
+                        <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="adminPanelSettings.jsp">Настройки</a></li>
         <li><a href="AdminLogout">Изход</a></li>
     </ul>
 </div>
@@ -67,8 +86,12 @@
                     <td><h3>Настройки на застраховател</h3></td>
                 </tr>
                 <tr>
-                    <td><label>ID</label></td>
-                    <td><input type="text" class="field" name="userID" size="30" value=<%=insurer.getInsurerID()%> readonly="readonly"></td>
+                    <td>ID</td>
+                    <td><input type="text" class="field" name="id" size="30" value=<%=insurer.getId()%> readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td><label>Служебен №</label></td>
+                    <td><input type="text" class="field" name="insurerID" size="30" value=<%=insurer.getInsurerID()%> readonly="readonly"></td>
                 <tr>
                     <td><label>Име</label></td>
                     <td><input type="text" class="field" name="insurerFirstName" value=<%=insurer.getFirstName()%> maxlength="50"></td>
@@ -87,23 +110,23 @@
                 </tr>
                 <tr>
                     <td><label>Парола</label></td>
-                    <td><input type="password" class="field" name="password1" value=<%=insurer.getPassword()%> size="30" maxlength="50"></td>
+                    <td><input type="password" class="field" name="password1" size="30" maxlength="50"></td>
                 </tr>
                 <tr>
                     <td><label>Повторете парола</label></td>
                     <td><input type="password" class="field" name="password2" placeholder="Повторете паролата" size="30" maxlength="50"></td>
                 </tr>
                 <tr>
-                    <td><label>Телфонен №</label></td>
-                    <td><input type="number" id="phoneNumber" name="phoneNumber" value=<%=insurer.getPhoneNumber()%></td>
+                    <td><label>Телефонен №</label></td>
+                    <td><input type="text" id="phoneNumber" name="phoneNumber" value=<%=insurer.getPhoneNumber()%>></td>
                 </tr>
                 <tr>
                     <td><label>Е-майл</label></td>
-                    <td><input id="e-mail" type="text" class="field" value=<%=insurer.getEmail()%> name="e-mail" size="30" onchange="validateEmail();" maxlength="100"></td>
+                    <td><input id="e-mail" type="text" class="field" name="e-mail"  value=<%=insurer.getEmail()%> size="30" onchange="validateEmail();" maxlength="100"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Добави"></td>
+                    <td><input type="submit" value="Промени"></td>
                 </tr>
                 <% } %>
             </table>

@@ -1,6 +1,13 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import kabilova.tu.inscorp.model.tariff.Tariff;
+import kabilova.tu.inscorp.model.tariff.TariffGO;
+import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
+import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
+import kabilova.tu.inscorp.server.web.TariffGoServer;
+import kabilova.tu.inscorp.server.web.TariffKaskoServer;
+import kabilova.tu.inscorp.server.web.TariffServer;
 import kabilova.tu.inscorp.server.web.VehicleServer;
 
 import javax.servlet.RequestDispatcher;
@@ -29,15 +36,24 @@ public class LoadMps extends HttpServlet {
         Vehicle vehicle = new Vehicle();
         vehicle.setRegNum(vehicleReg);
 
-        VehicleServer vehicleServer = new VehicleServer();
-        List<Vehicle> result = new ArrayList<>();
-        result.add(vehicleServer.loadVehicle());
+        VehicleServer vehicleServer = new VehicleServer(vehicle);
 
-        request.setAttribute("result", result);
+        request.setAttribute("result", vehicleServer.loadVehicle());
         RequestDispatcher rd = null;
         if(request.getServletPath().equals("/loadMpsGO")) {
+            TariffGO tariffGO = new TariffGO();
+            tariffGO.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
+            tariffGO.setZone(vehicleServer.loadVehicle().getZone());
+            TariffGoServer tariffGoServer = new TariffGoServer(tariffGO);
+
+            request.setAttribute("tariff", tariffGoServer.loadTariffGo());
             rd = getServletContext().getRequestDispatcher("/insurer/insurerAddNewGO.jsp");
         } else if(request.getServletPath().equals("/loadMpsKasko")) {
+            TariffKasko tariffKasko = new TariffKasko();
+            tariffKasko.setVehicleSubtype(vehicle.getVehicleSubtype());
+            TariffKaskoServer tariffKaskoServer = new TariffKaskoServer(tariffKasko);
+
+            request.setAttribute("tariff", tariffKaskoServer.loadTariffkasko());
             rd = getServletContext().getRequestDispatcher("/insurer/insurerAddNewKasko.jsp");
         }
         rd.forward(request, response);

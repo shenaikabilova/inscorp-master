@@ -63,10 +63,11 @@
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.7.1" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-xc:1.7.1" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.8" />
-          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.1" />
+          <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.23" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.23" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.18.1-GA" />

@@ -35,7 +35,7 @@ public class SearchUser extends HttpServlet{
         result.add((Insurer) userServer.loadByUsername());
 
         request.setAttribute("result", result);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("admin/adminPanelUpdateUser.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/adminPanelUpdateUser.jsp");
         rd.forward(request, response);
     }
 }

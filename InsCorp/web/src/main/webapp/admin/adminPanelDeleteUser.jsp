@@ -21,39 +21,57 @@
 //            if(userName == null) {
 //                response.sendRedirect("login.jsp");
 //            }
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
+            String username = null;
+            String password = null;
+            if(!request.getSession().isNew()) {
+                username = session.getAttribute("username").toString();
+                password = session.getAttribute("password").toString();
+            }
+            else {
+                response.sendRedirect("/AdminLogin");
+            }
         %>
         <title><%=username %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
     </head>
 
     <body>
-        <div class="menu">
-            <ul class="menu-nav">
-                <li><a href="adminPanel.jsp">Добави</a>
-                    <ul>
-                        <li><a href="adminPanelAddInsurer.jsp">Застрахователен агент</a></li>
-                    </ul>
-                </li>
-                <li><a href="adminPanelSettings.jsp">Настройки</a></li>
-                <li><a href="#">Застрахователни агенти</a>
-                    <ul>
-                        <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
-                        <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
-                        <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">МПС</a>
-                    <ul>
-                        <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
-                        <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
-                    </ul>
-                </li>
-                <li><a href="AdminLogout">Изход</a></li>
-            </ul>
-        </div>
-
+    <div class="menu">
+        <ul class="menu-nav">
+            <li><a href="#">Застрахователни агенти</a>
+                <ul>
+                    <li><a href="adminPanelAddInsurer.jsp">Добави</a></li>
+                    <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
+                    <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
+                    <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
+                </ul>
+            </li>
+            <li><a href="#">МПС</a>
+                <ul>
+                    <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                    <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Тарифиране</a>
+                <ul>
+                    <li><a href="#">ГО</a>
+                        <ul>
+                            <li><a href="loadTariffGO.jsp">Добави тарифа ГО</a></li>
+                            <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="tariffKasko.jsp">Каско</a>
+                        <ul>
+                            <li><a href="addTariffKasko.jsp">Добави тарифа Каско</a></li>
+                            <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="adminPanelSettings.jsp">Настройки</a></li>
+            <li><a href="AdminLogout">Изход</a></li>
+        </ul>
+    </div>
 
         <div class="deleteUser">
             <div class="shell">
@@ -61,8 +79,8 @@
                     <div class="form-section">
                         <div class="form-row">
                             <label>ID на застраховател</label>
-                            <input class="field" type="text" name="userID" placeholder="Въведете № на застраховател" >
-                            <input type="submit" value="Изтрий" name="deleteUser">
+                            <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
+                            <input type="submit" value="Изтрий">
                         </div>
                     </div>
                 </form>

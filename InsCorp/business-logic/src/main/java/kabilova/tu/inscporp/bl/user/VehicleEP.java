@@ -12,6 +12,10 @@ public class VehicleEP {
     private Vehicle vehicle;
     private VehicleDao dao;
 
+    public VehicleEP(VehicleDao dao) {
+        this.dao = dao;
+    }
+
     public VehicleEP(Vehicle vehicle, VehicleDao dao) {
         this.vehicle = vehicle;
         this.dao = dao;
@@ -26,4 +30,6 @@ public class VehicleEP {
     public void delete() { dao.delete(vehicle); }
 
     public Vehicle loadVehicle() { return dao.loadVehicle(vehicle.getRegNum()); }
+
+    public List<Vehicle> loadVehicleByUser() { return dao.loadVehicleByUser(vehicle.getInsured()); }
 }

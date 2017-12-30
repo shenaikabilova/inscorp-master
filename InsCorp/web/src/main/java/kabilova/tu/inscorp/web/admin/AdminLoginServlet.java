@@ -35,6 +35,10 @@ public class AdminLoginServlet extends HttpServlet{
             session.setAttribute("username", username);
             session.setAttribute("password", password);
             response.sendRedirect("admin/adminPanel.jsp");
+        } else{
+            request.setAttribute("errmsg", "Грешно потребителско име или парола!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/adminLoginError.jsp");
+            view.forward(request,response);
         }
 // else if(userServer.loadUser(username, password) instanceof Insurer) {
 //            HttpSession session = request.getSession(true);

@@ -3,6 +3,7 @@ package kabilova.tu.inscorp.web.admin;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by ShenaiKabilova
@@ -32,14 +36,31 @@ public class AddNewInsurer extends HttpServlet{
             String lastName = request.getParameter("insurerLastName");
             String username = request.getParameter("username");
             String phoneNumber = request.getParameter("phoneNumber");
-            String email = request.getParameter("email");
+            String email = request.getParameter("e-mail");
 
-            UserServer userServer = new UserServer(new Insurer(insurerID, firstName, secondName, lastName, username, pass1,
+            MessageDigest m;
+            BigInteger passEncrypt = null;
+            try {
+                m = MessageDigest.getInstance("MD5");
+                m.update(pass1.getBytes(), 0, pass1.length());
+                passEncrypt = new BigInteger(1,m.digest());
+                System.out.println(String.format("%1$032x", passEncrypt));
+            } catch (NoSuchAlgorithmException e1) {
+                e1.printStackTrace();
+            }
+
+            UserServer userServer = new UserServer(new Insurer(insurerID, firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt),
                                                        phoneNumber, email));
             userServer.createUser();
+
+            request.setAttribute("errmsg", "Успешен запис!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request,response);
         }
         else {
-            System.out.print("pass1 not equals to pass2");
+            request.setAttribute("errmsg", "Моля въведете еднакви пароли!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request,response);
         }
     }
 }

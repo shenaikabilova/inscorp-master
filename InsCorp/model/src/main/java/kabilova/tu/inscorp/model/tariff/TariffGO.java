@@ -16,6 +16,11 @@ public class TariffGO extends Tariff {
         this.zone = zone;
     }
 
+    public TariffGO(VehicleType vechileType, VehicleSubtype vehicleSubtype, int zone, double value) {
+        super(vechileType, vehicleSubtype, value);
+        this.zone = zone;
+    }
+
     public int getZone() {
         return zone;
     }

@@ -19,7 +19,7 @@ public class AdminLogin extends HttpServlet {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "UTF8"), true);
 
-            request.setCharacterEncoding("UTF-8");
+//            request.setCharacterEncoding("UTF-8");
 
             out.println("<html>");
             out.println("<body>");

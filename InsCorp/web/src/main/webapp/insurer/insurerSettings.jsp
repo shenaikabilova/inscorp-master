@@ -1,4 +1,5 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.model.user.Insurer" %>
+<%@ page import="kabilova.tu.inscorp.server.web.UserServer" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -7,25 +8,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<%--%>
-//    String userName = null;
-//    Cookie[] cookies = request.getCookies();
-//    if(cookies != null) {
-//        for(Cookie cookie: cookies) {
-//            if(cookie.getName().equals("user")) {
-//                userName = cookie.getValue();
-//            }
-//        }
-//    }
-//    if(userName == null) {
-//        response.sendRedirect("login.jsp");
-//    }
-<%--%>--%>
-
 <html>
 <head>
-    <%  String username = session.getAttribute("username").toString();
-        String password = session.getAttribute("password").toString();
+    <%
+        int id = 0;
+        String username = null;
+        String password = null;
+        if(!request.getSession().isNew()) {
+            id = Integer.parseInt(session.getAttribute("id").toString());
+            username = session.getAttribute("username").toString();
+            password = session.getAttribute("password").toString();
+        }
+        else {
+            response.sendRedirect("login.jsp");
+        }
     %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
@@ -36,10 +32,26 @@
     <div class="menu">
         <div class="menu-nav">
             <ul>
-                <li><a href="insurer.jsp">Нова застраховка</a>
+                <li><a href="#">Клиент</a>
                     <ul>
-                        <li><a href="insurerAddNewGO.jsp">Гражданска отговорност</a></li>
-                        <li><a href="insurerAddNewKasko.jsp">Каско</a></li>
+                        <li><a href="addNewInsured.jsp">Добави</a></li>
+                        <li><a href="loadInsuredForUpdate.jsp">Промени</a></li>
+                        <li><a href="deleteInsured.jsp">Изтрий</a></li>
+                        <li><a href="loadAllClients.jsp">Изведи всички</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">МПС</a>
+                    <ul>
+                        <li><a href="loadClient.jsp">Добави</a></li>
+                        <li><a href="loadVehicle.jsp">Промени</a></li>
+                        <li><a href="deleteVehicle.jsp">Изтрий</a></li>
+                        <li><a href="loadAllVehicles.jsp">Изведи всички</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Нова застраховка</a>
+                    <ul>
+                        <li><a href="loadMpsGO.jsp">Гражданска отговорност</a></li>
+                        <li><a href="loadMpsKasko.jsp">Каско</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Търсене</a>
@@ -55,7 +67,7 @@
                             <ul>
                                 <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
                                 <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
-                                <li><a href="searchAllKasko.jsp">Изведи всички</a></li>
+                                <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -75,46 +87,59 @@
 
 <div class="insurerSettings">
     <div class="shell">
-        <form action="insurerSettings" method="post">
-            <%--<%--%>
-                <%--InsurerDAO insurer = new InsurerDAOImpl();--%>
-            <%--%>--%>
-            <%--<h3>Настройки</h3>--%>
-            <%--<table width="100%">--%>
-                <%--<tr>--%>
-                    <%--<td><label>ID</label></td>--%>
-                    <%--<td><input type="text" class="field" name="userID" size="30" readonly="readonly"--%>
-                               <%--value=<%=insurer.searchUserName(userName).getInsurerId()%>></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td><label>Име</label></td>--%>
-                    <%--<td><input type="text" class="field" name="userName" size="30"--%>
-                               <%--value=<%=insurer.searchUserName(userName).getInsurerName()%>></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td><label>Фамилия</label></td>--%>
-                    <%--<td><input type="text" class="field" name="userFamily" size="30"--%>
-                               <%--value=<%=insurer.searchUserName(userName).getInsurerFamily()%>></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td><label>Е-майл</label></td>--%>
-                    <%--<td><input type="text" class="field" name="userEmail" size="30"--%>
-                               <%--value=<%=insurer.searchUserName(userName).getInsurerEmail()%>></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td><label>Парола</label></td>--%>
-                    <%--<td><input type="password" class="field" name="password1" size="30"--%>
-                               <%--value=<%=insurer.searchUserName(userName).getInsurerPassword()%>></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td><label>Повторете парола</label></td>--%>
-                    <%--<td><input type="password" class="field" name="password2" size="30"></td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td></td>--%>
-                    <%--<td><input type="submit" value="Промяна"></td>--%>
-                <%--</tr>--%>
-            <%--</table>--%>
+        <form action="/insurerSettingsUpdate" method="post">
+            <%
+                UserServer userServer = new UserServer(new Insurer());
+                if(userServer.loadUser(username, password) instanceof Insurer) {
+                    Insurer insurer = (Insurer) userServer.loadUser(username, password);
+            %>
+            <table width="100%">
+                <tr>
+                    <td></td>
+                    <td><h3>Добави застрахователен агент</h3></td>
+                </tr>
+                <tr>
+                    <td><label id="insurerID" for="insurerID">Служебен №</label></td>
+                    <td><input type="number" class="field" name="insurerID" value=<%=insurer.getInsurerID()%> size="30" maxlength="6"></td>
+                </tr>
+                <tr>
+                    <td><label>Име</label></td>
+                    <td><input type="text" class="field" name="insurerFirstName" value=<%=insurer.getFirstName()%> size="30" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Презиме</label></td>
+                    <td><input type="text" id="secondName" name="insurerSecondName" value=<%=insurer.getSecondName()%> size="50" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Фамилия</label></td>
+                    <td><input type="text" class="field" name="insurerLastName" value=<%=insurer.getLastName()%> size="30" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Потребителско име</label></td>
+                    <td><input type="text" id="username" name="username" value=<%=insurer.getUsername()%> maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Парола</label></td>
+                    <td><input type="password" class="field" name="password1" size="30" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Повторете парола</label></td>
+                    <td><input type="password" class="field" name="password2"  size="30" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td><label>Е-майл</label></td>
+                    <td><input id="e-mail" type="text" class="field" value=<%=insurer.getEmail()%> name="e-mail" size="30" onchange="validateEmail();" maxlength="100"></td>
+                </tr>
+                <tr>
+                    <td><label>Телефонен №</label></td>
+                    <td><input type="number" id="phoneNumber" value=<%=insurer.getPhoneNumber()%>></td>
+                </tr>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Промени"></td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>

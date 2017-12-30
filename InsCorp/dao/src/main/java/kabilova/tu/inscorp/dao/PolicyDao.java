@@ -14,4 +14,10 @@ import java.util.List;
 public interface PolicyDao extends CrudDao<Policy> {
     List<GO> loadActivePoliciesGO(User user, Calendar currentDate);
     List<Kasko> loadActivePoliciesKasko(User user, Calendar currentDate);
+    List<GO> loadPoliciesGO(User user);
+    List<Kasko> loadPoliciesKasko(User user);
+    List<GO> loadAllGO();
+    List<Kasko> loadAllKasko();
+    String getLastPolicyID();
+    Policy getPolicaByPolicaNum(String policaNum);
 }

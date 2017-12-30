@@ -27,36 +27,49 @@ import java.util.TimeZone;
         @JsonSubTypes.Type(value = Kasko.class, name="kasko")
 })
 public abstract class Policy {
-    private int policaID;
+    private int id;
+    private String policaID;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC+2")
-//    @JsonDeserialize(using = JsonDeserializer.class, as=Calendar.class)
     private Calendar dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Calendar dateTo;
     private Insurer insurer;
     private Insured insured;
     private Vehicle vehicle;
-    private Tariff tariff;
+    private int period;
+    private double value;
 
     public Policy() { }
 
-    public Policy(int policaID, Calendar dateFrom, Calendar dateTo, Insurer insurer, Insured insured, Vehicle vehicle, Tariff tariff) {
+    public Policy(int id, String policaID, Calendar dateFrom, Calendar dateTo, Insurer insurer, Insured insured, Vehicle vehicle, int period, double value) {
+        this.id = id;
         this.policaID = policaID;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.insurer = insurer;
         this.insured = insured;
         this.vehicle = vehicle;
-        this.tariff = tariff;
+        this.period = period;
+        this.value = value;
     }
 
-    public Policy(Calendar dateFrom, Calendar dateTo, Insurer insurer, Insured insured, Vehicle vehicle, Tariff tariff) {
+    public Policy(String policaID, Calendar dateFrom, Calendar dateTo, Insurer insurer, Insured insured, Vehicle vehicle, int period, double value) {
+        this.policaID = policaID;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.insurer = insurer;
         this.insured = insured;
         this.vehicle = vehicle;
-        this.tariff = tariff;
+        this.period = period;
+        this.value = value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Calendar getDateFrom() {
@@ -83,20 +96,12 @@ public abstract class Policy {
         this.insurer = insurer;
     }
 
-    public int getPolicaID() {
+    public String getPolicaID() {
         return policaID;
     }
 
-    public void setPolicaID(int policaID) {
+    public void setPolicaID(String policaID) {
         this.policaID = policaID;
-    }
-
-    public Tariff getTariff() {
-        return tariff;
-    }
-
-    public void setTariff(Tariff tariff) {
-        this.tariff = tariff;
     }
 
     public Insured getInsured() {
@@ -113,5 +118,21 @@ public abstract class Policy {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }

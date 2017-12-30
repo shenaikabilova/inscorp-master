@@ -1,6 +1,7 @@
 package kabilova.tu.inscporp.bl.user;
 
 import kabilova.tu.inscorp.dao.UserDao;
+import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public class UserEP<T> {
     }
 
     public User loadByUsername() { return dao.loadByUsername(user.getUsername()); }
+
+    public List<Insurer> readInsurers() { return dao.readInsurers(); }
 }

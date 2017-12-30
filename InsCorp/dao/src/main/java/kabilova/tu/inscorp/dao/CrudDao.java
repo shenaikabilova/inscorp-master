@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface CrudDao<T> {
     void create (T t);
-    List<T> read();
+    List read();
     void update(T t);
     void delete(T t);
 }

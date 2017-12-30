@@ -9,31 +9,37 @@ import java.util.Calendar;
  * Created by ShenaiKabilova
  */
 public class Vehicle {
-    private int      vehicleID;
-    private Insured  insured;
+    private int vehicleID;
+    private Insured insured;
     private VehicleType vehicleType;
     private VehicleSubtype vehicleSubtype;
-    private String   regNum;
-    private String   RAMA;
-    private String   brand;
-    private String   model;
+    private String country;
+    private String regNum;
+    private String regCity;
+    private String RAMA;
+    private String brand;
+    private String model;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC+2")
     private Calendar firstReg;
-    private int      years;
-    private double    engine;
-    private String   color;
-    private int      placeNumber;
+    private int years;
+    private double engine;
+    private String color;
+    private int placeNumber;
+    private int zone;
 
     public Vehicle() {
     }
 
-    public Vehicle(int vehicleID, Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
-                    Calendar firstReg, int years, double engine, String color, int placeNumber) {
+    public Vehicle(int vehicleID, Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum,
+                   String country, String regCity, String RAMA, String brand, String model,
+                    Calendar firstReg, int years, double engine, String color, int placeNumber, int zone) {
         this.vehicleID = vehicleID;
         this.insured = insured;
         this.vehicleType = vehicleType;
         this.vehicleSubtype = vehicleSubtype;
         this.regNum = regNum;
+        this.country = country;
+        this.regCity = regCity;
         this.RAMA = RAMA;
         this.brand = brand;
         this.model = model;
@@ -42,13 +48,18 @@ public class Vehicle {
         this.engine = engine;
         this.color = color;
         this.placeNumber = placeNumber;
+        this.zone = zone;
     }
 
-    public Vehicle(Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum, String RAMA, String brand, String model,
-                   Calendar firstReg, int years, double engine, String color, int placeNumber) {
+    public Vehicle(Insured insured, VehicleType vehicleType, VehicleSubtype vehicleSubtype, String regNum,
+                   String country, String regCity, String RAMA, String brand, String model,
+                   Calendar firstReg, int years, double engine, String color, int placeNumber, int zone) {
         this.insured = insured;
         this.vehicleType = vehicleType;
         this.vehicleSubtype = vehicleSubtype;
+        this.regNum = regNum;
+        this.country = country;
+        this.regCity = regCity;
         this.RAMA = RAMA;
         this.brand = brand;
         this.model = model;
@@ -57,6 +68,7 @@ public class Vehicle {
         this.engine = engine;
         this.color = color;
         this.placeNumber = placeNumber;
+        this.zone = zone;
     }
 
     public int getVehicleID() {
@@ -155,6 +167,13 @@ public class Vehicle {
         this.regNum = regNum;
     }
 
+    public String getRegCity() {
+        return regCity;
+    }
+
+    public void setRegCity(String regCity) {
+        this.regCity = regCity;
+    }
 
     public int getYears() {
         return years;
@@ -162,5 +181,21 @@ public class Vehicle {
 
     public void setYears(int years) {
         this.years = years;
+    }
+
+    public int getZone() {
+        return zone;
+    }
+
+    public void setZone(int zone) {
+        this.zone = zone;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

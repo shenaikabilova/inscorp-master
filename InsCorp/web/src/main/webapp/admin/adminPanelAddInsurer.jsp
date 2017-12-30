@@ -22,50 +22,59 @@
 //            if(userName == null) {
 //                response.sendRedirect("login.jsp");
 //            }
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
+            String username = null;
+            String password = null;
+            if(!request.getSession().isNew()) {
+                username = session.getAttribute("username").toString();
+                password = session.getAttribute("password").toString();
+            }
+            else {
+                response.sendRedirect("/AdminLogin");
+            }
         %>
         <title><%=username %></title>
         <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
-        <%--<script src="js/validate.js"></script>--%>
+        <script src="../js/validate.js"></script>
     </head>
 
     <body>
-        <div class="menu">
-            <div class="shell">
-                <ul class="menu-nav">
-                    <li><a href="adminPanel.jsp">Добави</a>
-                        <ul>
-                            <li><a href="adminPanelAddInsurer.jsp">Застрахователен агент</a></li>
-                            <li><a href="addVehicleType.jsp">Тип МПС</a></li>
-                            <li><a href="addVehicleSubtype.jsp">Подтип МПС</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="adminPanelSettings.jsp">Настройки</a></li>
-                    <li><a href="#">Застрахователни агенти</a>
-                        <ul>
-                            <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
-                            <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
-                            <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Тарифиране</a>
-                        <ul>
-                            <li><a href="tariffGO.jsp">ГО</a></li>
-                            <li><a href="tariffKasko.jsp">Каско</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">МПС</a>
-                        <ul>
-                            <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
-                            <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="AdminLogout">Изход</a></li>
+    <div class="menu">
+        <ul class="menu-nav">
+            <li><a href="#">Застрахователни агенти</a>
+                <ul>
+                    <li><a href="adminPanelAddInsurer.jsp">Добави</a></li>
+                    <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
+                    <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
+                    <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
                 </ul>
-            </div>
-        </div>
+            </li>
+            <li><a href="#">МПС</a>
+                <ul>
+                    <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+                    <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Тарифиране</a>
+                <ul>
+                    <li><a href="#">ГО</a>
+                        <ul>
+                            <li><a href="loadTariffGO.jsp">Добави тарифа ГО</a></li>
+                            <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="tariffKasko.jsp">Каско</a>
+                        <ul>
+                            <li><a href="addTariffKasko.jsp">Добави тарифа Каско</a></li>
+                            <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="adminPanelSettings.jsp">Настройки</a></li>
+            <li><a href="AdminLogout">Изход</a></li>
+        </ul>
+    </div>
 
         <div class="addInsurer">
             <div class="shell">
@@ -76,7 +85,7 @@
                             <td><h3>Добави застрахователен агент</h3></td>
                         </tr>
                         <tr>
-                            <td><label id="insurerID" for="insurerID">ID</label></td>
+                            <td><label id="insurerID" for="insurerID">Служебен №</label></td>
                             <td><input type="number" class="field" name="insurerID" placeholder="ID" size="30" maxlength="6"></td>
                         </tr>
                         <tr>
@@ -104,12 +113,12 @@
                             <td><input type="password" class="field" name="password2" placeholder="Повторете паролата" size="30" maxlength="50"></td>
                         </tr>
                         <tr>
-                            <td><label>Телфонен №</label></td>
-                            <td><input type="number" id="phoneNumber" name="phoneNumber" placeholder="Телефонен №"></td>
-                        </tr>
-                        <tr>
                             <td><label>Е-майл</label></td>
                             <td><input id="e-mail" type="text" class="field" placeholder="Е-майл" name="e-mail" size="30" onchange="validateEmail();" maxlength="100"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Телефонен №</label></td>
+                            <td><input type="number" id="phoneNumber" name="phoneNumber" placeholder="Телефонен №"></td>
                         </tr>
                         <tr>
                             <td></td>

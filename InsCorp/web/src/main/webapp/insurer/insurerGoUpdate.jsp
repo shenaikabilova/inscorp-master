@@ -1,4 +1,4 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.model.policy.GO" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -10,44 +10,54 @@
 <html>
 <head>
     <%
-//        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) {
-//            response.sendRedirect("login.jsp");
-//        }
-        String username = session.getAttribute("username").toString();
-        String password = session.getAttribute("password").toString();
+        int id = 0;
+        String username = null;
+        String password = null;
+        if(!request.getSession().isNew()) {
+            id = Integer.parseInt(session.getAttribute("id").toString());
+            username = session.getAttribute("username").toString();
+            password = session.getAttribute("password").toString();
+        }
+        else {
+            response.sendRedirect("login.jsp");
+        }
     %>
     <title><%=username %></title>
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="js/GO/calendarGO.js"></script>
-    <script src="js/GO/setKubici.js"></script>
-    <script src="js/GO/setGOValue.js"></script>
-    <script src="js/validate.js"></script>
-    <script src="js/GO/onLoad.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/setPremiq.js"></script>
+    <script src="../js/validate.js"></script>
 </head>
 
-<body onload="onLoad();">
+<body>
 <div class="menu">
     <div class="menu-nav">
         <ul>
-            <li><a href="insurer.jsp">Нова застраховка</a>
+            <li><a href="#">Клиент</a>
                 <ul>
-                    <li><a href="insurerAddNewGO.jsp">Гражданска отговорност</a></li>
-                    <li><a href="insurerAddNewKasko.jsp">Каско</a></li>
+                    <li><a href="addNewInsured.jsp">Добави</a></li>
+                    <li><a href="loadInsuredForUpdate.jsp">Промени</a></li>
+                    <li><a href="deleteInsured.jsp">Изтрий</a></li>
+                    <li><a href="loadAllClients.jsp">Изведи всички</a></li>
+                </ul>
+            </li>
+            <li><a href="#">МПС</a>
+                <ul>
+                    <li><a href="loadClient.jsp">Добави</a></li>
+                    <li><a href="loadVehicle.jsp">Промени</a></li>
+                    <li><a href="deleteVehicle.jsp">Изтрий</a></li>
+                    <li><a href="loadAllVehicles.jsp">Изведи всички</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Нова застраховка</a>
+                <ul>
+                    <li><a href="loadMpsGO.jsp">Гражданска отговорност</a></li>
+                    <li><a href="loadMpsKasko.jsp">Каско</a></li>
                 </ul>
             </li>
             <li><a href="#">Търсене</a>
@@ -63,7 +73,7 @@
                         <ul>
                             <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
-                            <li><a href="searchAllKasko.jsp">Изведи всички</a></li>
+                            <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -82,221 +92,163 @@
 
 <div class="newGO">
     <div class="shell">
-        <h3>Редакция на застраховка "Гражданска отговорност"</h3>
-        <form action="GoUpdate" method="post">
-            <%--<%--%>
-                <%--List<GrajdanskaOtgovornost> list = (List<GrajdanskaOtgovornost>)request.getAttribute("result");--%>
-                <%--for(GrajdanskaOtgovornost i : list) {--%>
-            <%--%>--%>
-            <%--<div class="form-section">--%>
-                <%--<div class="form-section">--%>
-                    <%--<h4>Застрахователна полица ГО на МПС</h4>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>№ на полица</label>--%>
-                        <%--<input class="field" type="text" value=<%=i.getInsurenceGrajdanskaOtgovornostID() %> name="policaN" maxlength="6">--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Застраховател</label>--%>
-                        <%--<input class="field" type="text" value=<%=userName%> name="userName" readonly="readonly" maxlength="6">--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="form-section">--%>
-                    <%--<h4>Застрахован</h4>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Тип на клиента:</label>--%>
+        <h3>Сключване на застраховка "Гражданеска отговорност"</h3>
+        <form action="/addNewGO" method="post">
+            <div class="form-section">
+                <div class="form-section">
+                    <%
+                        GO go = (GO) request.getAttribute("policy");
+                    %>
+                    <h4>Застрахователна полица ГО на МПС</h4>
+                    <div class="form-row">
+                        <label>ID</label>
+                        <input type="text" id="polID" name="polID" value=<%=go.getId()%>
+                        <label>№ на полица</label>
+                        <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6"
+                               value=<%=go.getPolicaID()%> readonly>
+                    </div>
+                    <div class="form-row">
+                        <label>Застраховател ID</label>
+                        <input type="text" id="insID" name="insID" value=<%=id%>>
+                        <label>Застраховател</label>
+                        <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h4>Застрахован</h4>
+                    <label>ID</label>
+                    <input type="text" class="field" name="insuredID" value=<%=go.getInsured().getId()%>
+                            <div class="form-row">
+                    <label>Собственик</label>
+                    <input type="text" class="field" name="insuredFirstName" value=<%=go.getInsured().getFirstName()%> size="30" maxlength="50">
+                    <input type="text" class="field" name="insuredSecondName" value=<%=go.getInsured().getSecondName()%> size="30" maxlength="50">
+                    <input type="text" class="field" name="insuredLastName" value=<%=go.getInsured().getLastName()%> size="30" maxlength="50">
+                </div>
+                <div class="form-row">
+                    <label>ЕГН</label>
+                    <input type="text" id="EGN" class="field" name="EGN" value=<%=go.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
+                </div>
+                <input type="text" id="country" name="country" value=<%=go.getInsured().getCountry()%> maxlength="50"><br>
+                <div class="form-row-inner">
+                    <label >Пощенски код</label>
+                    <input type="text" class="field" name="pKod" value=<%=go.getInsured().getPostCode()%> size="20" maxlength="4">
+                </div>
+                <label>Град/Село</label>
+                <input type="text" id="city" name="city" value=<%=go.getInsured().getCity()%> maxlength="50">
+                <label>Адрес</label>
+                <input type="text" id="address" name="address" value=<%=go.getInsured().getAddress()%> maxlength="100">
 
-                        <%--<select id="insType" class="field" name="insType">--%>
-                            <%--<%--%>
-                                <%--InsurerTypeDAO insTypes = new InsurerTypeDAOImpl();--%>
-                                <%--for(InsurerType type : insTypes.listInsurerTypes()) { %>--%>
-                            <%--<option--%>
-                                    <%--<%--%>
-                                        <%--if(type.getInsurerType().equals(i.getInsurenceType())) { %>--%>
-                                    <%--selected--%>
-                                    <%--<% } %>--%>
-                            <%--><%=type.getInsurerType() %></option>--%>
-                            <%--<%} %>--%>
-                        <%--</select>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Собственик</label>--%>
-                        <%--<input type="text" class="field" value=<%=i.getInsurenceFirstName() %> name="insuredFirstName" placeholder="Име" size="30" maxlength="50">--%>
-                        <%--<input type="text" class="field" value=<%=i.getInsurenceSecondName() %> name="insuredSecondName" placeholder="Презиме" size="30" maxlength="50">--%>
-                        <%--<input type="text" class="field" value=<%=i.getInsurenceLastName() %> name="insuredLastName" placeholder="Фамилия" size="30" maxlength="50">--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>ЕГН</label>--%>
-                        <%--<input type="text" class="field" value=<%=i.getInsurenceEGN() %> name="EGN" placeholder="ЕГН" maxlength="10">--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Държава</label>--%>
-                        <%--<select class="field" name="country">--%>
-                            <%--<%--%>
-                                <%--CountryDAO countries = new CountryDAOImpl();--%>
-                                <%--for(Country country : countries.listCountries()) { %>--%>
-                            <%--<option--%>
-                                    <%--<%--%>
-                                        <%--if(country.getCountry().equals(i.getInsurenceCountry())) { %>--%>
-                                    <%--selected--%>
-                                    <%--<% } %>--%>
-                            <%--><%=country.getCountry()%></option>--%>
-                            <%--<%} %>--%>
-                        <%--</select>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="address">Адрес на собственика</label>--%>
-                            <%--<input type="text" class="field" value=<%=i.getInsurenceAddress() %> name="address" placeholder="гр. ж.к. ул. бл. вх. ет. ап." size="50" maxlength="200">--%>
-                        <%--</div>--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="pKod">Пощенски код</label>--%>
-                            <%--<input type="text" class="field" value=<%=i.getInsurencePK() %> name="pKod" placeholder="Пощенски код" size="20" maxlength="4">--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Мобилен телефон</label>--%>
-                        <%--<input type="text" class="field" value=<%=i.getInsurenceMobilePhone() %> name="mobilePhone" placeholder="Мобилен телефон" size="30" maxlength="10">--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="form-action">--%>
-                <%--<h4>Данни за МПС</h4>--%>
-                <%--<div class="form-row">--%>
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="registrationNumber">Регистрационен №</label>--%>
-                            <%--<input type="text" id="registrationNumber" class="field" value=<%=i.getVehicleRegNumber() %> name="registrationNumber" placeholder="Регистрационен №" size="20" onchange="isValidRegNumber();" maxlength="8">--%>
-                        <%--</div>--%>
 
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="zone">Зона</label>--%>
-                            <%--<select id="zone" class="field" name="zone" onchange="sum();">--%>
-                                <%--<option--%>
-                                        <%--<%--%>
-                                            <%--if(i.getZone().equals("Зона І - София")) { %>--%>
-                                        <%--selected--%>
-                                        <%--<% }%>--%>
-                                <%-->Зона І - София</option>--%>
-                                <%--<option--%>
-                                        <%--<%--%>
-                                            <%--if(i.getZone().equals("Зона IІ - Пловдив, Варна и Бургас")) { %>--%>
-                                        <%--selected--%>
-                                        <%--<% }%>--%>
-                                <%-->Зона IІ - Пловдив, Варна и Бургас</option>--%>
-                                <%--<option--%>
-                                        <%--<%--%>
-                                            <%--if(i.getZone().equals("Зона ІІІ - Други")) { %>--%>
-                                        <%--selected--%>
-                                        <%--<% }%>--%>
-                                <%-->Зона ІІІ - Други</option>--%>
-                            <%--</select>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+                <div class="form-row">
+                    <label>Мобилен телефон</label>
+                    <input type="text" class="field" name="mobilePhone" value=<%=go.getInsured().getPhoneNumber()%> size="30" maxlength="10">
+                </div>
 
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="vehicleType">Вид МПС</label>--%>
-                            <%--<select id="vehicleType" class="field" name="vehicleType" onchange="change();">--%>
-                                <%--<%--%>
-                                    <%--VehicleTypeDAO vTypes = new VehicleTypeDAOImpl();--%>
-                                    <%--for(VehicleTypeServer type : vTypes.listVehicleTypes()) { %>--%>
-                                <%--<option--%>
-                                        <%--<%--%>
-                                            <%--if(type.getVehicleType().equals(i.getVehicleType())) { %>--%>
-                                        <%--selected--%>
-                                        <%--<% } %>--%>
-                                <%--><%=type.getVehicleType() %></option>--%>
-                                <%--<%} %>--%>
-                            <%--</select>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="kubici">Кубици</label>--%>
-                            <%--<select id="kubici" class="field" name="kubici" onchange="sum();"></select>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="ramaN">Рама №</label>--%>
-                            <%--<input type="text" class="field" value=<%=i.getVehicleRama() %> name="ramaN" placeholder="Рама №" size="30" maxlength="17">--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+            </div>
+            <div class="form-section">
+                <h4>Данни за МПС</h4>
+                <label>МПС - id</label>
+                <input type="text" id="vehicleID" name="vehicleID" value=<%=go.getVehicle().getVehicleID()%>>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label for="registrationNumber">Регистрационен №</label>
+                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" value=<%=go.getVehicle().getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
+                    </div>
 
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label for="vehicleBrand">Марка</label>--%>
-                            <%--<select id="vehicleBrand" class="field" name="vehicleBrand">--%>
-                                <%--<%--%>
-                                    <%--VehicleBrandDAO brands = new VehicleBrandDAOImpl();--%>
-                                    <%--for(VehicleBrand brand : brands.listAllVehicleBrand()) { %>--%>
-                                <%--<option--%>
-                                        <%--<%--%>
-                                            <%--if(brand.getVehicleBrand().equals(i.getVehicleBrand())) { %>--%>
-                                        <%--selected--%>
-                                        <%--<% } %>--%>
-                                <%--><%=brand.getVehicleBrand() %></option>--%>
-                                <%--<%} %>--%>
-                            <%--</select>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label>Модел</label>--%>
-                            <%--<input type="text" class="field" value=<%=i.getVehicleModel() %> name="vehicleModel" placeholder="Модел" size="30" maxlength="50">--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+                    <div class="form-row-inner">
+                        <label for="zone">Зона</label>
+                        <select id="zone" class="field" name="zone" onchange="sum();">
+                            <option value="1">Зона І - София</option>
+                            <option value="2">Зона IІ - Пловдив, Варна и Бургас</option>
+                            <option value="3">Зона ІІІ - Други</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <%--<div class="form-row">--%>
-                        <%--<label>Дата на сключване</label>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label>Начало</label>--%>
-                            <%--<input class="field" type="text" value=<%=i.getInsurenceDateFrom() %> placeholder="Начална дата" id="datepicker1" name="fromDate">--%>
-                        <%--</div>--%>
-                        <%--<div class="form-row-inner">--%>
-                            <%--<label>Край</label>--%>
-                            <%--<input class="field" type="text" value=<%=i.getInsurenceDateTo() %> placeholder="Крайна датва" id="datepicker2" name="toDate">--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Срок</label>--%>
-                        <%--<select id="months" class="field" name="months">--%>
-                            <%--<option--%>
-                                    <%--<%--%>
-                                        <%--if(i.getInsurenceMonths() == 12) { %>--%>
-                                    <%--selected--%>
-                                    <%--<% }%>--%>
-                            <%-->12</option>--%>
-                        <%--</select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label for="vehicleType">Вид МПС</label>
+                        <select id="vehicleType" class="field" name="vehicleType">
+                            <option value=<%=go.getVehicle().getVehicleType().getId()%>><%=go.getVehicle().getVehicleType().getVehicleType()%></option>
+                        </select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Кубици</label>
+                        <select id="vehicleSubtype" class="field" name="vehicleSubtype">
+                            <option value=<%=go.getVehicle().getVehicleSubtype().getId()%>><%=go.getVehicle().getVehicleSubtype().getSubtype()%>
+                        </select>
+                    </div>
+                </div>
 
-                <%--<div class="form-action">--%>
-                    <%--<h4>Застрахователна сума</h4>--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Застрахоателна сума</label>--%>
-                        <%--<input type="text"--%>
-                               <%--class="field" value=<%=i.getInsurenceValue() %> id="vehicleInsValue" name="vehicleInsValue" size="30" readonly="readonly" >--%>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Рама №</label>
+                        <input type="text" class="field" name="ramaN" value=<%=go.getVehicle().getRAMA()%> size="30" maxlength="17">
+                    </div>
+                </div>
 
-                    <%--</div>--%>
-                    <%--<!-- 						<div class="form-row"> -->--%>
-                    <%--<!-- 							<label>Отстъпки</label> -->--%>
-                    <%--<!-- 							<input  -->--%>
-                    <%--<!-- 							onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();" -->--%>
-                    <%--<!-- 							class="field" id="insOtstapki" type="text" name="insOtstapki" value="0"> -->--%>
-                    <%--<!-- 						</div> -->--%>
-                    <%--<!-- 						<div class="form-row"> -->--%>
-                    <%--<!-- 							<label>Надбавки</label> -->--%>
-                    <%--<!-- 							<input -->--%>
-                    <%--<!-- 							onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();" -->--%>
-                    <%--<!-- 							class="field" id=insNadbavki type="text" name="insNadbavki" value="0"> -->--%>
-                    <%--<!-- 						</div> -->--%>
-                    <%--<div class="form-row">--%>
-                        <%--<label>Застрахователна премия</label>--%>
-                        <%--<input class="field" value=<%=i.getInsurencePremiq() %>  id="insPremiq" type="text" name="insPremiq" readonly="readonly" >--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<input type="submit" value="Сключи застраховка" name="GoUpdate">--%>
-            <%--<% } %>--%>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Марка</label>
+                        <select id="vehicleBrand" class="field" name="vehicleBrand">
+                            <option><%=go.getVehicle().getBrand()%></option>
+                        </select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Модел</label>
+                        <input type="text" class="field" name="vehicleModel" value=<%=go.getVehicle().getModel()%> size="30" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>Дата на сключване</label>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Начало</label>
+                        <input class="field" type="text" placeholder="Начална дата" id="datepicker1" name="fromDate">
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Край</label>
+                        <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>Срок</label>
+                    <select id="period" class="field" name="period">
+                        <option>12</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label>Тарифа ID</label>
+                <input type="text" id="tariffID" name="tariffID" value=<%=go.getTariffGO().getTariffID()%>>
+                <h4>Застрахователна сума</h4>
+                <div class="form-row">
+                    <label>Застрахоателна сума</label>
+                    <input type="text"
+                           class="field" id="vehicleInsValue" name="vehicleInsValue" size="30" readonly="readonly" value=<%=go.getTariffGO().getValue()%> readonly>
+                </div>
+                <div class="form-row">
+                    <label>Отстъпки</label>
+                    <input
+                            onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                            class="field" id="insOtstapki" type="text" name="insOtstapki" value="0">
+                </div>
+                <div class="form-row">
+                    <label>Надбавки</label>
+                    <input
+                            onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                            class="field" id=insNadbavki type="text" name="insNadbavki" value="0">
+                </div>
+                <div class="form-row">
+                    <label>Застрахователна премия</label>
+                    <input class="field" id="value" type="text" name="value" value=<%=go.getTariffGO().getValue()%> readonly>
+                </div>
+            </div>
+
+            <input type="submit" value="Сключи застраховка">
         </form>
     </div>
 </div>

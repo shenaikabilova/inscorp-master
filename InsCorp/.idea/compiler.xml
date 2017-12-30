@@ -61,13 +61,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="business-logic" target="1.7" />
-      <module name="dao" target="1.7" />
-      <module name="dao-impl" target="1.7" />
-      <module name="InsCorp" target="1.7" />
-      <module name="model" target="1.7" />
-      <module name="server" target="1.7" />
-      <module name="web" target="1.7" />
+      <module name="business-logic" target="1.8" />
+      <module name="dao" target="1.8" />
+      <module name="dao-impl" target="1.8" />
+      <module name="InsCorp" target="1.8" />
+      <module name="model" target="1.8" />
+      <module name="server" target="1.8" />
+      <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

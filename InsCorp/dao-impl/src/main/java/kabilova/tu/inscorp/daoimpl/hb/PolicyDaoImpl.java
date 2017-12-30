@@ -5,9 +5,12 @@ import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.policy.Policy;
+import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Calendar;
@@ -33,10 +36,10 @@ public class PolicyDaoImpl implements PolicyDao {
     }
 
     @Override
-    public List<Policy> read() {
+    public List read() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<Policy> policies = session
+        List policies = session
                 .createCriteria(Policy.class)
                 .list();
         return policies;
@@ -104,5 +107,109 @@ public class PolicyDaoImpl implements PolicyDao {
             throw  new IllegalArgumentException("cannot find policies");
         }
         return policies;
+    }
+
+    @Override
+    public List<GO> loadPoliciesGO(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<GO> policies = null;
+
+        if(user instanceof Insurer) {
+            policies = session
+                    .createCriteria(GO.class)
+                    .add(Restrictions.eq("insurer", user))
+                    .list();
+        } else if(user instanceof Insured) {
+            policies = session
+                    .createCriteria(GO.class)
+                    .add(Restrictions.eq("insured", user))
+                    .list();
+        }
+        if(policies.size() < 1) {
+            throw  new IllegalArgumentException("cannot find policies");
+        }
+        return policies;
+    }
+
+    @Override
+    public List<Kasko> loadPoliciesKasko(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Kasko> policies = null;
+        if(user instanceof Insurer) {
+            policies = session
+                    .createCriteria(Kasko.class)
+                    .add(Restrictions.eq("insurer", user))
+                    .list();
+        } else if(user instanceof Insured) {
+            policies = session
+                    .createCriteria(Kasko.class)
+                    .add(Restrictions.eq("insured", user))
+                    .list();
+        }
+        if(policies.size() < 1) {
+            throw  new IllegalArgumentException("cannot find policies");
+        }
+        return policies;
+    }
+
+    @Override
+    public List<GO> loadAllGO() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<GO> policies =  session
+                    .createCriteria(GO.class)
+                    .list();
+        if(policies.size() < 1) {
+            throw  new IllegalArgumentException("cannot find policies");
+        }
+        return policies;
+    }
+
+    @Override
+    public List<Kasko> loadAllKasko() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Kasko> policies = session
+                    .createCriteria(Kasko.class)
+                    .list();
+        if(policies.size() < 1) {
+            throw  new IllegalArgumentException("cannot find policies");
+        }
+        return policies;
+    }
+
+    @Override
+    public String getLastPolicyID() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Policy policies = (Policy) session
+                .createCriteria(Policy.class)
+                .addOrder(Order.desc("policaID"))
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return policies.getPolicaID();
+    }
+
+    @Override
+    public Policy getPolicaByPolicaNum(String policaNum) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Policy> policies = session
+                .createCriteria(Policy.class)
+                .add(Restrictions.eq("policaID", policaNum))
+                .list();
+
+        if (policies.size() < 1) {
+            throw new IllegalArgumentException("cannot find policies"); //TODO
+        }
+        return policies.get(0);
     }
 }

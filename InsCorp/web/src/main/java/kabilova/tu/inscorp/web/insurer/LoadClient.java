@@ -18,12 +18,10 @@ import java.util.List;
  */
 @WebServlet("/loadClient")
 public class LoadClient extends HttpServlet {
-    @Override
     public void init() throws ServletException {
         super.init();
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchByEgn = request.getParameter("searchEGN");
 
@@ -33,10 +31,10 @@ public class LoadClient extends HttpServlet {
         insured.setEgn(searchByEgn);
         InsuredServer insuredServer = new InsuredServer(insured);
 
-        List<Insured> result = new ArrayList<>();
-        result.add(insuredServer.loadByEgn());
+//        List<Insured> result = new ArrayList<>();
+//        result.add(insuredServer.loadByEgn());
 
-        request.setAttribute("result", result);
+        request.setAttribute("result", insuredServer.loadByEgn());
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/insurer/addNewMPS.jsp");
         rd.forward(request, response);
 
