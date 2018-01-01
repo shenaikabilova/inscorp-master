@@ -43,7 +43,23 @@ public class TariffDaoImpl implements TariffDao {
 
     @Override
     public TariffKasko loadTariffkasko(VehicleSubtype vehicleSubtype) {
-        return null;
+        if (vehicleSubtype == null) {
+            throw new IllegalArgumentException("Invalid vehicle type");
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<TariffKasko> tariffGO = session
+                .createCriteria(TariffKasko.class)
+                .add(Restrictions.like("vehicleSubtype", vehicleSubtype))
+                .list();
+
+        if (tariffGO.size() < 1) {
+            throw new IllegalArgumentException("..."); //TODO
+        }
+
+        return tariffGO.get(0);
     }
 
     @Override
@@ -100,5 +116,27 @@ public class TariffDaoImpl implements TariffDao {
         } finally {
             HibernateUtil.shutdown();
         }
+    }
+
+    @Override
+    public List<TariffGO> readAllTariffGo() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<TariffGO> tariff = session
+                .createCriteria(TariffGO.class)
+                .list();
+        return tariff;
+    }
+
+    @Override
+    public List<TariffKasko> readAllTariffKasko() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<TariffKasko> tariff = session
+                .createCriteria(TariffKasko.class)
+                .list();
+        return tariff;
     }
 }

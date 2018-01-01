@@ -12,8 +12,8 @@ public class TariffKasko extends Tariff {
 
     public TariffKasko() { }
 
-    public TariffKasko(int tariffID, VehicleType vechileType, VehicleSubtype vehicleSubtype, int kaskoPercent, double value) {
-        super(tariffID, vechileType, vehicleSubtype, value);
+    public TariffKasko(int tariffID, VehicleType vechileType, VehicleSubtype vehicleSubtype, int kaskoPercent) {
+        super(tariffID, vechileType, vehicleSubtype);
         this.kaskoPercent = kaskoPercent;
     }
 

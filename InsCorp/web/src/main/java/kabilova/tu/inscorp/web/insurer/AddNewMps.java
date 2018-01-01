@@ -62,7 +62,7 @@ public class AddNewMps extends HttpServlet {
         vehicleServer.create();
 
         request.setAttribute("msg", "Успешен запис");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/ErrorLogin.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
         view.forward(request, response);
     }
 }

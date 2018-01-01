@@ -56,11 +56,11 @@
                 <ul>
                     <li><a href="#">ГО</a>
                         <ul>
-                            <li><a href="admin/addTariffGO.jsp">Добави тарифа ГО</a></li>
+                            <li><a href="admin/loadTariffKasko.jsp">Добави тарифа ГО</a></li>
                             <li><a href="admin/viewTariffGo.jsp">Изведи тарифиране</a></li>
                         </ul>
                     </li>
-                    <li><a href="tariffKasko.jsp">Каско</a>
+                    <li><a href="#">Каско</a>
                         <ul>
                             <li><a href="admin/addTariffKasko.jsp">Добави тарифа Каско</a></li>
                             <li><a href="admin/viewTariffKasko.jsp">Изведи тарифиране</a></li>

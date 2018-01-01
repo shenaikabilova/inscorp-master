@@ -8,19 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<%@page import="kabilova.tu.inscorp.model.user.Insurer"%>--%>
-<%--<%@page import="kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl"%>--%>
-<%--<%@page import="dao_api.InsurerDAO"%>--%>
-
-<%--<%--%>
-    <%--try {--%>
-        <%--Class.forName("com.mysql.jdbc.Driver");--%>
-    <%--}--%>
-    <%--catch (Exception e) {--%>
-        <%--throw new UnavailableException(e.getMessage());--%>
-    <%--}--%>
-<%--%>--%>
-
 <html>
 <head>
     <%
@@ -75,9 +62,9 @@
                         <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
                     </ul>
                 </li>
-                <li><a href="tariffKasko.jsp">Каско</a>
+                <li><a href="#">Каско</a>
                     <ul>
-                        <li><a href="addTariffKasko.jsp">Добави тарифа Каско</a></li>
+                        <li><a href="loadTariffKasko.jsp">Добави тарифа Каско</a></li>
                         <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
                     </ul>
                 </li>

@@ -55,30 +55,30 @@
    <ul class="menu-nav">
        <li><a href="#">Застрахователни агенти</a>
            <ul>
-               <li><a href="/adminPanelAddInsurer.jsp">Добави</a></li>
-               <li><a href="admin/adminPanelInsurers.jsp">Изведи</a></li>
-               <li><a href="admin/adminPanelSearchUser.jsp">Промени</a></li>
-               <li><a href="admin/adminPanelDeleteUser.jsp">Изтрий</a></li>
+               <li><a href="adminPanelAddInsurer.jsp">Добави</a></li>
+               <li><a href="adminPanelInsurers.jsp">Изведи</a></li>
+               <li><a href="adminPanelSearchUser.jsp">Промени</a></li>
+               <li><a href="adminPanelDeleteUser.jsp">Изтрий</a></li>
            </ul>
        </li>
        <li><a href="#">МПС</a>
            <ul>
-               <li><a href="admin/adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
-               <li><a href="admin/adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+               <li><a href="adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
+               <li><a href="adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
            </ul>
        </li>
        <li><a href="#">Тарифиране</a>
            <ul>
                <li><a href="#">ГО</a>
                    <ul>
-                       <li><a href="admin/loadTariffGO.jsp">Добави тарифа ГО</a></li>
-                       <li><a href="admin/viewTariffGo.jsp">Изведи тарифиране</a></li>
+                       <li><a href="loadTariffGO.jsp">Добави тарифа ГО</a></li>
+                       <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
                    </ul>
                </li>
-               <li><a href="tariffKasko.jsp">Каско</a>
+               <li><a href="#">Каско</a>
                    <ul>
-                       <li><a href="admin/addTariffKasko.jsp">Добави тарифа Каско</a></li>
-                       <li><a href="admin/viewTariffKasko.jsp">Изведи тарифиране</a></li>
+                       <li><a href="loadTariffKasko.jsp">Добави тарифа Каско</a></li>
+                       <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
                    </ul>
                </li>
            </ul>

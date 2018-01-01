@@ -1,7 +1,5 @@
 package kabilova.tu.inscorp.model.vehicle;
 
-import java.util.Set;
-
 /**
  * Created by ShenaiKabilova
  */

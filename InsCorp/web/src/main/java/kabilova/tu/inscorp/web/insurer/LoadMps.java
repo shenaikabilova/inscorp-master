@@ -48,9 +48,10 @@ public class LoadMps extends HttpServlet {
 
             request.setAttribute("tariff", tariffGoServer.loadTariffGo());
             rd = getServletContext().getRequestDispatcher("/insurer/insurerAddNewGO.jsp");
-        } else if(request.getServletPath().equals("/loadMpsKasko")) {
+        }
+        else if(request.getServletPath().equals("/loadMpsKasko")) {
             TariffKasko tariffKasko = new TariffKasko();
-            tariffKasko.setVehicleSubtype(vehicle.getVehicleSubtype());
+            tariffKasko.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
             TariffKaskoServer tariffKaskoServer = new TariffKaskoServer(tariffKasko);
 
             request.setAttribute("tariff", tariffKaskoServer.loadTariffkasko());

@@ -1,9 +1,15 @@
 package kabilova.tu.inscorp.web.admin;
 
+import kabilova.tu.inscorp.model.tariff.Tariff;
+import kabilova.tu.inscorp.model.tariff.TariffGO;
+import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
+import kabilova.tu.inscorp.server.web.TariffGoServer;
+import kabilova.tu.inscorp.server.web.TariffServer;
 import kabilova.tu.inscorp.server.web.VehicleSubtypeServer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,17 +27,35 @@ public class AddVehicleSubtype extends HttpServlet{
         request.setCharacterEncoding("UTF-8");
 
         int vehicleTypeID = Integer.parseInt(request.getParameter("vehicleType"));
-        String vehicleSubtype = request.getParameter("vehicleSubtype");
+        String vehicleSubtypeID = request.getParameter("vehicleSubtype");
 
         System.out.print(vehicleTypeID);
 
         VehicleType vehicleType = new VehicleType();
         vehicleType.setId(vehicleTypeID);
-        VehicleSubtype vehicleSubtypeO = new VehicleSubtype();
-        vehicleSubtypeO.setVehicleType(vehicleType);
-        vehicleSubtypeO.setSubtype(vehicleSubtype);
+        VehicleSubtype vehicleSubtype = new VehicleSubtype();
+        vehicleSubtype.setVehicleType(vehicleType);
+        vehicleSubtype.setSubtype(vehicleSubtypeID);
 
-        VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(vehicleSubtypeO);
+        VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(vehicleSubtype);
         vehicleSubtypeServer.create();
+
+        TariffGO tariffGO = new TariffGO();
+        tariffGO.setVechileType(vehicleType);
+        tariffGO.setVehicleSubtype(vehicleSubtype);
+        TariffServer tariffGoServer = new TariffServer(tariffGO);
+        for(int i=1; i<=3; i++) {
+            tariffGO.setZone(i);
+            tariffGoServer.create();
+        }
+
+        TariffKasko tariffKasko = new TariffKasko();
+        tariffKasko.setVechileType(vehicleType);
+        tariffKasko.setVehicleSubtype(vehicleSubtype);
+        TariffServer tariffKaskoServer = new TariffServer(tariffKasko);
+        tariffKaskoServer.create();
+        request.setAttribute("errmsg", "Успешен запис!");
+        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+        view.forward(request,response);
     }
 }

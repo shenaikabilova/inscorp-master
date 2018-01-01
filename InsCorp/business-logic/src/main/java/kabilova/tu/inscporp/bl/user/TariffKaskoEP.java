@@ -1,7 +1,10 @@
 package kabilova.tu.inscporp.bl.user;
 
 import kabilova.tu.inscorp.dao.TariffDao;
+import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
+
+import java.util.List;
 
 /**
  * Created by ShenaiKabilova
@@ -18,4 +21,6 @@ public class TariffKaskoEP extends TariffEP {
     public TariffKasko loadTariffKasko() {
         return dao.loadTariffkasko(tariffKasko.getVehicleSubtype());
     }
+
+    public List<TariffKasko> loadAllTariffKaskos() { return dao.readAllTariffKasko(); }
 }

@@ -22,7 +22,7 @@
             password = session.getAttribute("password").toString();
         }
         else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("insurer/login.jsp");
         }
     %>
     <title><%=username %></title>
@@ -43,52 +43,52 @@
         <ul>
             <li><a href="#">Клиент</a>
                 <ul>
-                    <li><a href="addNewInsured.jsp">Добави</a></li>
-                    <li><a href="loadInsuredForUpdate.jsp">Промени</a></li>
-                    <li><a href="deleteInsured.jsp">Изтрий</a></li>
-                    <li><a href="loadAllClients.jsp">Изведи всички</a></li>
+                    <li><a href="insurer/addNewInsured.jsp">Добави</a></li>
+                    <li><a href="insurer/loadInsuredForUpdate.jsp">Промени</a></li>
+                    <li><a href="insurer/deleteInsured.jsp">Изтрий</a></li>
+                    <li><a href="insurer/loadAllClients.jsp">Изведи всички</a></li>
                 </ul>
             </li>
             <li><a href="#">МПС</a>
                 <ul>
-                    <li><a href="loadClient.jsp">Добави</a></li>
-                    <li><a href="loadVehicle.jsp">Промени</a></li>
-                    <li><a href="deleteVehicle.jsp">Изтрий</a></li>
-                    <li><a href="loadAllVehicles.jsp">Изведи всички</a></li>
-                    <li><a href="changeOwner.jsp">Смени собственик</a></li>
+                    <li><a href="insurer/loadClient.jsp">Добави</a></li>
+                    <li><a href="insurer/loadVehicle.jsp">Промени</a></li>
+                    <li><a href="insurer/deleteVehicle.jsp">Изтрий</a></li>
+                    <li><a href="insurer/loadAllVehicles.jsp">Изведи всички</a></li>
+                    <li><a href="insurer/changeOwner.jsp">Смени собственик</a></li>
                 </ul>
             </li>
             <li><a href="#">Нова застраховка</a>
                 <ul>
-                    <li><a href="loadMpsGO.jsp">Гражданска отговорност</a></li>
-                    <li><a href="loadMpsKasko.jsp">Каско</a></li>
+                    <li><a href="insurer/loadMpsGO.jsp">Гражданска отговорност</a></li>
+                    <li><a href="insurer/loadMpsKasko.jsp">Каско</a></li>
                 </ul>
             </li>
             <li><a href="#">Търсене</a>
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
-                            <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
-                            <li><a href="searchGOAll.jsp">Изведи всички</a></li>
+                            <li><a href="insurer/searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
+                            <li><a href="insurer/searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
-                            <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
-                            <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
+                            <li><a href="insurer/searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
+                            <li><a href="insurer/searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li><a href="#">Редакция</a>
                 <ul>
-                    <li><a href="insurerGoUpdateSearch.jsp">Гражданска отговорност</a></li>
-                    <li><a href="insurerKaskoUpdateSearch.jsp">Каско</a></li>
+                    <li><a href="insurer/insurerGoUpdateSearch.jsp">Гражданска отговорност</a></li>
+                    <li><a href="insurer/insurerKaskoUpdateSearch.jsp">Каско</a></li>
                 </ul>
             </li>
-            <li><a href="insurerSettings.jsp">Настройки</a></li>
+            <li><a href="insurer/insurerSettings.jsp">Настройки</a></li>
             <li><a href="logout">Изход</a>
         </ul>
     </div>
@@ -96,8 +96,8 @@
 
 <div class="newKasko">
     <div class="shell">
-        <h3>Сключване на застраховка "Гражданеска отговорност"</h3>
-        <form action="/addNewGO" method="post">
+        <h3>Сключване на застраховка "Каско"</h3>
+        <form action="/addNewKasko" method="post">
             <div class="form-section">
                 <div class="form-section">
                     <h4>Застрахователна полица ГО на МПС</h4>
@@ -244,33 +244,35 @@
             <div class="form-section">
                 <label>Тарифа ID</label>
                 <input type="text" id="tariffID" name="tariffID" value=<%=tariffKasko.getTariffID()%>>
+                <label>Оценка на МПС</label>
+                <input type="text" id="vehicleValue" name="vehicleValue" placeholder="Оценка на МПС"
+                       onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
                 <label>Тип Каско</label>
                 <select id="kaskoType" name="kaskoType">
                     <option>Пълно Каско</option>
                     <option>Каско тип А</option>
                     <option>Каско тип Б</option>
                 </select>
-                <h4>Застрахователна сума</h4>
-                <div class="form-row">
-                    <label>Застрахоателна сума</label>
-                    <input type="text"
-                           class="field" id="vehicleInsValue" name="vehicleInsValue" size="30" readonly="readonly" value=<%=tariffKasko.getValue()%> readonly>
-                </div>
                 <div class="form-row">
                     <label>Отстъпки</label>
                     <input
-                            onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                            onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
                             class="field" id="insOtstapki" type="text" name="insOtstapki" value="0">
                 </div>
                 <div class="form-row">
                     <label>Надбавки</label>
                     <input
-                            onchange="setGOPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                            onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
                             class="field" id=insNadbavki type="text" name="insNadbavki" value="0">
                 </div>
                 <div class="form-row">
+                    <label>Застрахователен %</label>
+                    <input class="field" id="kaskoPercent" type="text" name="kaskoPercent" value=<%=tariffKasko.getKaskoPercent()%> readonly
+                           onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
+                </div>
+                <div class="form-row">
                     <label>Застрахователна премия</label>
-                    <input class="field" id="value" type="text" name="value" value=<%=tariffKasko.getValue()%> readonly>
+                    <input class="field" id="value" type="text" name="value" readonly>
                 </div>
             </div>
 

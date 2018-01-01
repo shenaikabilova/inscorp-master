@@ -30,7 +30,7 @@
             password = session.getAttribute("password").toString();
         }
         else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("insurer/login.jsp");
         }
     %>
     <title><%=username %></title>
@@ -68,14 +68,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -95,7 +95,7 @@
 </div>
 
 <div>
-    <form action="/loadInuredForUpdate" method="post">
+    <form action="/loadInsuredForUpdate" method="post">
         <label>ЕГН</label>
         <input type="text" name="clientEGN" placeholder="ЕГН">
         <input type="submit" value="Търсене">

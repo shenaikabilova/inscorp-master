@@ -32,7 +32,7 @@ public class DeleteInsured extends HttpServlet{
         insuredServer.delete();
 
         request.setAttribute("msg", "Успешно изтриване");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/ErrorLogin.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
         view.forward(request, response);
     }
 }

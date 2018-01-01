@@ -1,26 +1,15 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.server.web.TariffKaskoServer" %>
+<%@ page import="kabilova.tu.inscorp.model.tariff.TariffKasko" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 20.10.2017 г.
-  Time: 12:46
+  Date: 30.12.2017 г.
+  Time: 23:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%
-//        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) {
-//            response.sendRedirect("login.jsp");
-//        }
         String username = null;
         String password = null;
         if(!request.getSession().isNew()) {
@@ -73,19 +62,23 @@
     </ul>
 </div>
 
+<form>
+    <table border="1">
+        <th>Тип МПС</th>
+        <th>Подтоп МПС</th>
+        <th>Застрахователна стойност</th>
 
-<div class="updateUser">
-    <div class="shell">
-        <form action="/searchUser" method="get">
-            <div class="form-section">
-                <div class="form-row">
-                    <label>ID на застраховател</label>
-                    <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
-                    <input type="submit" value="Търсене" name="searchUser">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+        <%
+            TariffKaskoServer tariffGoServer = new TariffKaskoServer(new TariffKasko());
+            for(TariffKasko kasko : tariffGoServer.loadAllTariffKasko()) {
+        %>
+        <tr>
+            <td><%=kasko.getVechileType().getVehicleType()%></td>
+            <td><%=kasko.getVehicleSubtype().getSubtype()%></td>
+            <td><%=kasko.getKaskoPercent()%></td>
+        </tr>
+        <% } %>
+    </table>
+</form>
 </body>
 </html>

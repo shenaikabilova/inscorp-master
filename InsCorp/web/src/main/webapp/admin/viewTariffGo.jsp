@@ -1,26 +1,15 @@
-<%--
+<%@ page import="kabilova.tu.inscorp.model.tariff.TariffGO" %>
+<%@ page import="kabilova.tu.inscorp.server.web.TariffGoServer" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 20.10.2017 г.
-  Time: 12:46
+  Date: 30.12.2017 г.
+  Time: 23:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%
-//        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) {
-//            response.sendRedirect("login.jsp");
-//        }
         String username = null;
         String password = null;
         if(!request.getSession().isNew()) {
@@ -73,19 +62,25 @@
     </ul>
 </div>
 
+<form>
+    <table border="1">
+        <th>Тип МПС</th>
+        <th>Подтоп МПС</th>
+        <th>Зона</th>
+        <th>Застрахователна стойност</th>
 
-<div class="updateUser">
-    <div class="shell">
-        <form action="/searchUser" method="get">
-            <div class="form-section">
-                <div class="form-row">
-                    <label>ID на застраховател</label>
-                    <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
-                    <input type="submit" value="Търсене" name="searchUser">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+        <%
+            TariffGoServer tariffGoServer = new TariffGoServer(new TariffGO());
+            for(TariffGO go : tariffGoServer.loadAllTariffGO()) {
+        %>
+        <tr>
+            <td><%=go.getVechileType().getVehicleType()%></td>
+            <td><%=go.getVehicleSubtype().getSubtype()%></td>
+            <td><%=go.getZone()%></td>
+            <td><%=go.getValue()%></td>
+        </tr>
+        <% } %>
+    </table>
+</form>
 </body>
 </html>

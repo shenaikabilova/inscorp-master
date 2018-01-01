@@ -13,10 +13,10 @@
         
         <many-to-one name="vechileType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" column="VEHICLETYPE"/>
         <many-to-one name="vehicleSubtype" class="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" column="VEHICLESUBTYPE"/>
-        <property name="value" column="VALUE" type="double" access="property"/>
 
         <subclass name="kabilova.tu.inscorp.model.tariff.TariffGO" discriminator-value="TARIFFGO">
             <property name="zone" column="ZONE" type="int" access="property"/>
+            <property name="value" column="VALUE" type="double" access="property"/>
         </subclass>
 
         <subclass name="kabilova.tu.inscorp.model.tariff.TariffKasko" discriminator-value="TARIFFKASKO">

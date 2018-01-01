@@ -21,9 +21,7 @@ public class LoadInsuredForUpdate extends HttpServlet{
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String searchByEgn = request.getParameter("searchEGN");
-
-        System.out.println("1: " + request.getServletPath());
+        String searchByEgn = request.getParameter("clientEGN");
 
         Insured insured = new Insured();
         insured.setEgn(searchByEgn);

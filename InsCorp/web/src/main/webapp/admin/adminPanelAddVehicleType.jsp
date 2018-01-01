@@ -59,9 +59,9 @@
                             <li><a href="viewTariffGo.jsp">Изведи тарифиране</a></li>
                         </ul>
                     </li>
-                    <li><a href="tariffKasko.jsp">Каско</a>
+                    <li><a href="t#">Каско</a>
                         <ul>
-                            <li><a href="addTariffKasko.jsp">Добави тарифа Каско</a></li>
+                            <li><a href="loadTariffKasko.jsp">Добави тарифа Каско</a></li>
                             <li><a href="viewTariffKasko.jsp">Изведи тарифиране</a></li>
                         </ul>
                     </li>

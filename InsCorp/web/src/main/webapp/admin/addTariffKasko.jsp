@@ -1,9 +1,9 @@
 <%@ page import="kabilova.tu.inscorp.model.tariff.TariffGO" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="kabilova.tu.inscorp.model.tariff.TariffKasko" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 16.12.2017 г.
-  Time: 23:08
+  Date: 30.12.2017 г.
+  Time: 23:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -62,21 +62,18 @@
     </ul>
 </div>
 
-<form action="/addTariffGO" method="post">
+<form action="/addTariffKasko" method="post">
     <%
-        TariffGO go = (TariffGO) request.getAttribute("result");
+        TariffKasko kasko = (TariffKasko) request.getAttribute("result");
     %>
-    <input type="text" id="tariffID" name="tariffID" value=<%=go.getTariffID()%>>
+    <input type="text" id="tariffID" name="tariffID" value=<%=kasko.getTariffID()%>>
     <select class="field" id="vehicleType" name="vehicleType">
-        <option value=<%=go.getVechileType().getId()%>> <%=go.getVechileType().getVehicleType()%> </option>
+        <option value=<%=kasko.getVechileType().getId()%>> <%=kasko.getVechileType().getVehicleType()%> </option>
     </select>
     <select class="field" id="vehicleSubtype" name="vehicleSubtype">
-        <option value=<%=go.getVehicleSubtype().getId()%>> <%=go.getVehicleSubtype().getSubtype()%> </option>
+        <option value=<%=kasko.getVehicleSubtype().getId()%>> <%=kasko.getVehicleSubtype().getSubtype()%> </option>
     </select>
-    <select class="field" id="zone" name="zone">
-        <option value=<%=go.getZone()%>> <%=go.getZone()%></option>
-    </select>
-    <input type="text" name="value" value=<%=go.getValue()%>>
+    <input type="text" name="kaskoPercent" value=<%=kasko.getKaskoPercent()%>>
     <input type="submit" value="Промени">
 </form>
 </body>

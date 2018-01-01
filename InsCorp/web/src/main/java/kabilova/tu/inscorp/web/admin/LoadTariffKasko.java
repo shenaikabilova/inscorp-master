@@ -1,8 +1,10 @@
 package kabilova.tu.inscorp.web.admin;
 
 import kabilova.tu.inscorp.model.tariff.TariffGO;
+import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.server.web.TariffGoServer;
+import kabilova.tu.inscorp.server.web.TariffKaskoServer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +19,8 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-@WebServlet("/loadTariffGO")
-public class LoadTariffGO extends HttpServlet {
+@WebServlet("/loadTariffKasko")
+public class LoadTariffKasko extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
@@ -27,19 +29,18 @@ public class LoadTariffGO extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int vehicleSubtypeID = Integer.parseInt(request.getParameter("vehicleSubtype"));
-        int zone = Integer.parseInt(request.getParameter("zone"));
 
         VehicleSubtype vehicleSubtype = new VehicleSubtype();
         vehicleSubtype.setId(vehicleSubtypeID);
 
-        TariffGO tariffGO = new TariffGO();
-        tariffGO.setVehicleSubtype(vehicleSubtype);
-        tariffGO.setZone(zone);
+        TariffKasko tariffKasko = new TariffKasko();
+        tariffKasko.setVehicleSubtype(vehicleSubtype);
 
-        TariffGoServer tariffServer = new TariffGoServer(tariffGO);
+        TariffKaskoServer tariffServer = new TariffKaskoServer(tariffKasko);
 
-        request.setAttribute("result", tariffServer.loadTariffGo());
-        RequestDispatcher view = request.getRequestDispatcher("admin/addTariffGo.jsp");
-        view.forward(request,response);
+        System.out.println(tariffServer.loadTariffkasko().getTariffID());
+        request.setAttribute("result", tariffServer.loadTariffkasko());
+        RequestDispatcher view = request.getRequestDispatcher("admin/addTariffKasko.jsp");
+        view.forward(request, response);
     }
 }

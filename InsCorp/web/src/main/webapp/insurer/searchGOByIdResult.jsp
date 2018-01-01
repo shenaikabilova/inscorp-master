@@ -1,15 +1,17 @@
-<%@ page import="kabilova.tu.inscorp.model.user.Insured" %><%--
+<%@ page import="kabilova.tu.inscorp.model.policy.GO" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 28.12.2017 г.
-  Time: 20:54
+  Date: 20.10.2017 г.
+  Time: 13:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <%
-        //        String userName = null;
+//        String userName = null;
 //        Cookie[] cookies = request.getCookies();
 //        if(cookies != null) {
 //            for(Cookie cookie: cookies) {
@@ -18,7 +20,9 @@
 //                }
 //            }
 //        }
-//        if(userName == null) { response.sendRedirect("login.jsp");}
+//        if(userName == null) {
+//            response.sendRedirect("login.jsp");
+//        }
         int id = 0;
         String username = null;
         String password = null;
@@ -28,12 +32,13 @@
             password = session.getAttribute("password").toString();
         }
         else {
-            response.sendRedirect("insurer/login.jsp");
+            response.sendRedirect("login.jsp");
         }
     %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
+
 <body>
 <div class="menu">
     <div class="menu-nav">
@@ -65,14 +70,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="insurer/searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="insurer/searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -91,45 +96,71 @@
     </div>
 </div>
 
-<form action="/updateInsured" method="post">
-    <% Insured insured = (Insured) request.getAttribute("result");%>
-    Добавяне на нов клиент<br>
-    <label>ID</label>
-    <input type="text" id="insuredID" name="insuredID" value=<%=insured.getId()%> >
-    <label>Име</label>
-    <input type="text" id="firstName" name="firstName" value=<%=insured.getFirstName()%> maxlength="50">
-    <label>Презиме</label>
-    <input type="text" id="secondName" name="secondName" value=<%=insured.getSecondName()%> maxlength="50">
-    <label>Фамилия</label>
-    <input type="text" id="lastName" name="lastName" value=<%=insured.getLastName()%> maxlength="50"><br>
+<div class="searchInsurers viewInsurers shell">
+    <h3>Застраховка "Гражданска отговорност" по № на полица</h3>
+    <table border="1">
+        <th>Полица №</th>
+        <th>Име</th>
+        <th>Презиме</th>
+        <th>Фамилия</th>
+        <th>ЕГН</th>
+        <th>Държава</th>
+        <th>Град</th>
+        <th>Пощенски код</th>
+        <th>Адрес</th>
+        <th>Мобилен телефон</th>
+        <th>Имейл</th>
+        <th>Регистрационен №</th>
+        <th>РАМА</th>
+        <th>Тип</th>
+        <th>Подтип</th>
+        <th>Марка</th>
+        <th>Модел</th>
+        <th>Първа регистрация</th>
+        <th>Години</th>
+        <th>Двигател</th>
+        <th>Цвят</th>
+        <th>Брой места</th>
+        <th>Дата от:</th>
+        <th>Дата до:</th>
+        <th>Брой месеци</th>
+        <th>Застрахователна стойност</th>
+        <th>Застрахователна премия</th>
 
-    <label>Потребителско име</label>
-    <input type="text" id="username" name="username" value=<%=insured.getUsername()%> maxlength="50">
-    <label>Парола</label>
-    <input type="password" id="pass1" name="pass1" maxlength="50">
-    <label>Повторете парола</label>
-    <input type="password" id="pass2" name="pass2" maxlength="50">
-
-    <label>ЕГН</label>
-    <input type="number" id="EGN" name="EGN" value=<%=insured.getEgn()%> maxlength="10">
-    <label>Пощенски код</label>
-    <input type="number" id="postCode" value=<%=insured.getPostCode()%> placeholder="ПК">
-    <label>Държава</label>
-    <input type="text" id="country" name="country" value=<%=insured.getCountry()%> maxlength="50"><br>
-
-    <label>Град/Село</label>
-    <input type="text" id="city" name="city" value=<%=insured.getCity()%> maxlength="50">
-    <label>Адрес</label>
-    <input type="text" id="address" name="address" value=<%=insured.getAddress()%> maxlength="100">
-
-    <br>
-    <label>Телефонен №</label>
-    <input type="text" id="phoneNumber" name="phoneNumber" value=<%=insured.getPhoneNumber()%> maxlength="10">
-    <label>Е-майл</label>
-    <input type="text" id="email" name="email" value=<%=insured.getEmail()%> maxlength="50"/>
-    <br>
-
-    <input type="submit" value="Промени">
-</form>
+        <%
+            GO go = (GO) request.getAttribute("result");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        %>
+        <tr>
+            <td><%=go.getPolicaID()%></td>
+            <td><%=go.getInsured().getFirstName()%></td>
+            <td><%=go.getInsured().getSecondName()%></td>
+            <td><%=go.getInsured().getLastName()%></td>
+            <td><%=go.getInsured().getEgn()%></td>
+            <td><%=go.getInsured().getCountry()%></td>
+            <td><%=go.getInsured().getCity()%></td>
+            <td><%=go.getInsured().getPostCode()%></td>
+            <td><%=go.getInsured().getAddress()%></td>
+            <td><%=go.getInsured().getPhoneNumber()%></td>
+            <td><%=go.getInsured().getEmail()%></td>
+            <td><%=go.getVehicle().getRegNum()%></td>
+            <td><%=go.getVehicle().getRAMA()%></td>
+            <td><%=go.getVehicle().getVehicleType().getVehicleType()%></td>
+            <td><%=go.getVehicle().getVehicleSubtype().getSubtype()%></td>
+            <td><%=go.getVehicle().getBrand()%></td>
+            <td><%=go.getVehicle().getModel()%></td>
+            <td><%=simpleDateFormat.format(go.getVehicle().getFirstReg().getTime())%></td>
+            <td><%=go.getVehicle().getYears()%></td>
+            <td><%=go.getVehicle().getEngine()%></td>
+            <td><%=go.getVehicle().getColor()%></td>
+            <td><%=go.getVehicle().getPlaceNumber()%></td>
+            <td><%=simpleDateFormat.format(go.getDateFrom().getTime())%></td>
+            <td><%=simpleDateFormat.format(go.getDateTo().getTime())%></td>
+            <td><%=go.getPeriod()%></td>
+            <td><%=go.getTariffGO().getValue()%></td>
+            <td><%=go.getValue()%></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

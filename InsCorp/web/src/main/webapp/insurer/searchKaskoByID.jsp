@@ -1,9 +1,8 @@
-<%@ page import="kabilova.tu.inscorp.model.policy.GO" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
-  Time: 13:00
+  Time: 13:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -70,14 +69,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -96,72 +95,19 @@
     </div>
 </div>
 
-<div class="searchInsurers viewInsurers shell">
-    <h3>Застраховка "Гражданска отговорност" по № на полица</h3>
-    <table border="1">
-        <th>Полица №</th>
-        <th>Име</th>
-        <th>Презиме</th>
-        <th>Фамилия</th>
-        <th>ЕГН</th>
-        <th>Държава</th>
-        <th>Град</th>
-        <th>Пощенски код</th>
-        <th>Адрес</th>
-        <th>Мобилен телефон</th>
-        <th>Имейл</th>
-        <th>Регистрационен №</th>
-        <th>РАМА</th>
-        <th>Тип</th>
-        <th>Подтип</th>
-        <th>Марка</th>
-        <th>Модел</th>
-        <th>Първа регистрация</th>
-        <th>Години</th>
-        <th>Двигател</th>
-        <th>Цвят</th>
-        <th>Брой места</th>
-        <th>Дата от:</th>
-        <th>Дата до:</th>
-        <th>Брой месеци</th>
-        <th>Застрахователна стойност</th>
-        <th>Застрахователна премия</th>
-
-        <%
-            GO go = (GO) request.getAttribute("result");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        %>
-        <tr>
-            <td><%=go.getPolicaID()%></td>
-            <td><%=go.getInsured().getFirstName()%></td>
-            <td><%=go.getInsured().getSecondName()%></td>
-            <td><%=go.getInsured().getLastName()%></td>
-            <td><%=go.getInsured().getEgn()%></td>
-            <td><%=go.getInsured().getCountry()%></td>
-            <td><%=go.getInsured().getCity()%></td>
-            <td><%=go.getInsured().getPostCode()%></td>
-            <td><%=go.getInsured().getAddress()%></td>
-            <td><%=go.getInsured().getPhoneNumber()%></td>
-            <td><%=go.getInsured().getEmail()%></td>
-            <td><%=go.getVehicle().getRegNum()%></td>
-            <td><%=go.getVehicle().getRAMA()%></td>
-            <td><%=go.getVehicle().getVehicleType().getVehicleType()%></td>
-            <td><%=go.getVehicle().getVehicleSubtype().getSubtype()%></td>
-            <td><%=go.getVehicle().getBrand()%></td>
-            <td><%=go.getVehicle().getModel()%></td>
-            <td><%=simpleDateFormat.format(go.getVehicle().getFirstReg().getTime())%></td>
-            <td><%=go.getVehicle().getYears()%></td>
-            <td><%=go.getVehicle().getEngine()%></td>
-            <td><%=go.getVehicle().getColor()%></td>
-            <td><%=go.getVehicle().getPlaceNumber()%></td>
-            <td><%=simpleDateFormat.format(go.getDateFrom().getTime())%></td>
-            <td><%=simpleDateFormat.format(go.getDateTo().getTime())%></td>
-            <td><%=go.getPeriod()%></td>
-            <td><%=go.getTariffGO().getValue()%></td>
-            <td><%=go.getValue()%></td>
-        </tr>
-        <% } %>
-    </table>
+<div class="searchGO">
+    <div class="shell">
+        <form action="/searchKaskoByID" method="post">
+            <h3>Търсене на застраховка "Каско" по № на полица</h3>
+            <div class="form-section">
+                <div class="form-row">
+                    <label>№ на полица</label>
+                    <input class="field" type="text" name="searchByID" placeholder="Въведете № на полица" >
+                    <input type="submit" value="Намери" name="searchKaskoByID">
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

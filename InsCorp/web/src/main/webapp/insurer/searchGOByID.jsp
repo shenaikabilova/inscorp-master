@@ -69,14 +69,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -97,7 +97,7 @@
 
 <div class="searchByID">
     <div class="shell">
-        <form action="searchByID" method="get">
+        <form action="/searchGOByID" method="post">
             <div class="form-section">
                 <div class="form-row">
                     <h3>Търсене на застраховка "Гражданска отговорност" по № на полица</h3>

@@ -64,14 +64,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>

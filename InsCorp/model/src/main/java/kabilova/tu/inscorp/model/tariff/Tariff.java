@@ -24,22 +24,19 @@ public abstract class Tariff {
     private int tariffID;
     private VehicleType vechileType;
     private VehicleSubtype vehicleSubtype;
-    private double value;
 
     public Tariff() {
     }
 
-    public Tariff(int tariffID, VehicleType vechileType, VehicleSubtype vehicleSubtype, double value) {
+    public Tariff(int tariffID, VehicleType vechileType, VehicleSubtype vehicleSubtype) {
         this.tariffID = tariffID;
         this.vechileType = vechileType;
         this.vehicleSubtype = vehicleSubtype;
-        this.value = value;
     }
 
-    public Tariff(VehicleType vechileType, VehicleSubtype vehicleSubtype, double value) {
+    public Tariff(VehicleType vechileType, VehicleSubtype vehicleSubtype) {
         this.vechileType = vechileType;
         this.vehicleSubtype = vehicleSubtype;
-        this.value = value;
     }
 
     public int getTariffID() {
@@ -48,14 +45,6 @@ public abstract class Tariff {
 
     public void setTariffID(int tariffID) {
         this.tariffID = tariffID;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
     }
 
     public VehicleType getVechileType() {

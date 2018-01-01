@@ -72,14 +72,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -127,6 +127,7 @@
         <th>Дата от:</th>
         <th>Дата до:</th>
         <th>Брой месеци</th>
+        <th>Оценка на МПС</th>
         <th>Застрахователна стойност</th>
         <th>Застрахователна премия</th>
 
@@ -165,6 +166,7 @@
             <td><%=simpleDateFormat.format(kasko.getDateFrom().getTime())%></td>
             <td><%=simpleDateFormat.format(kasko.getDateTo().getTime())%></td>
             <td><%=kasko.getPeriod()%></td>
+            <td><%=kasko.getVehicleValue()%></td>
             <td><%=kasko.getTariffKasko().getValue()%></td>
             <td><%=kasko.getValue()%></td>
         </tr>

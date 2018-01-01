@@ -67,7 +67,7 @@ public class AddNewGO extends HttpServlet {
         policyGOServer.create();
 
         request.setAttribute("msg", "Успешен запис");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/ErrorLogin.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
         view.forward(request, response);
     }
 }
