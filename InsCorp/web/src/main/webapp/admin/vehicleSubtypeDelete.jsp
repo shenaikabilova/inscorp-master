@@ -1,14 +1,14 @@
 <%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" %>
 <%@ page import="java.util.List" %>
-<%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleType" %>
 <%@ page import="kabilova.tu.inscorp.server.web.VehicleSubtypeServer" %>
+<%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleType" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 30.12.2017 г.
-  Time: 23:13
+  Date: 1.1.2018 г.
+  Time: 20:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -107,10 +107,11 @@
 
 <div>
     <div class="shell">
-        <form action="/loadTariffKasko" method="post">
+        <form action="/vehicleSubtypeDelete" method="post">
             <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
             <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
-            <input type="submit" value="Зареди тарифа">
+
+            <input type="submit" value="Изтрий">
         </form>
     </div>
 </div>

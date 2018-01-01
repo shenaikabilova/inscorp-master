@@ -30,15 +30,29 @@
         <li><a href="#">Застрахователни агенти</a>
             <ul>
                 <li><a href="admin/adminPanelAddInsurer.jsp">Добави</a></li>
-                <li><a href="admin/adminPanelInsurers.jsp">Изведи</a></li>
                 <li><a href="admin/adminPanelSearchUser.jsp">Промени</a></li>
                 <li><a href="admin/adminPanelDeleteUser.jsp">Изтрий</a></li>
+                <li><a href="admin/adminPanelInsurers.jsp">Изведи</a></li>
             </ul>
         </li>
         <li><a href="#">МПС</a>
             <ul>
-                <li><a href="admin/adminPanelAddVehicleType.jsp">Добави тип МПС</a></li>
-                <li><a href="admin/adminPanelAddVehicleSubtype.jsp">Добави подтип МПС</a></li>
+                <li><a href="#">Тип МПС</a>
+                    <ul>
+                        <li><a href="admin/addVehicleType.jsp">Добави</a></li>
+                        <li><a href="admin/vehicleTypeUpdate.jsp">Промени</a></li>
+                        <li><a href="admin/vehicleTypeDelete.jsp">Изтрий</a></li>
+                        <li><a href="admin/loadVehicleType.jsp">Преглед</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Подтип МПС</a>
+                    <ul>
+                        <li><a href="admin/addVehicleSubtype.jsp">Добави</a></li>
+                        <li><a href="admin/vehicleSubtypeUpdate.jsp">Промени</a></li>
+                        <li><a href="admin/vehicleSubtypeDelete.jsp">Изтрий</a></li>
+                        <li><a href="admin/loadVehicleSubtype.jsp">Преглед</a></li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li><a href="#">Тарифиране</a>

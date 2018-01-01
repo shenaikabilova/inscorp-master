@@ -1,9 +1,9 @@
-<%@ page import="kabilova.tu.inscorp.server.web.TariffKaskoServer" %>
-<%@ page import="kabilova.tu.inscorp.model.tariff.TariffKasko" %><%--
+<%@ page import="kabilova.tu.inscorp.server.web.VehicleTypeServer" %>
+<%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleType" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 30.12.2017 г.
-  Time: 23:43
+  Date: 1.1.2018 г.
+  Time: 19:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -76,23 +76,17 @@
     </ul>
 </div>
 
-<form>
-    <table border="1">
-        <th>Тип МПС</th>
-        <th>Подтоп МПС</th>
-        <th>Застрахователна стойност</th>
-
-        <%
-            TariffKaskoServer tariffGoServer = new TariffKaskoServer(new TariffKasko());
-            for(TariffKasko kasko : tariffGoServer.loadAllTariffKasko()) {
-        %>
-        <tr>
-            <td><%=kasko.getVechileType().getVehicleType()%></td>
-            <td><%=kasko.getVehicleSubtype().getSubtype()%></td>
-            <td><%=kasko.getKaskoPercent()%></td>
-        </tr>
-        <% } %>
-    </table>
+<form action="/vehicleTypeDelete" method="post">
+    <label>Въведи тип МПС</label>
+    <select class="field" id="vehicleType" name="vehicleType">
+        <option disabled="" selected="value"></option>
+            <%
+            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
+            for(VehicleType vehicleType : vehicleTypeServer.read()) {
+            %>
+            <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
+            <% } %>
+        <input type="submit" value="Изтрий">
 </form>
 </body>
 </html>

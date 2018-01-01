@@ -26,4 +26,8 @@ public class VehicleSubtypeServer {
     public List<VehicleSubtype> read() { return vehicleSubtypeEP.read(); }
 
     public void update() { vehicleSubtypeEP.update();}
+
+    public void delete() { vehicleSubtypeEP.delete(); }
+
+    public VehicleSubtype searchByName() { return vehicleSubtypeEP.searchByName(); }
 }

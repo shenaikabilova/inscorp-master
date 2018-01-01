@@ -30,4 +30,8 @@ public class VehicleTypeServer {
     public List<VehicleType> read() { return vehicleTypeEP.read(); }
 
     public void update() { vehicleTypeEP.update();}
+
+    public void delete() { vehicleTypeEP.delete(); }
+
+    public VehicleType searchByName() { return vehicleTypeEP.searchByName(); }
 }

@@ -25,13 +25,13 @@ import java.util.List;
  */
 @WebServlet(urlPatterns = {"/loadMpsGO", "/loadMpsKasko"})
 public class LoadMps extends HttpServlet {
-    @Override
     public void init() throws ServletException {
         super.init();
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String vehicleReg = request.getParameter("searchVehicleRegNum");
         Vehicle vehicle = new Vehicle();
         vehicle.setRegNum(vehicleReg);

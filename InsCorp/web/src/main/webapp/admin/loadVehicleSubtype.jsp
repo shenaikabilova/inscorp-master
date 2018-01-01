@@ -1,9 +1,9 @@
-<%@ page import="kabilova.tu.inscorp.server.web.TariffKaskoServer" %>
-<%@ page import="kabilova.tu.inscorp.model.tariff.TariffKasko" %><%--
+<%@ page import="kabilova.tu.inscorp.server.web.VehicleSubtypeServer" %>
+<%@ page import="kabilova.tu.inscorp.model.vehicle.VehicleSubtype" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
-  Date: 30.12.2017 г.
-  Time: 23:43
+  Date: 1.1.2018 г.
+  Time: 20:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -79,17 +79,16 @@
 <form>
     <table border="1">
         <th>Тип МПС</th>
-        <th>Подтоп МПС</th>
-        <th>Застрахователна стойност</th>
+        <th>Подтип МПС</th>
 
         <%
-            TariffKaskoServer tariffGoServer = new TariffKaskoServer(new TariffKasko());
-            for(TariffKasko kasko : tariffGoServer.loadAllTariffKasko()) {
+            VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(new VehicleSubtype());
+            for(VehicleSubtype vehicleSubtype : vehicleSubtypeServer.read()) {
         %>
+
         <tr>
-            <td><%=kasko.getVechileType().getVehicleType()%></td>
-            <td><%=kasko.getVehicleSubtype().getSubtype()%></td>
-            <td><%=kasko.getKaskoPercent()%></td>
+            <td><%=vehicleSubtype.getVehicleType().getVehicleType()%></td>
+            <td><%=vehicleSubtype.getSubtype()%></td>
         </tr>
         <% } %>
     </table>

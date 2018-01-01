@@ -132,7 +132,7 @@ public class UserDaoImpl implements UserDao {
                 .list();
 
         if (user.size() > 1) {
-            throw new IllegalArgumentException("..."); //TODO
+            throw new IllegalArgumentException("cound not find user");
         }
 
         return user.get(0);
