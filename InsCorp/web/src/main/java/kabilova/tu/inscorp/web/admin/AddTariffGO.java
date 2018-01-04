@@ -33,16 +33,22 @@ public class AddTariffGO extends HttpServlet {
         int zone = Integer.parseInt(request.getParameter("zone"));
         double value = Double.parseDouble(request.getParameter("value"));
 
-        VehicleType vehicleType = new VehicleType();
-        vehicleType.setId(vehicleTypeID);
-        VehicleSubtype vehicleSubtype = new VehicleSubtype();
-        vehicleSubtype.setId(vehicleSubtypeID);
+        if(id==0 || vehicleTypeID==0 || vehicleSubtypeID==0 || zone==0 || value==0) {
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            VehicleType vehicleType = new VehicleType();
+            vehicleType.setId(vehicleTypeID);
+            VehicleSubtype vehicleSubtype = new VehicleSubtype();
+            vehicleSubtype.setId(vehicleSubtypeID);
 
-        TariffServer tariffServer = new TariffServer(new TariffGO(id, vehicleType, vehicleSubtype, zone, value));
-        tariffServer.update();
+            TariffServer tariffServer = new TariffServer(new TariffGO(id, vehicleType, vehicleSubtype, zone, value));
+            tariffServer.update();
 
-        request.setAttribute("errmsg", "Успешен запис!");
-        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-        view.forward(request,response);
+            request.setAttribute("errmsg", "Успешен запис!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        }
     }
 }

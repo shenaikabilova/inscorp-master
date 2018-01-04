@@ -1,5 +1,8 @@
 <%@ page import="kabilova.tu.inscorp.server.web.UserServer" %>
-<%@ page import="kabilova.tu.inscorp.model.user.Admin" %><%--
+<%@ page import="kabilova.tu.inscorp.model.user.Admin" %>
+<%@ page import="java.security.MessageDigest" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="java.security.NoSuchAlgorithmException" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -95,9 +98,20 @@
         <form action="adminPanelSettings" method="post">
             <table width="100%">
                 <%
+                    MessageDigest m;
+                    BigInteger passEncrypt = null;
+                    try {
+                        m = MessageDigest.getInstance("MD5");
+                        m.update(password.getBytes(), 0, password.length());
+                        passEncrypt = new BigInteger(1, m.digest());
+                        System.out.println(String.format("%1$032x", passEncrypt));
+                    } catch (NoSuchAlgorithmException e1) {
+                        e1.printStackTrace();
+                    }
+
                     Admin admin = new Admin();
                     admin.setUsername(username);
-                    admin.setPassword(password);
+                    admin.setPassword(String.format("%1$032x", passEncrypt));
                     UserServer userServer = new UserServer(admin);
 
                 %>
@@ -107,27 +121,27 @@
                 </tr>
                 <tr>
                     <td><label>ID</label></td>
-                    <td><input type="text" class="field" name="userID" size="30" value=<%=userServer.loadUser(username, password).getId()%> ></td>
+                    <td><input type="text" class="field" name="userID" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getId()%> ></td>
                 </tr>
                 <tr>
                     <td><label>Потребителско име</label></td>
-                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getUsername()%>></td>
+                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getUsername()%>></td>
                 </tr>
                 <tr>
                     <td><label>Име</label></td>
-                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getFirstName()%>></td>
+                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getFirstName()%>></td>
                 </tr>
                 <tr>
                     <td><label>Презиме</label></td>
-                    <td><input type="text" class="field" name="secondName" size="30" value=<%=userServer.loadUser(username, password).getSecondName()%>></td>
+                    <td><input type="text" class="field" name="secondName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getSecondName()%>></td>
                 </tr>
                 <tr>
                     <td><label>Фамилия</label>
-                    <td><input type="text" class="field" name="lastName" size="30" value=<%=userServer.loadUser(username, password).getLastName()%>></td>
+                    <td><input type="text" class="field" name="lastName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getLastName()%>></td>
                 </tr>
                 <tr>
                     <td><label>Е-майл</label></td>
-                    <td><input type="text" class="field" name="userEmail" size="30" value=<%=userServer.loadUser(username, password).getEmail()%>></td>
+                    <td><input type="text" class="field" name="userEmail" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getEmail()%>></td>
                 </tr>
                 <tr>
                     <td><label>Парола</label></td>

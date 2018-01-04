@@ -25,11 +25,17 @@ public class LoadVehicleByRegNum extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String regNum = request.getParameter("regNum");
-        Vehicle vehicle = new Vehicle();
-        vehicle.setRegNum(regNum);
-        VehicleServer vehicleServer = new VehicleServer(vehicle);
-        request.setAttribute("result", vehicleServer.loadVehicle());
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/insurer/updateVehicle.jsp");
-        rd.forward(request, response);
+        if(regNum.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            Vehicle vehicle = new Vehicle();
+            vehicle.setRegNum(regNum);
+            VehicleServer vehicleServer = new VehicleServer(vehicle);
+            request.setAttribute("result", vehicleServer.loadVehicle());
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("insurer/updateVehicle.jsp");
+            rd.forward(request, response);
+        }
     }
 }

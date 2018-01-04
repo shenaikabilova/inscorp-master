@@ -26,23 +26,29 @@ public class SearchPolicyByID extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String policyID = request.getParameter("searchByID");
-        PolicyServer policyServer;
-        RequestDispatcher rd = null;
+        if(policyID.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            PolicyServer policyServer;
+            RequestDispatcher rd = null;
 
-        if(request.getServletPath().equals("/searchGOByID")) {
-            GO go = new GO();
-            go.setPolicaID(policyID);
-            policyServer = new PolicyServer(go);
-            request.setAttribute("result", policyServer.getPolicyByPolicyNum());
-            rd = request.getRequestDispatcher("insurer/searchGOByIdResult.jsp");
-        } else if(request.getServletPath().equals("/searchKaskoByID")) {
-            Kasko kasko = new Kasko();
-            kasko.setPolicaID(policyID);
-            policyServer = new PolicyServer(kasko);
-            request.setAttribute("result", policyServer.getPolicyByPolicyNum());
-            rd = request.getRequestDispatcher("insurer/searchKaskoByIdResult.jsp");
+            if (request.getServletPath().equals("/searchGOByID")) {
+                GO go = new GO();
+                go.setPolicaID(policyID);
+                policyServer = new PolicyServer(go);
+                request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                rd = request.getRequestDispatcher("insurer/searchGOByIdResult.jsp");
+            } else if (request.getServletPath().equals("/searchKaskoByID")) {
+                Kasko kasko = new Kasko();
+                kasko.setPolicaID(policyID);
+                policyServer = new PolicyServer(kasko);
+                request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                rd = request.getRequestDispatcher("insurer/searchKaskoByIdResult.jsp");
+            }
+
+            rd.forward(request, response);
         }
-
-        rd.forward(request, response);
     }
 }

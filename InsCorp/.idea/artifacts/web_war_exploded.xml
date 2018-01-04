@@ -19,6 +19,9 @@
           <element id="archive" name="dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="dao" />
           </element>
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.5" />
           <element id="archive" name="dao-impl-1.0-SNAPSHOT.jar">
             <element id="module-output" name="dao-impl" />
           </element>
@@ -57,7 +60,6 @@
           <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.3-1" />
           <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.2" />
           <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
-          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.7.1" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.7.1" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.7.1" />

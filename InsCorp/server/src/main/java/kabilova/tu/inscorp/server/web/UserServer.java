@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
@@ -19,7 +20,7 @@ public class UserServer {
         userEP = new UserEP(user, new UserDaoImpl());
     }
 
-    public void createUser() {
+    public void createUser() throws InsCorpException {
         userEP.createUser();
     }
 

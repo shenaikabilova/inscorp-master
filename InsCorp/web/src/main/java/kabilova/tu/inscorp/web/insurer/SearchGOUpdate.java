@@ -26,12 +26,18 @@ public class SearchGOUpdate extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String policyID = request.getParameter("searchGOByID");
-        GO go = new GO();
-        go.setPolicaID(policyID);
-        PolicyServer policyServer = new PolicyServer(go);
+        if(policyID.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            GO go = new GO();
+            go.setPolicaID(policyID);
+            PolicyServer policyServer = new PolicyServer(go);
 
-        request.setAttribute("policy", policyServer.getPolicyByPolicyNum());
-        RequestDispatcher view = request.getRequestDispatcher("insurer/insurerGoUpdate.jsp");
-        view.forward(request, response);
+            request.setAttribute("policy", policyServer.getPolicyByPolicyNum());
+            RequestDispatcher view = request.getRequestDispatcher("insurer/insurerGoUpdate.jsp");
+            view.forward(request, response);
+        }
     }
 }

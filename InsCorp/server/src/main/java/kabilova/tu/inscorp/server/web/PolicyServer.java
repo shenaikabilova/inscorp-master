@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscporp.bl.user.PolicyEP;
@@ -18,7 +19,7 @@ public class PolicyServer {
         policyEP = new PolicyEP(policy, new PolicyDaoImpl());
     }
 
-    public void create() { policyEP.create(); }
+    public void create() throws InsCorpException{ policyEP.create(); }
 
     public List<Policy> read() { return policyEP.read(); }
 

@@ -33,30 +33,37 @@ public class LoadMps extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String vehicleReg = request.getParameter("searchVehicleRegNum");
-        Vehicle vehicle = new Vehicle();
-        vehicle.setRegNum(vehicleReg);
+        if(vehicleReg.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            Vehicle vehicle = new Vehicle();
+            vehicle.setRegNum(vehicleReg);
 
-        VehicleServer vehicleServer = new VehicleServer(vehicle);
+            VehicleServer vehicleServer = new VehicleServer(vehicle);
 
-        request.setAttribute("result", vehicleServer.loadVehicle());
-        RequestDispatcher rd = null;
-        if(request.getServletPath().equals("/loadMpsGO")) {
-            TariffGO tariffGO = new TariffGO();
-            tariffGO.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
-            tariffGO.setZone(vehicleServer.loadVehicle().getZone());
-            TariffGoServer tariffGoServer = new TariffGoServer(tariffGO);
+            request.setAttribute("result", vehicleServer.loadVehicle());
+//             rd = null;
+            if (request.getServletPath().equals("/loadMpsGO")) {
+                TariffGO tariffGO = new TariffGO();
+                tariffGO.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
+                tariffGO.setZone(vehicleServer.loadVehicle().getZone());
+                TariffGoServer tariffGoServer = new TariffGoServer(tariffGO);
 
-            request.setAttribute("tariff", tariffGoServer.loadTariffGo());
-            rd = getServletContext().getRequestDispatcher("/insurer/insurerAddNewGO.jsp");
+                request.setAttribute("tariff", tariffGoServer.loadTariffGo());
+                RequestDispatcher rd = request.getRequestDispatcher("insurer/insurerAddNewGO.jsp");
+                rd.forward(request, response);
+            } else if (request.getServletPath().equals("/loadMpsKasko")) {
+                TariffKasko tariffKasko = new TariffKasko();
+                tariffKasko.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
+                TariffKaskoServer tariffKaskoServer = new TariffKaskoServer(tariffKasko);
+
+                request.setAttribute("tariff", tariffKaskoServer.loadTariffkasko());
+                RequestDispatcher rd = request.getRequestDispatcher("insurer/insurerAddNewKasko.jsp");
+                rd.forward(request, response);
+            }
+
         }
-        else if(request.getServletPath().equals("/loadMpsKasko")) {
-            TariffKasko tariffKasko = new TariffKasko();
-            tariffKasko.setVehicleSubtype(vehicleServer.loadVehicle().getVehicleSubtype());
-            TariffKaskoServer tariffKaskoServer = new TariffKaskoServer(tariffKasko);
-
-            request.setAttribute("tariff", tariffKaskoServer.loadTariffkasko());
-            rd = getServletContext().getRequestDispatcher("/insurer/insurerAddNewKasko.jsp");
-        }
-        rd.forward(request, response);
     }
 }

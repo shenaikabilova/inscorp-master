@@ -16,11 +16,11 @@
         <property name="lastName" column="LASTNAME" type="string" access="property"/>
         <property name="username" column="USERNAME" type="string" access="property"/>
         <property name="password" column="PASSWORD" type="string" access="property"/>
-        <property name="phoneNumber" column="PHONENUMBER" type="string" access="property"/>
-        <property name="email" column="EMAIL" type="string" access="property"/>
+        <property name="phoneNumber" column="PHONENUMBER" type="string" access="property" unique="true"/>
+        <property name="email" column="EMAIL" type="string" access="property" unique="true"/>
 
         <subclass name="kabilova.tu.inscorp.model.user.Insurer" discriminator-value="INSURER">
-            <property name="insurerID" column="INSURERID" type="int" access="property"/>
+            <property name="insurerID" column="INSURERID" type="int" access="property" unique="true"/>
         </subclass>
 
         <subclass name="kabilova.tu.inscorp.model.user.Admin" discriminator-value="ADMIN">

@@ -219,6 +219,16 @@
                         <label>Модел</label>
                         <input type="text" class="field" name="vehicleModel" value=<%=vehicle.getModel()%> size="30" maxlength="50">
                     </div>
+
+                    <div class="form-row-inner">
+                        <label>Двигател</label>
+                        <select id="engine" name="engine">
+                            <option <%if(vehicle.getEngine() == 1.4) { %> selected <% }%> >1.4</option>
+                            <option <%if(vehicle.getEngine() == 1.6) { %> selected <% }%> >1.6</option>
+                            <option <%if(vehicle.getEngine() == 1.8) { %> selected <% }%> >1.8</option>
+                            <option <%if(vehicle.getEngine() == 2.0) { %> selected <% }%> >2.0</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-row">

@@ -33,23 +33,6 @@ public class LoadActivePoliciesGO {
 
         PolicyEP policyEP = new PolicyEP(new PolicyDaoImpl());
         List<GO> policies =  policyEP.loadActivePoliciesGO(insured, Calendar.getInstance());
-//
-//        for(Policy p : )) {
-//            System.out.println(p.getPolicaID());
-//            policies.add(p);
-//        }
-
-
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-//        Gson gson = gsonBuilder.create();
-//        try {
-//            System.out.println(gson.toJson(policies));
-//            return gson.toJson(policies);
-//        } catch (JsonParseException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         try {

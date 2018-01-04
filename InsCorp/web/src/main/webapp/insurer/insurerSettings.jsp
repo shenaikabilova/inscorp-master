@@ -1,5 +1,8 @@
 <%@ page import="kabilova.tu.inscorp.model.user.Insurer" %>
-<%@ page import="kabilova.tu.inscorp.server.web.UserServer" %><%--
+<%@ page import="kabilova.tu.inscorp.server.web.UserServer" %>
+<%@ page import="java.security.MessageDigest" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="java.security.NoSuchAlgorithmException" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -90,9 +93,20 @@
     <div class="shell">
         <form action="/insurerSettingsUpdate" method="post">
             <%
+                MessageDigest m;
+                BigInteger passEncrypt = null;
+                try {
+                    m = MessageDigest.getInstance("MD5");
+                    m.update(password.getBytes(), 0, password.length());
+                    passEncrypt = new BigInteger(1, m.digest());
+                    System.out.println(String.format("%1$032x", passEncrypt));
+                } catch (NoSuchAlgorithmException e1) {
+                    e1.printStackTrace();
+                }
+
                 UserServer userServer = new UserServer(new Insurer());
-                if(userServer.loadUser(username, password) instanceof Insurer) {
-                    Insurer insurer = (Insurer) userServer.loadUser(username, password);
+                if(userServer.loadUser(username, String.format("%1$032x", passEncrypt)) instanceof Insurer) {
+                    Insurer insurer = (Insurer) userServer.loadUser(username, String.format("%1$032x", passEncrypt));
             %>
             <table width="100%">
                 <tr>

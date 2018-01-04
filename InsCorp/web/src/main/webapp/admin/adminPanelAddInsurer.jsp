@@ -100,11 +100,11 @@
                         </tr>
                         <tr>
                             <td><label id="insurerID" for="insurerID">Служебен №</label></td>
-                            <td><input type="number" class="field" name="insurerID" placeholder="ID" size="30" maxlength="6"></td>
+                            <td><input type="text" class="field" name="insurerID" placeholder="ID" size="50" maxlength="6"></td>
                         </tr>
                         <tr>
                             <td><label>Име</label></td>
-                            <td><input type="text" class="field" name="insurerFirstName" placeholder="Име" size="30" maxlength="50"></td>
+                            <td><input type="text" class="field" name="insurerFirstName" placeholder="Име" size="50" maxlength="50"></td>
                         </tr>
                         <tr>
                             <td><label>Презиме</label></td>
@@ -112,7 +112,7 @@
                         </tr>
                         <tr>
                             <td><label>Фамилия</label></td>
-                            <td><input type="text" class="field" name="insurerLastName" placeholder="Фамилия" size="30" maxlength="50"></td>
+                            <td><input type="text" class="field" name="insurerLastName" placeholder="Фамилия" size="50" maxlength="50"></td>
                         </tr>
                         <tr>
                             <td><label>Потребителско име</label></td>

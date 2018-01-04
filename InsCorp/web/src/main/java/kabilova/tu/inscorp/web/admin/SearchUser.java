@@ -27,15 +27,21 @@ public class SearchUser extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
 
-        Insurer insurer = new Insurer();
-        insurer.setUsername(username);
-        UserServer userServer = new UserServer(insurer);
+        if(username.trim().equals("")) {
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            Insurer insurer = new Insurer();
+            insurer.setUsername(username);
+            UserServer userServer = new UserServer(insurer);
 
-        List<Insurer> result = new ArrayList<>();
-        result.add((Insurer) userServer.loadByUsername());
+//            List<Insurer> result = new ArrayList<>();
+//            result.add((Insurer) userServer.loadByUsername());
 
-        request.setAttribute("result", result);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/adminPanelUpdateUser.jsp");
-        rd.forward(request, response);
+            request.setAttribute("result", userServer.loadByUsername());
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("admin/adminPanelUpdateUser.jsp");
+            rd.forward(request, response);
+        }
     }
 }

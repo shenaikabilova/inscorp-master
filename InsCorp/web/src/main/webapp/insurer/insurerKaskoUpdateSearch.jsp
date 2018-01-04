@@ -97,7 +97,7 @@
 
 <div class="searchKaskoUpdate">
     <div class="shell">
-        <form action="searchKaskoUpdate" method="get">
+        <form action="/searchKaskoUpdate" method="get">
             <div class="form-section">
                 <div class="form-row">
                     <h3>Търсене на застраховка "Каско" за редакция</h3>

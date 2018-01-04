@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.daoimpl.hb;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.user.Insured;
@@ -8,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import kabilova.tu.inscorp.model.user.User;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 
@@ -41,13 +43,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void create(User user) {
+    public void create(User user) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         try {
             session.save(user);
             session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+            throw new InsCorpException("Съществуваща уникална стойност!");
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {

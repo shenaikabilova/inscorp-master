@@ -27,18 +27,21 @@ public class DeleteUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
 
-        Insurer insurer = new Insurer();
-        insurer.setUsername(username);
-        UserServer userServer = new UserServer(insurer);
+        if(username.trim().equals("")){
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            Insurer insurer = new Insurer();
+            insurer.setUsername(username);
+            UserServer userServer = new UserServer(insurer);
 
-        List<Insurer> result = new ArrayList<>();
-        result.add((Insurer) userServer.loadByUsername());
-        insurer.setId(userServer.loadByUsername().getId());
-        userServer.delete();
+            insurer.setId(userServer.loadByUsername().getId());
+            userServer.delete();
 
-        request.setAttribute("errmsg", "Застрахователният агент е изтрит!");
-        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-        view.forward(request,response);
-
+            request.setAttribute("errmsg", "Застрахователният агент е изтрит!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        }
     }
 }

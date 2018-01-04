@@ -1,5 +1,6 @@
 package kabilova.tu.inscporp.bl.user;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.PolicyDao;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;
@@ -26,7 +27,7 @@ public class PolicyEP {
         this.dao = dao;
     }
 
-    public void create() { dao.create(policy); }
+    public void create() throws InsCorpException { dao.create(policy); }
 
     public List<Policy> read() { return dao.read(); }
 

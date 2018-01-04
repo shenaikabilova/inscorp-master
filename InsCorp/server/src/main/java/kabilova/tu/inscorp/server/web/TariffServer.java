@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.TariffDaoImpl;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.tariff.TariffGO;
@@ -20,7 +21,7 @@ public class TariffServer {
         tariffEP = new TariffEP(tariff, new TariffDaoImpl());
     }
 
-    public void create() {
+    public void create() throws InsCorpException {
         tariffEP.create();
     }
 

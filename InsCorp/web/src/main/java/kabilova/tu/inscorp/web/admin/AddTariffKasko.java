@@ -32,16 +32,22 @@ public class AddTariffKasko extends HttpServlet {
         int vehicleSubtypeID = Integer.parseInt(request.getParameter("vehicleSubtype"));
         int kaskoPercent = Integer.parseInt(request.getParameter("kaskoPercent"));
 
-        VehicleType vehicleType = new VehicleType();
-        vehicleType.setId(vehicleTypeID);
-        VehicleSubtype vehicleSubtype = new VehicleSubtype();
-        vehicleSubtype.setId(vehicleSubtypeID);
+        if(id==0 || vehicleTypeID==0 || vehicleSubtypeID==0 || kaskoPercent==0) {
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            VehicleType vehicleType = new VehicleType();
+            vehicleType.setId(vehicleTypeID);
+            VehicleSubtype vehicleSubtype = new VehicleSubtype();
+            vehicleSubtype.setId(vehicleSubtypeID);
 
-        TariffServer tariffServer = new TariffServer(new TariffKasko(id, vehicleType, vehicleSubtype, kaskoPercent));
-        tariffServer.update();
+            TariffServer tariffServer = new TariffServer(new TariffKasko(id, vehicleType, vehicleSubtype, kaskoPercent));
+            tariffServer.update();
 
-        request.setAttribute("errmsg", "Успешен запис!");
-        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-        view.forward(request, response);
+            request.setAttribute("errmsg", "Успешен запис!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package kabilova.tu.inscporp.bl.user;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.VehicleDao;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 
@@ -21,7 +22,7 @@ public class VehicleEP {
         this.dao = dao;
     }
 
-    public void create() { dao.create(vehicle); }
+    public void create() throws InsCorpException{ dao.create(vehicle); }
 
     public List<Vehicle> read() { return dao.read(); }
 

@@ -94,7 +94,7 @@
 <div class="newGO">
     <div class="shell">
         <h3>Сключване на застраховка "Гражданеска отговорност"</h3>
-        <form action="/addNewGO" method="post">
+        <form action="/updateGO" method="post">
             <div class="form-section">
                 <div class="form-section">
                     <%
@@ -198,6 +198,16 @@
                     <div class="form-row-inner">
                         <label>Модел</label>
                         <input type="text" class="field" name="vehicleModel" value=<%=go.getVehicle().getModel()%> size="30" maxlength="50">
+                    </div>
+
+                    <div class="form-row-inner">
+                        <label>Двигател</label>
+                        <select id="engine" name="engine">
+                            <option <%if(go.getVehicle().getEngine() == 1.4) { %> selected <% }%> >1.4</option>
+                            <option <%if(go.getVehicle().getEngine() == 1.6) { %> selected <% }%> >1.6</option>
+                            <option <%if(go.getVehicle().getEngine() == 1.8) { %> selected <% }%> >1.8</option>
+                            <option <%if(go.getVehicle().getEngine() == 2.0) { %> selected <% }%> >2.0</option>
+                        </select>
                     </div>
                 </div>
 

@@ -202,6 +202,7 @@
             <option>1.2</option>
             <option>1.4</option>
             <option>1.6</option>
+            <option>2.0</option>
         </select>
         <label>Цвят</label>
         <input type="text" id="color" name="color" placeholder="Цвят">

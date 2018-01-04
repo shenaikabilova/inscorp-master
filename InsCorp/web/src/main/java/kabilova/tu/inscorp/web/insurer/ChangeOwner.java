@@ -29,19 +29,25 @@ public class ChangeOwner extends HttpServlet {
         String regNum = request.getParameter("regNum");
         String egn = request.getParameter("egn");
 
-        Insured insured = new Insured();
-        insured.setEgn(egn);
-        Vehicle vehicle = new Vehicle();
-        vehicle.setRegNum(regNum);
-        InsuredServer insuredServer = new InsuredServer(insured);
-        insured.setId(insuredServer.loadByEgn().getId());
-        vehicle.setInsured(insured);
+        if(regNum.trim().equals("") || egn.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            Insured insured = new Insured();
+            insured.setEgn(egn);
+            Vehicle vehicle = new Vehicle();
+            vehicle.setRegNum(regNum);
+            InsuredServer insuredServer = new InsuredServer(insured);
+            insured.setId(insuredServer.loadByEgn().getId());
+            vehicle.setInsured(insured);
 
-        VehicleServer vehicleServer = new VehicleServer();
-        vehicleServer.update();
+            VehicleServer vehicleServer = new VehicleServer();
+            vehicleServer.update();
 
-        request.setAttribute("msg", "Успешен запис");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-        view.forward(request, response);
+            request.setAttribute("msg", "Успешен запис");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package kabilova.tu.inscporp.bl.user;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
@@ -24,7 +25,7 @@ public class UserEP<T> {
         return dao.loadUser(username, password);
     }
 
-    public void createUser() {
+    public void createUser() throws InsCorpException {
         dao.create(user);
     }
 

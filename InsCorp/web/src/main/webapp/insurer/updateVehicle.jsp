@@ -149,9 +149,9 @@
 
     МПС
     <label>Регистрационен №</label>
-    <input type="text" id="regNum" name="regNum" placeholder="Регистрационен №" maxlength="7">
+    <input type="text" id="regNum" name="regNum" value=<%=vehicle.getRegNum()%> maxlength="7">
     <label>Регистрирана в Град</label>
-    <input type="text" id="regCity" name="regCity" placeholder="Град">
+    <input type="text" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%>>
     <label>Зона</label>
     <select class="field" id="zone" name="zone">
         <option value=1>Зона 1</option>
@@ -159,7 +159,7 @@
         <option value=3>Зона 3</option>
     </select>
     <label>РАМА</label>
-    <input type="text" id="rama" name="rama" placeholder="РАМА" maxlength="17">
+    <input type="text" id="rama" name="rama" value=<%=vehicle.getRAMA()%> maxlength="17">
 
     <label>Тип</label>
     <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
@@ -174,29 +174,30 @@
 
     <br>
     <label>Марка</label>
-    <input type="text" id="brand" name="brand" placeholder="Марка">
+    <input type="text" id="brand" name="brand" value=<%=vehicle.getBrand()%>>
     <label>Модел</label>
-    <input type="text" id="model" name="model" placeholder="Модел">
+    <input type="text" id="model" name="model" value=<%=vehicle.getModel()%>>
 
     <label>Първа регистрация</label>
     <input type="text" placeholder="Първа регистрация" id="datepicker1" name="firstReg">
     <label>Години</label>
-    <input type="number" id="years" name="years" placeholder="Години">
+    <input type="number" id="years" name="years" value=<%=vehicle.getYears()%>>
     <br>
 
     <label>Двигател</label>
     <select id="engine" name="engine">
-        <option>1.2</option>
-        <option>1.4</option>
-        <option>1.6</option>
+        <option <%if(vehicle.getEngine() == 1.4) { %> selected <% }%> >1.4</option>
+        <option <%if(vehicle.getEngine() == 1.6) { %> selected <% }%> >1.6</option>
+        <option <%if(vehicle.getEngine() == 1.8) { %> selected <% }%> >1.8</option>
+        <option <%if(vehicle.getEngine() == 2.0) { %> selected <% }%> >2.0</option>
     </select>
     <label>Цвят</label>
-    <%--TODO color--%>
+    <input type="text" id="color" name="color" value=<%=vehicle.getColor()%>
     <label>Брой места</label>
     <input type="number" id="placeNumber" name="placeNumber" placeholder="Брой места">
     <br>
 
-    <input type="submit" value="Добави">
+    <input type="submit" value="Редактирай">
 </form>
 </body>
 <script>

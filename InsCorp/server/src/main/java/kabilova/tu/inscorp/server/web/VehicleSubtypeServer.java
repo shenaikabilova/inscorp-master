@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.VehicleSubtypeDaoImpl;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
@@ -21,7 +22,7 @@ public class VehicleSubtypeServer {
         vehicleSubtypeEP = new VehicleSubtypeEP(vehicleSubtype, new VehicleSubtypeDaoImpl());
     }
 
-    public void create() { vehicleSubtypeEP.create(); }
+    public void create() throws InsCorpException { vehicleSubtypeEP.create(); }
 
     public List<VehicleSubtype> read() { return vehicleSubtypeEP.read(); }
 
@@ -29,5 +30,4 @@ public class VehicleSubtypeServer {
 
     public void delete() { vehicleSubtypeEP.delete(); }
 
-    public VehicleSubtype searchByName() { return vehicleSubtypeEP.searchByName(); }
 }

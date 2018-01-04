@@ -1,3 +1,4 @@
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.dao.PolicyDao;
 import kabilova.tu.inscorp.dao.UserDao;
@@ -27,6 +28,11 @@ public class Main {
     public static void main(String[] args) {
 //        Admin admin = new Admin(1, "Admin", "Admin", "Admin", "admin", "admin");
 //        kabilova.tu.inscorp.dao.UserDao dao = new kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl();
+//        try {
+//            dao.create(new Insurer(1111, "a","a","a","username","pass","124","meil"));
+//        } catch (InsCorpException e) {
+//            e.printStackTrace();
+//        }
 //        dao.create(admin);
 //
 //        UserDao dao = new UserDaoImpl();
@@ -45,12 +51,12 @@ public class Main {
 
 //        Insurer insurer = new Insurer();
 //        insurer.setId(3);
-        PolicyDao dao = new PolicyDaoImpl();
+//        PolicyDao dao = new PolicyDaoImpl();
 //        for(GO go : dao.loadPoliciesGO(insurer)){
 //            System.out.println(go.getVehicle().getVehicleID());
 //        }
-//
-        GO go = (GO) dao.getPolicaByPolicaNum("000001");
-        System.out.println("last policyID: " + go.getPolicaID());
+////
+//        GO go = (GO) dao.getPolicaByPolicaNum("000001");
+//        System.out.println("last policyID: " + go.getPolicaID());
     }
 }

@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
@@ -37,32 +38,49 @@ public class AddNewMps extends HttpServlet {
         String country = request.getParameter("country");
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
-
         String firstReg =  request.getParameter("firstReg");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Calendar calendar = Calendar.getInstance();
-        try {
-            calendar.setTime(simpleDateFormat.parse(firstReg));
-        }catch (ParseException e) {System.out.println("Exception :"+e);  }
-
         int years = Integer.parseInt(request.getParameter("years"));
-        float engine = Float.parseFloat(request.getParameter("engine"));
+        double engine = Double.parseDouble(request.getParameter("engine"));
         String color = request.getParameter("color");
         int placeNumber = Integer.parseInt(request.getParameter("placeNumber"));
 
-        Insured insured = new Insured();
-        insured.setId(insuredID);
-        VehicleType vehicleType = new VehicleType();
-        vehicleType.setId(typeID);
-        VehicleSubtype vehicleSubtype = new VehicleSubtype();
-        vehicleSubtype.setId(subtypeID);
+        if(insuredID==0 || regNum.trim().equals("") || regCity.trim().equals("") || zone==0 || rama.trim().equals("") ||
+           typeID==0 || subtypeID==0 || country.trim().equals("") || brand.trim().equals("") || model.trim().equals("") ||
+           firstReg.trim().equals("") || years==0 ||engine==0 || color.trim().equals("") || placeNumber==0) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Calendar calendar = Calendar.getInstance();
+            try {
+                calendar.setTime(simpleDateFormat.parse(firstReg));
+            } catch (ParseException e) {
+                System.out.println("Exception :" + e);
+            }
 
-        VehicleServer vehicleServer = new VehicleServer(new Vehicle(insured, vehicleType, vehicleSubtype, regNum, country,
-                regCity, rama, brand, model, calendar, years, engine, color, placeNumber, zone));
-        vehicleServer.create();
 
-        request.setAttribute("msg", "Успешен запис");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-        view.forward(request, response);
+            Insured insured = new Insured();
+            insured.setId(insuredID);
+            VehicleType vehicleType = new VehicleType();
+            vehicleType.setId(typeID);
+            VehicleSubtype vehicleSubtype = new VehicleSubtype();
+            vehicleSubtype.setId(subtypeID);
+
+            VehicleServer vehicleServer = new VehicleServer(new Vehicle(insured, vehicleType, vehicleSubtype, regNum, country,
+                    regCity, rama, brand, model, calendar, years, engine, color, placeNumber, zone));
+
+            try {
+                vehicleServer.create();
+            } catch (InsCorpException e) {
+                request.setAttribute("msg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
+            }
+
+            request.setAttribute("msg", "Успешен запис");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        }
     }
 }

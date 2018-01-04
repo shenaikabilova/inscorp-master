@@ -1,8 +1,10 @@
 package kabilova.tu.inscorp.web.admin;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 import kabilova.tu.inscorp.server.web.VehicleTypeServer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +27,23 @@ public class AddNewVehicleType extends HttpServlet {
 
         String vehicleType = request.getParameter("vehicleType");
 
-        VehicleTypeServer vehicleTypeServer = new VehicleTypeServer(new VehicleType(vehicleType));
-        vehicleTypeServer.create();
+        if(vehicleType.trim().equals("")){
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer(new VehicleType(vehicleType));
+            try {
+                vehicleTypeServer.create();
+
+                request.setAttribute("errmsg", "Успешен запис!");
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            } catch (InsCorpException e) {
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
+        }
     }
 }

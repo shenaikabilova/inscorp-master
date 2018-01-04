@@ -1,5 +1,7 @@
 package kabilova.tu.inscorp.web.admin;
 
+import exception.InsCorpException;
+import kabilova.tu.inscorp.SendMail;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
 
@@ -38,29 +40,47 @@ public class AddNewInsurer extends HttpServlet{
             String phoneNumber = request.getParameter("phoneNumber");
             String email = request.getParameter("e-mail");
 
-            MessageDigest m;
-            BigInteger passEncrypt = null;
-            try {
-                m = MessageDigest.getInstance("MD5");
-                m.update(pass1.getBytes(), 0, pass1.length());
-                passEncrypt = new BigInteger(1,m.digest());
-                System.out.println(String.format("%1$032x", passEncrypt));
-            } catch (NoSuchAlgorithmException e1) {
-                e1.printStackTrace();
+            if (insurerID == 0 || firstName.trim().equals("") || secondName.trim().equals("") || lastName.trim().equals("") ||
+                    username.trim().equals("") || phoneNumber.trim().equals("") || email.trim().equals("")) {
+                request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            } else {
+                MessageDigest m;
+                BigInteger passEncrypt = null;
+                try {
+                    m = MessageDigest.getInstance("MD5");
+                    m.update(pass1.getBytes(), 0, pass1.length());
+                    passEncrypt = new BigInteger(1, m.digest());
+                    System.out.println(String.format("%1$032x", passEncrypt));
+                } catch (NoSuchAlgorithmException e1) {
+                    e1.printStackTrace();
+                }
+
+                UserServer userServer = new UserServer(new Insurer(insurerID, firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt),
+                        phoneNumber, email));
+                try {
+                    userServer.createUser();
+                } catch (InsCorpException e) {
+                    request.setAttribute("errmsg", "Неуспешен запис: " + e.getMessage() + " Проверете стойностите на полетата: " +
+                            "служебен №, телефонен номер и/или имейл адрес.");
+                    RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                    view.forward(request, response);
+                }
+
+//            SendMail sendMail = new SendMail();
+//            sendMail.sendMail(insurerID, pass1, email);
+
+                request.setAttribute("errmsg", "Успешен запис!");
+//            response.sendRedirect("admin/AdminPanelMsg.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
             }
-
-            UserServer userServer = new UserServer(new Insurer(insurerID, firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt),
-                                                       phoneNumber, email));
-            userServer.createUser();
-
-            request.setAttribute("errmsg", "Успешен запис!");
-            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-            view.forward(request,response);
         }
-        else {
+        else{
             request.setAttribute("errmsg", "Моля въведете еднакви пароли!");
             RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-            view.forward(request,response);
+            view.forward(request, response);
         }
     }
 }

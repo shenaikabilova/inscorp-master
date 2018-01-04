@@ -93,8 +93,7 @@
         <form action="/updateInsurer" method="post">
             <table width="100%">
                 <%
-                    List<Insurer> insurers = (List<Insurer>)request.getAttribute("result");
-                    for(Insurer insurer : insurers) {
+                    Insurer insurer = (Insurer) request.getAttribute("result");
                 %>
                 <tr>
                     <td><h3>Настройки на застраховател</h3></td>
@@ -142,7 +141,6 @@
                     <td></td>
                     <td><input type="submit" value="Промени"></td>
                 </tr>
-                <% } %>
             </table>
         </form>
     </div>

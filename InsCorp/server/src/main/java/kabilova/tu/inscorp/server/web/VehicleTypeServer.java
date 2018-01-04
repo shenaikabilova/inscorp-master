@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.daoimpl.hb.VehicleTypeDaoImpl;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
@@ -25,7 +26,7 @@ public class VehicleTypeServer {
         vehicleTypeEP = new VehicleTypeEP(vehicleType, new VehicleTypeDaoImpl());
     }
 
-    public void create() { vehicleTypeEP.create(); }
+    public void create() throws InsCorpException { vehicleTypeEP.create(); }
 
     public List<VehicleType> read() { return vehicleTypeEP.read(); }
 
@@ -33,5 +34,4 @@ public class VehicleTypeServer {
 
     public void delete() { vehicleTypeEP.delete(); }
 
-    public VehicleType searchByName() { return vehicleTypeEP.searchByName(); }
 }

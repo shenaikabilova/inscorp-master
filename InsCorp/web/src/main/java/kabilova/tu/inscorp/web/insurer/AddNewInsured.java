@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.server.web.UserServer;
 
@@ -34,7 +35,6 @@ public class AddNewInsured extends HttpServlet {
             String secondName = request.getParameter("secondName");
             String lastName = request.getParameter("lastName");
             String username = request.getParameter("username");
-
             String EGN = request.getParameter("EGN");
             int postCode = Integer.parseInt(request.getParameter("postCode"));
             String country = request.getParameter("country");
@@ -43,24 +43,38 @@ public class AddNewInsured extends HttpServlet {
             String phoneNumber = request.getParameter("phoneNumber");
             String email = request.getParameter("email");
 
-            MessageDigest m;
-            BigInteger passEncrypt = null;
-            try {
-                m = MessageDigest.getInstance("MD5");
-                m.update(pass1.getBytes(), 0, pass1.length());
-                passEncrypt = new BigInteger(1,m.digest());
-                System.out.println(String.format("%1$032x", passEncrypt));
-            } catch (NoSuchAlgorithmException e1) {
-                e1.printStackTrace();
+            if(firstName.trim().equals("") || secondName.trim().equals("") || lastName.trim().equals("") ||
+               username.trim().equals("") || EGN.trim().equals("") || postCode==0 || country.trim().equals("") ||
+               city.trim().equals("") || address.trim().equals("") || phoneNumber.trim().equals("") || email.trim().equals("")) {
+                request.setAttribute("msg", "Моля, попълнете всички полета!");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
+            } else {
+                MessageDigest m;
+                BigInteger passEncrypt = null;
+                try {
+                    m = MessageDigest.getInstance("MD5");
+                    m.update(pass1.getBytes(), 0, pass1.length());
+                    passEncrypt = new BigInteger(1, m.digest());
+                    System.out.println(String.format("%1$032x", passEncrypt));
+                } catch (NoSuchAlgorithmException e1) {
+                    e1.printStackTrace();
+                }
+
+                UserServer userServer = new UserServer(new Insured(firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt), EGN, postCode, country,
+                        city, address, phoneNumber, email));
+                try {
+                    userServer.createUser();
+                } catch (InsCorpException e) {
+                    request.setAttribute("msg", e.getMessage());
+                    RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                    view.forward(request, response);
+                }
+
+                request.setAttribute("msg", "Успешен запис");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
             }
-
-            UserServer userServer = new UserServer(new Insured(firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt), EGN, postCode, country,
-                    city, address, phoneNumber, email));
-            userServer.createUser();
-
-            request.setAttribute("msg", "Успешен запис");
-            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-            view.forward(request, response);
         }
         else {
             request.setAttribute("msg", "Моля въведете еднакви пароли!");

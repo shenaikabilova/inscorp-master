@@ -25,14 +25,20 @@ public class DeleteInsured extends HttpServlet{
         request.setCharacterEncoding("UTF-8");
 
         String egn = request.getParameter("clientEGN");
-        Insured insured = new Insured();
-        insured.setEgn(egn);
-        InsuredServer insuredServer = new InsuredServer(insured);
-        insured.setId(insuredServer.loadByEgn().getId());
-        insuredServer.delete();
+        if(egn.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            Insured insured = new Insured();
+            insured.setEgn(egn);
+            InsuredServer insuredServer = new InsuredServer(insured);
+            insured.setId(insuredServer.loadByEgn().getId());
+            insuredServer.delete();
 
-        request.setAttribute("msg", "Успешно изтриване");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-        view.forward(request, response);
+            request.setAttribute("msg", "Успешно изтриване");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        }
     }
 }

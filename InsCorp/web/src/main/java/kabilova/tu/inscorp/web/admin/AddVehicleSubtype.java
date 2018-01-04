@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.admin;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
@@ -27,35 +28,58 @@ public class AddVehicleSubtype extends HttpServlet{
         request.setCharacterEncoding("UTF-8");
 
         int vehicleTypeID = Integer.parseInt(request.getParameter("vehicleType"));
-        String vehicleSubtypeID = request.getParameter("vehicleSubtype");
+        String newVehicleSubtype = request.getParameter("vehicleSubtype");
 
-        System.out.print(vehicleTypeID);
+        if(vehicleTypeID==0 || newVehicleSubtype.trim().equals("")) {
+            request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
+        } else {
+            VehicleType vehicleType = new VehicleType();
+            vehicleType.setId(vehicleTypeID);
+            VehicleSubtype vehicleSubtype = new VehicleSubtype();
+            vehicleSubtype.setVehicleType(vehicleType);
+            vehicleSubtype.setSubtype(newVehicleSubtype);
 
-        VehicleType vehicleType = new VehicleType();
-        vehicleType.setId(vehicleTypeID);
-        VehicleSubtype vehicleSubtype = new VehicleSubtype();
-        vehicleSubtype.setVehicleType(vehicleType);
-        vehicleSubtype.setSubtype(vehicleSubtypeID);
+            VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(vehicleSubtype);
+            try {
+                vehicleSubtypeServer.create();
+            } catch (InsCorpException e) {
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
 
-        VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(vehicleSubtype);
-        vehicleSubtypeServer.create();
+            TariffGO tariffGO = new TariffGO();
+            tariffGO.setVechileType(vehicleType);
+            tariffGO.setVehicleSubtype(vehicleSubtype);
+            TariffServer tariffGoServer = new TariffServer(tariffGO);
+            for (int i = 1; i <= 3; i++) {
+                tariffGO.setZone(i);
+                try {
+                    tariffGoServer.create();
+                } catch (InsCorpException e) {
+                    request.setAttribute("errmsg", e.getMessage());
+                    RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                    view.forward(request, response);
+                }
+            }
 
-        TariffGO tariffGO = new TariffGO();
-        tariffGO.setVechileType(vehicleType);
-        tariffGO.setVehicleSubtype(vehicleSubtype);
-        TariffServer tariffGoServer = new TariffServer(tariffGO);
-        for(int i=1; i<=3; i++) {
-            tariffGO.setZone(i);
-            tariffGoServer.create();
+            TariffKasko tariffKasko = new TariffKasko();
+            tariffKasko.setVechileType(vehicleType);
+            tariffKasko.setVehicleSubtype(vehicleSubtype);
+            TariffServer tariffKaskoServer = new TariffServer(tariffKasko);
+            try {
+                tariffKaskoServer.create();
+            } catch (InsCorpException e) {
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
+
+            request.setAttribute("errmsg", "Успешен запис!");
+            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            view.forward(request, response);
         }
-
-        TariffKasko tariffKasko = new TariffKasko();
-        tariffKasko.setVechileType(vehicleType);
-        tariffKasko.setVehicleSubtype(vehicleSubtype);
-        TariffServer tariffKaskoServer = new TariffServer(tariffKasko);
-        tariffKaskoServer.create();
-        request.setAttribute("errmsg", "Успешен запис!");
-        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-        view.forward(request,response);
     }
 }

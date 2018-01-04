@@ -25,14 +25,20 @@ public class DeleteVehicle extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String regNum = request.getParameter("regNum");
-        Vehicle vehicle = new Vehicle();
-        vehicle.setRegNum(regNum);
-        VehicleServer vehicleServer = new VehicleServer(vehicle);
-        vehicle.setVehicleID(vehicleServer.loadVehicle().getVehicleID());
-        vehicleServer.delete();
+        if(regNum.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
+            Vehicle vehicle = new Vehicle();
+            vehicle.setRegNum(regNum);
+            VehicleServer vehicleServer = new VehicleServer(vehicle);
+            vehicle.setVehicleID(vehicleServer.loadVehicle().getVehicleID());
+            vehicleServer.delete();
 
-        request.setAttribute("msg", "Успешно изтриване");
-        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-        view.forward(request, response);
+            request.setAttribute("msg", "Успешно изтриване");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        }
     }
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by ShenaiKabilova
  */
-@WebServlet("/loadInsuredForUpdate")
+//@WebServlet("/loadInsuredForUpdate")
 public class LoadInsuredForUpdate extends HttpServlet{
     public void init() throws ServletException {
         super.init();
@@ -23,12 +23,19 @@ public class LoadInsuredForUpdate extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchByEgn = request.getParameter("clientEGN");
 
-        Insured insured = new Insured();
-        insured.setEgn(searchByEgn);
-        InsuredServer insuredServer = new InsuredServer(insured);
+        if(searchByEgn.trim().equals("")) {
+            request.setAttribute("msg", "Моля, попълнете всички полета!");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+            view.forward(request, response);
+        } else {
 
-        request.setAttribute("result", insuredServer.loadByEgn());
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/insurer/updateInsured.jsp");
-        rd.forward(request, response);
+            Insured insured = new Insured();
+            insured.setEgn(searchByEgn);
+            InsuredServer insuredServer = new InsuredServer(insured);
+
+            request.setAttribute("result", insuredServer.loadByEgn());
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("insurer/updateInsured.jsp");
+            rd.forward(request, response);
+        }
     }
 }

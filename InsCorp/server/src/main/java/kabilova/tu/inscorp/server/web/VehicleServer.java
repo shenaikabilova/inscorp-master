@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.server.web;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.VehicleDaoImpl;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscporp.bl.user.VehicleEP;
@@ -20,7 +21,7 @@ public class VehicleServer {
         vehicleEP = new VehicleEP(vehicle, new VehicleDaoImpl());
     }
 
-    public void create() { vehicleEP.create(); }
+    public void create() throws InsCorpException { vehicleEP.create(); }
 
     public List<Vehicle> read() { return vehicleEP.read(); }
 

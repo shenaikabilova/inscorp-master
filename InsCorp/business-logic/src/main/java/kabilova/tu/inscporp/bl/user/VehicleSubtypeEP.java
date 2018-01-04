@@ -1,5 +1,6 @@
 package kabilova.tu.inscporp.bl.user;
 
+import exception.InsCorpException;
 import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 
@@ -17,7 +18,7 @@ public class VehicleSubtypeEP {
         this.dao = dao;
     }
 
-    public void create() {
+    public void create() throws InsCorpException{
         dao.create(vehicleSubtype);
     }
 
