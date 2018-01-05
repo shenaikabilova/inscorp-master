@@ -1,16 +1,8 @@
 package kabilova.tu.inscorp.server.rest;
 
-import kabilova.tu.inscorp.dao.PolicyDao;
-import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
-import kabilova.tu.inscorp.model.policy.Policy;
-import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
-import kabilova.tu.inscorp.model.vehicle.VehicleType;
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
 
 /**
  * Created by ShenaiKabilova

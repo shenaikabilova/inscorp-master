@@ -1,15 +1,6 @@
-import exception.InsCorpException;
-import kabilova.tu.inscorp.dao.UserDao;
-import kabilova.tu.inscorp.daoimp.test.db.HibernateUtilTest;
-import kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl;
-import kabilova.tu.inscorp.model.user.Admin;
-import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.bl.mail.daoimp.test.db.HibernateUtilTest;
 import kabilova.tu.inscorp.model.user.Insurer;
-import kabilova.tu.inscorp.model.user.User;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;
 import org.junit.Before;

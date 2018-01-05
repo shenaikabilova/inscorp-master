@@ -1,9 +1,9 @@
 package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.TariffDao;
-import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.tariff.TariffGO;
+import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import org.hibernate.HibernateException;

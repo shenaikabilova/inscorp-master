@@ -1,6 +1,5 @@
 package kabilova.tu.inscorp.model.tariff;
 
-import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 

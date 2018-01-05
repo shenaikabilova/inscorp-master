@@ -1,8 +1,6 @@
 package kabilova.tu.inscorp.web.admin;
 
 import kabilova.tu.inscorp.model.user.Admin;
-import kabilova.tu.inscorp.model.user.Insurer;
-import kabilova.tu.inscorp.model.user.User;
 import kabilova.tu.inscorp.server.web.UserServer;
 
 import javax.servlet.RequestDispatcher;

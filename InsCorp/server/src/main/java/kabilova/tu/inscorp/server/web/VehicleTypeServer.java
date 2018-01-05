@@ -1,10 +1,9 @@
 package kabilova.tu.inscorp.server.web;
 
-import exception.InsCorpException;
-import kabilova.tu.inscorp.dao.CrudDao;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.VehicleTypeDaoImpl;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
-import kabilova.tu.inscporp.bl.user.VehicleTypeEP;
+import kabilova.tu.inscorp.bl.user.VehicleTypeEP;
 
 import java.util.List;
 

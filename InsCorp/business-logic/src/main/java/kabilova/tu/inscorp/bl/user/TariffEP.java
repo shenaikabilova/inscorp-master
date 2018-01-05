@@ -1,6 +1,6 @@
-package kabilova.tu.inscporp.bl.user;
+package kabilova.tu.inscorp.bl.user;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.dao.TariffDao;
 import kabilova.tu.inscorp.model.tariff.Tariff;
 

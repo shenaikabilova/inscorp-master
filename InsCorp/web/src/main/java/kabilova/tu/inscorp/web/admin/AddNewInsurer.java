@@ -1,7 +1,7 @@
 package kabilova.tu.inscorp.web.admin;
 
-import exception.InsCorpException;
-import kabilova.tu.inscorp.SendMail;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
+import kabilova.tu.inscorp.bl.mail.SendMail;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
 

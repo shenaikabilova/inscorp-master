@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp;
+package kabilova.tu.inscorp.bl.mail;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -15,8 +15,8 @@ public class SendMail {
      * @param email string field contains email
      */
     public void sendMail (int user, String pass, String email) {
-        final String userName = "shenaikabilova93@gmail.com";
-        final String password = "sheni412";
+        final String userName = "mail";
+        final String password = "pass";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

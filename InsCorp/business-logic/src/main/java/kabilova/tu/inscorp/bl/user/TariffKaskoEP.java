@@ -1,7 +1,6 @@
-package kabilova.tu.inscporp.bl.user;
+package kabilova.tu.inscorp.bl.user;
 
 import kabilova.tu.inscorp.dao.TariffDao;
-import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import kabilova.tu.inscorp.SendMail;
+import kabilova.tu.inscorp.bl.mail.SendMail;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
 

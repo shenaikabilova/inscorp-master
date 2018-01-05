@@ -1,10 +1,9 @@
 package kabilova.tu.inscorp.web.admin;
 
-import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
-import kabilova.tu.inscorp.model.vehicle.VehicleType;
 import kabilova.tu.inscorp.server.web.TariffServer;
+import kabilova.tu.inscorp.model.vehicle.VehicleType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;

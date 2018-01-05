@@ -1,8 +1,7 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import kabilova.tu.inscorp.model.policy.GO;
-import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.server.web.PolicyServer;
+import kabilova.tu.inscorp.model.policy.GO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;

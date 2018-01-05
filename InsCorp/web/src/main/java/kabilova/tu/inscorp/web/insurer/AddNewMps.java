@@ -1,11 +1,11 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
-import kabilova.tu.inscorp.model.vehicle.VehicleType;
 import kabilova.tu.inscorp.server.web.VehicleServer;
+import kabilova.tu.inscorp.model.vehicle.VehicleType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

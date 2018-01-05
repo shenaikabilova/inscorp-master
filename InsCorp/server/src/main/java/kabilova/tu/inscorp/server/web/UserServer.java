@@ -1,10 +1,10 @@
 package kabilova.tu.inscorp.server.web;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
-import kabilova.tu.inscporp.bl.user.UserEP;
+import kabilova.tu.inscorp.bl.user.UserEP;
 
 import java.util.List;
 

@@ -1,10 +1,8 @@
 package kabilova.tu.inscorp.daoimpl.hb;
 
-import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.dao.VehicleDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscorp.model.user.User;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

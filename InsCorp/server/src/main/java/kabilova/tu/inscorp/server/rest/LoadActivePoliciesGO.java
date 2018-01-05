@@ -4,18 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
+import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Policy;
-import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscporp.bl.user.PolicyEP;
-import org.codehaus.jettison.json.JSONException;
+import kabilova.tu.inscorp.bl.user.PolicyEP;
 
 import javax.ws.rs.*;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

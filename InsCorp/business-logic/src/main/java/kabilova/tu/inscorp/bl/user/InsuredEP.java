@@ -1,4 +1,4 @@
-package kabilova.tu.inscporp.bl.user;
+package kabilova.tu.inscorp.bl.user;
 
 import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.model.user.Insured;

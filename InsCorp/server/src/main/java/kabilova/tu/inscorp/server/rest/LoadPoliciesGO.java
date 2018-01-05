@@ -8,7 +8,7 @@ import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscporp.bl.user.PolicyEP;
+import kabilova.tu.inscorp.bl.user.PolicyEP;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;

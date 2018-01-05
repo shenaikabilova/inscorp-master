@@ -1,14 +1,14 @@
 package kabilova.tu.inscorp.daoimpl.hb;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.dao.UserDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
 import kabilova.tu.inscorp.model.user.Insured;
+import kabilova.tu.inscorp.model.user.User;
 import kabilova.tu.inscorp.model.user.Insurer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import kabilova.tu.inscorp.model.user.User;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package exception;
+package kabilova.tu.inscorp.model.exception;
 
 /**
  * Created by ShenaiKabilova

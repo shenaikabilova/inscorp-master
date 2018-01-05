@@ -1,6 +1,5 @@
 package kabilova.tu.inscorp.dao;
 
-import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;

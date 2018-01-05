@@ -2,9 +2,6 @@ package kabilova.tu.inscorp.model.tariff;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import kabilova.tu.inscorp.model.user.Admin;
-import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 

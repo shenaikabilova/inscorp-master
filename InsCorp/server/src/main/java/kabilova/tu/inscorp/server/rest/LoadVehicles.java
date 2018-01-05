@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import kabilova.tu.inscorp.daoimpl.hb.VehicleDaoImpl;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
-import kabilova.tu.inscporp.bl.user.VehicleEP;
+import kabilova.tu.inscorp.bl.user.VehicleEP;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;

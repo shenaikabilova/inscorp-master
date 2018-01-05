@@ -1,4 +1,4 @@
-package kabilova.tu.inscorp.daoimp.test.db;
+package kabilova.tu.inscorp.bl.mail.daoimp.test.db;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

@@ -1,6 +1,6 @@
 package kabilova.tu.inscorp.dao;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 
 import java.util.List;
 

@@ -3,16 +3,11 @@ package kabilova.tu.inscorp.model.policy;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import kabilova.tu.inscorp.model.user.Admin;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
-import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 
 import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * Created by ShenaiKabilova

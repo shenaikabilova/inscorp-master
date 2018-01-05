@@ -1,11 +1,9 @@
 package kabilova.tu.inscorp.server.web;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.daoimpl.hb.TariffDaoImpl;
 import kabilova.tu.inscorp.model.tariff.Tariff;
-import kabilova.tu.inscorp.model.tariff.TariffGO;
-import kabilova.tu.inscorp.model.tariff.TariffKasko;
-import kabilova.tu.inscporp.bl.user.TariffEP;
+import kabilova.tu.inscorp.bl.user.TariffEP;
 
 import java.util.List;
 

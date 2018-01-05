@@ -1,11 +1,10 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.server.web.InsuredServer;
+import kabilova.tu.inscorp.model.user.Insured;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

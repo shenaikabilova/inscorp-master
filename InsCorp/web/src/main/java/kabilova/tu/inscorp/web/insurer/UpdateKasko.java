@@ -1,9 +1,8 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
-import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.server.web.PolicyServer;

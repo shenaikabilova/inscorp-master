@@ -1,6 +1,6 @@
-package kabilova.tu.inscporp.bl.user;
+package kabilova.tu.inscorp.bl.user;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.dao.PolicyDao;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;

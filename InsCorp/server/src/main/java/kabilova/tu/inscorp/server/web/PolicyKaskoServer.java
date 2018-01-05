@@ -3,7 +3,7 @@ package kabilova.tu.inscorp.server.web;
 import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
 import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.user.Insurer;
-import kabilova.tu.inscporp.bl.user.PolicyEP;
+import kabilova.tu.inscorp.bl.user.PolicyEP;
 
 import java.util.List;
 

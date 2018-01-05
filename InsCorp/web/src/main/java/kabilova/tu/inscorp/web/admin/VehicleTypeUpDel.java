@@ -1,9 +1,9 @@
 package kabilova.tu.inscorp.web.admin;
 
+import kabilova.tu.inscorp.server.web.VehicleTypeServer;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 import kabilova.tu.inscorp.server.web.VehicleServer;
-import kabilova.tu.inscorp.server.web.VehicleTypeServer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

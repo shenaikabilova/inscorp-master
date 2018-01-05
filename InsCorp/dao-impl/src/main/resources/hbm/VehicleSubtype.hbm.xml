@@ -9,7 +9,7 @@
             <generator class="increment"/>
         </id>
 
-        <!--<one-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" access="property"/>-->
+        <!--<one-to-one name="vehicleType" class="VehicleType" access="property"/>-->
         <many-to-one name="vehicleType" class="kabilova.tu.inscorp.model.vehicle.VehicleType" column="IDVEHICLE"/>
         <property name="subtype" column="SUBTYPE" type="string" access="property"/>
     </class>

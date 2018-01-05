@@ -1,9 +1,9 @@
 package kabilova.tu.inscorp.dao;
 
+import kabilova.tu.inscorp.model.user.User;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.policy.Policy;
-import kabilova.tu.inscorp.model.user.User;
 
 import java.util.Calendar;
 import java.util.List;

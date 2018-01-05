@@ -2,12 +2,12 @@ package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.PolicyDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
-import kabilova.tu.inscorp.model.policy.GO;
-import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.user.User;
+import kabilova.tu.inscorp.model.policy.GO;
+import kabilova.tu.inscorp.model.policy.Kasko;
+import kabilova.tu.inscorp.model.user.Insurer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;

@@ -1,6 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
-import exception.InsCorpException;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.server.web.UserServer;
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kabilova.tu.inscorp.daoimpl.hb.UserDaoImpl;
 import kabilova.tu.inscorp.model.user.Insured;
-import kabilova.tu.inscporp.bl.user.UserEP;
+import kabilova.tu.inscorp.bl.user.UserEP;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
