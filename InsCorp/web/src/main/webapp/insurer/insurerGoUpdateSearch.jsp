@@ -85,7 +85,7 @@
 
 <div class="searchGOUpdate">
     <div class="shell">
-        <form action="/searchGOUpdate" method="get">
+        <form action="/searchGOUpdate" method="post">
             <div class="form-section">
                 <div class="form-row">
                     <h3>Търсене на полица по застраховка "Гражданска отговорност"</h3>

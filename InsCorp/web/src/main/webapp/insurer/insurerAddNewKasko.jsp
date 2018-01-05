@@ -99,82 +99,116 @@
         <h3>Сключване на застраховка "Каско"</h3>
         <form action="/addNewKasko" method="post">
             <div class="form-section">
-                <div class="form-section">
-                    <h4>Застрахователна полица ГО на МПС</h4>
-                    <div class="form-row">
-                        <label>№ на полица</label>
-                        <%
-                            PolicyServer policyServer = new PolicyServer(new Kasko());
-                            String policyLastID = policyServer.getLastPolicyID();
-                            int countZeros=0;
-                            int max=0;
-                            for(int i=0; i<policyLastID.length(); i++) {
-                                char c = policyLastID.charAt(i);
-                                if(c == '0') {
-                                    countZeros++;
-                                    max=countZeros;
-                                }
-                                else countZeros=0;
+                <h4>Застрахователна полица Каско на МПС</h4>
+                <div class="form-row">
+                    <%
+                        PolicyServer policyServer = new PolicyServer(new Kasko());
+                        String policyLastID = policyServer.getLastPolicyID();
+                        int countZeros=0;
+                        int max=0;
+                        for(int i=0; i<policyLastID.length(); i++) {
+                            char c = policyLastID.charAt(i);
+                            if(c == '0') {
+                                countZeros++;
+                                max=countZeros;
                             }
-                            int i = Integer.parseInt(policyLastID);
-                            i++;
-                            max = max + String.valueOf(i).length();
-                            String newPolicyID = String.format("%0"+max+"d", i);
-                        %>
-                        <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6"
-                               value=<%=newPolicyID%> readonly>
+                            else countZeros=0;
+                        }
+                        int i = Integer.parseInt(policyLastID);
+                        i++;
+                        max = max + String.valueOf(i).length();
+                        String newPolicyID = String.format("%0"+max+"d", i);
+                    %>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>№ на полица</label>
+                        <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6" value=<%=newPolicyID%> readonly>
                     </div>
-                    <div class="form-row">
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
                         <label>Застраховател ID</label>
-                        <input type="text" id="insID" name="insID" value=<%=id%>>
+                        <input type="text" class="field" id="insID" name="insID" value=<%=id%>>
+                    </div>
+                    <div class="form-row-inner">
                         <label>Застраховател</label>
                         <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
                     </div>
                 </div>
-                <div class="form-section">
-                    <h4>Застрахован</h4>
-
-                    <% Vehicle vehicle = (Vehicle) request.getAttribute("result");
-                        TariffKasko tariffKasko = (TariffKasko) request.getAttribute("tariff");
-                    %>
-                    <label>ID</label>
-                    <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>
-                            <div class="form-row">
-                    <label>Собственик</label>
-                    <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50">
-                    <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="30" maxlength="50">
-                    <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
+            </div>
+            <div class="form-section">
+                <h4>Застрахован</h4>
+                <% Vehicle vehicle = (Vehicle) request.getAttribute("result");
+                    TariffKasko tariffKasko = (TariffKasko) request.getAttribute("tariff");
+                %>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>>
+                    </div>
                 </div>
                 <div class="form-row">
-                    <label>ЕГН</label>
-                    <input type="text" id="EGN" class="field" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
+                    <div class="form-row-inner">
+                        <label>Собственик</label>
+                        <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
+                    </div>
                 </div>
-                <input type="text" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> maxlength="50"><br>
-                <div class="form-row-inner">
-                    <label >Пощенски код</label>
-                    <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%> size="20" maxlength="4">
-                </div>
-                <label>Град/Село</label>
-                <input type="text" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> maxlength="50">
-                <label>Адрес</label>
-                <input type="text" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
-
                 <div class="form-row">
-                    <label>Мобилен телефон</label>
-                    <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> size="30" maxlength="10">
+                    <div class="form-row-inner">
+                        <label>ЕГН</label>
+                        <input type="text" id="EGN" class="field" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
+                    </div>
                 </div>
-
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Държава</label>
+                        <input type="text" class="field" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> maxlength="50"><br>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label >Пощенски код</label>
+                        <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%> size="20" maxlength="4">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Град/Село</label>
+                        <input type="text" class="field" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> maxlength="50">
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Адрес</label>
+                        <input type="text" class="field" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Мобилен телефон</label>
+                        <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> size="30" maxlength="10">
+                    </div>
+                </div>
             </div>
             <div class="form-section">
                 <h4>Данни за МПС</h4>
-                <label>МПС - id</label>
-                <input type="text" id="vehicleID" name="vehicleID" value=<%=vehicle.getVehicleID()%>>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>МПС - id</label>
+                        <input type="text" class="field" id="vehicleID" name="vehicleID" value=<%=vehicle.getVehicleID()%>>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="registrationNumber">Регистрационен №</label>
-                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" value=<%=vehicle.getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
+                        <input type="text" class="field" id="registrationNumber" class="field" name="registrationNumber" value=<%=vehicle.getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
                     </div>
-
+                    <div class="form-row-inner">
+                        <label>Град</label>
+                        <input type="text" class="field" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%>>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-row-inner">
                         <label for="zone">Зона</label>
                         <select id="zone" class="field" name="zone" onchange="sum();">
@@ -184,7 +218,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="vehicleType">Вид МПС</label>
@@ -192,21 +225,19 @@
                             <option value=<%=vehicle.getVehicleType().getId()%>><%=vehicle.getVehicleType().getVehicleType()%></option>
                         </select>
                     </div>
-                    <div class="form-row-inner">
-                        <label>Кубици</label>
+                <div class="form-row-inner">
+                    <label>Подтип</label>
                         <select id="vehicleSubtype" class="field" name="vehicleSubtype">
                             <option value=<%=vehicle.getVehicleSubtype().getId()%>><%=vehicle.getVehicleSubtype().getSubtype()%></option>
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Рама №</label>
                         <input type="text" class="field" name="ramaN" value=<%=vehicle.getRAMA()%> size="30" maxlength="17">
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Марка</label>
@@ -218,7 +249,6 @@
                         <label>Модел</label>
                         <input type="text" class="field" name="vehicleModel" value=<%=vehicle.getModel()%> size="30" maxlength="50">
                     </div>
-
                     <div class="form-row-inner">
                     <label>Двигател</label>
                         <select id="engine" name="engine">
@@ -229,19 +259,18 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <label>Дата на сключване</label>
-                </div>
+            </div>
+            <div class="form-section">
+                <h4>Дата на сключване</h4>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Начало</label>
                         <input class="field" type="text" placeholder="Начална дата" id="datepicker1" name="fromDate">
                     </div>
-                    <div class="form-row-inner">
-                        <label>Край</label>
-                        <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate">
-                    </div>
+                <div class="form-row-inner">
+                    <label>Край</label>
+                    <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate">
+                </div>
                 </div>
                 <div class="form-row">
                     <label>Срок</label>
@@ -250,43 +279,61 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-section">
-                <label>Тарифа ID</label>
-                <input type="text" id="tariffID" name="tariffID" value=<%=tariffKasko.getTariffID()%>>
-                <label>Оценка на МПС</label>
-                <input type="text" id="vehicleValue" name="vehicleValue" placeholder="Оценка на МПС"
-                       onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
-                <label>Тип Каско</label>
-                <select id="kaskoType" name="kaskoType">
-                    <option>Пълно Каско</option>
-                    <option>Каско тип А</option>
-                    <option>Каско тип Б</option>
-                </select>
+                <h4>Данни по полицата</h4>
                 <div class="form-row">
-                    <label>Отстъпки</label>
-                    <input
-                            onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
-                            class="field" id="insOtstapki" type="text" name="insOtstapki" value="0">
+                    <div class="form-row-inner">
+                        <label>Тарифа ID</label>
+                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=tariffKasko.getTariffID()%>>
+                    </div>
                 </div>
                 <div class="form-row">
-                    <label>Надбавки</label>
-                    <input
-                            onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
-                            class="field" id=insNadbavki type="text" name="insNadbavki" value="0">
+                    <div class="form-row-inner">
+                        <label>Оценка на МПС</label>
+                        <input type="text" class="field" id="vehicleValue" name="vehicleValue" placeholder="Оценка на МПС"
+                               onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
+                    </div>
                 </div>
                 <div class="form-row">
-                    <label>Застрахователен %</label>
-                    <input class="field" id="kaskoPercent" type="text" name="kaskoPercent" value=<%=tariffKasko.getKaskoPercent()%> readonly
-                           onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
+                    <div class="form-row-inner">
+                        <label>Тип Каско</label>
+                        <select class="field" id="kaskoType" name="kaskoType">
+                            <option>Пълно Каско</option>
+                            <option>Каско тип А</option>
+                            <option>Каско тип Б</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-row">
-                    <label>Застрахователна премия</label>
-                    <input class="field" id="value" type="text" name="value" readonly>
+                    <div class="form-row-inner">
+                        <label>Отстъпки</label>
+                        <input onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                                class="field" id="insOtstapki" type="text" name="insOtstapki" value="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Надбавки</label>
+                        <input onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                                class="field" id=insNadbavki type="text" name="insNadbavki" value="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Застрахователен %</label>
+                        <input class="field" id="kaskoPercent" type="text" name="kaskoPercent" value=<%=tariffKasko.getKaskoPercent()%> readonly
+                               onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Застрахователна премия</label>
+                        <input class="field" id="value" type="text" name="value" readonly>
+                    </div>
                 </div>
             </div>
-
             <input type="submit" value="Сключи застраховка">
+        </div>
         </form>
     </div>
 </div>

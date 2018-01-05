@@ -90,58 +90,74 @@
 
 <div class="adminpanelSettings">
     <div class="shell">
+        <h3>Настройки на застраховател</h3>
         <form action="/updateInsurer" method="post">
-            <table width="100%">
-                <%
-                    Insurer insurer = (Insurer) request.getAttribute("result");
-                %>
-                <tr>
-                    <td><h3>Настройки на застраховател</h3></td>
-                </tr>
-                <tr>
-                    <td>ID</td>
-                    <td><input type="text" class="field" name="id" size="30" value=<%=insurer.getId()%> readonly="readonly"></td>
-                </tr>
-                <tr>
-                    <td><label>Служебен №</label></td>
-                    <td><input type="text" class="field" name="insurerID" size="30" value=<%=insurer.getInsurerID()%> readonly="readonly"></td>
-                <tr>
-                    <td><label>Име</label></td>
-                    <td><input type="text" class="field" name="insurerFirstName" value=<%=insurer.getFirstName()%> maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Презиме</label></td>
-                    <td><input type="text" id="secondName" name="insurerSecondName" value=<%=insurer.getSecondName()%> size="50" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Фамилия</label></td>
-                    <td><input type="text" class="field" name="insurerLastName" value=<%=insurer.getLastName()%> size="30" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Потребителско име</label></td>
-                    <td><input type="text" id="username" name="username" value=<%=insurer.getUsername()%> maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Парола</label></td>
-                    <td><input type="password" class="field" name="password1" size="30" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Повторете парола</label></td>
-                    <td><input type="password" class="field" name="password2" placeholder="Повторете паролата" size="30" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td><label>Телефонен №</label></td>
-                    <td><input type="text" id="phoneNumber" name="phoneNumber" value=<%=insurer.getPhoneNumber()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Е-майл</label></td>
-                    <td><input id="e-mail" type="text" class="field" name="e-mail"  value=<%=insurer.getEmail()%> size="30" onchange="validateEmail();" maxlength="100"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Промени"></td>
-                </tr>
-            </table>
+        <%
+            Insurer insurer = (Insurer) request.getAttribute("result");
+        %>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" name="id" size="30" value=<%=insurer.getId()%> readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Служебен №</label>
+                        <input type="text" class="field" name="insurerID" size="30" value=<%=insurer.getInsurerID()%> readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Име</label>
+                        <input type="text" class="field" name="insurerFirstName" value=<%=insurer.getFirstName()%> maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Презиме</label>
+                        <input type="text" class="field" id="secondName" name="insurerSecondName" value=<%=insurer.getSecondName()%> size="50" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Фамилия</label>
+                        <input type="text" class="field" name="insurerLastName" value=<%=insurer.getLastName()%> size="30" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Потребителско име</label>
+                        <input type="text" class="field" id="username" name="username" value=<%=insurer.getUsername()%> maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Парола</label>
+                        <input type="password" class="field" name="password1" size="30" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Повторете парола</label>
+                        <input type="password" class="field" name="password2" placeholder="Повторете паролата" size="30" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Телефонен №</label>
+                        <input type="text" class="field" id="phoneNumber" name="phoneNumber" value=<%=insurer.getPhoneNumber()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Е-майл</label>
+                        <input id="e-mail" type="text" class="field" name="e-mail"  value=<%=insurer.getEmail()%> size="30" onchange="validateEmail();" maxlength="100">
+                    </div>
+                </div>
+                <input type="submit" value="Промени">
+            </div>
         </form>
     </div>
 </div>

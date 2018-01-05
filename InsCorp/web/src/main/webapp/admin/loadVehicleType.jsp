@@ -76,21 +76,24 @@
     </ul>
 </div>
 
-<form>
-    <table border="1">
-        <th>Тип МПС</th>
+<div class="viewInsurers shell">
+    <h3>Типове МПС</h3>
+    <form>
+        <table border="1">
+            <th>Тип МПС</th>
 
-        <%
-            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer(new VehicleType());
-            for(VehicleType vehicleType : vehicleTypeServer.read()) {
-        %>
+            <%
+                VehicleTypeServer vehicleTypeServer = new VehicleTypeServer(new VehicleType());
+                for(VehicleType vehicleType : vehicleTypeServer.read()) {
+            %>
 
-        <tr>
-            <td><%=vehicleType.getVehicleType()%></td>
-        </tr>
+            <tr>
+                <td><%=vehicleType.getVehicleType()%></td>
+            </tr>
 
-        <% } %>
-    </table>
-</form>
+            <% } %>
+        </table>
+    </form>
+</div>
 </body>
 </html>

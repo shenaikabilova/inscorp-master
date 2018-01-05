@@ -1,6 +1,5 @@
-package kabilova.tu.inscorp.web.admin;
+package kabilova.tu.inscorp.web.insurer;
 
-import exception.InsCorpException;
 import kabilova.tu.inscorp.SendMail;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
@@ -20,8 +19,8 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by ShenaiKabilova
  */
-@WebServlet("/adminPanelAddInsurer")
-public class AddNewInsurer extends HttpServlet{
+@WebServlet("/insurerSettingsUpdate")
+public class InsurerSettingsUpdate extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
     }
@@ -32,6 +31,7 @@ public class AddNewInsurer extends HttpServlet{
         String pass1 = request.getParameter("password1");
         String pass2 = request.getParameter("password2");
         if(pass1.equals(pass2)) {
+            int id = Integer.parseInt(request.getParameter("insID"));
             int insurerID = Integer.parseInt(request.getParameter("insurerID"));
             String firstName = request.getParameter("insurerFirstName");
             String secondName = request.getParameter("insurerSecondName");
@@ -40,10 +40,10 @@ public class AddNewInsurer extends HttpServlet{
             String phoneNumber = request.getParameter("phoneNumber");
             String email = request.getParameter("e-mail");
 
-            if (insurerID == 0 || firstName.trim().equals("") || secondName.trim().equals("") || lastName.trim().equals("") ||
+            if (id==0 || insurerID == 0 || firstName.trim().equals("") || secondName.trim().equals("") || lastName.trim().equals("") ||
                     username.trim().equals("") || phoneNumber.trim().equals("") || email.trim().equals("")) {
                 request.setAttribute("errmsg", "Моля, попълнете всички полета!");
-                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             } else {
                 MessageDigest m;
@@ -57,29 +57,21 @@ public class AddNewInsurer extends HttpServlet{
                     e1.printStackTrace();
                 }
 
-                UserServer userServer = new UserServer(new Insurer(insurerID, firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt),
+                UserServer userServer = new UserServer(new Insurer(id, insurerID, firstName, secondName, lastName, username, String.format("%1$032x", passEncrypt),
                         phoneNumber, email));
-                try {
-                    userServer.createUser();
-                } catch (InsCorpException e) {
-                    request.setAttribute("errmsg", "Неуспешен запис: " + e.getMessage() + " Проверете стойностите на полетата: " +
-                            "служебен №, телефонен номер и/или имейл адрес.");
-                    RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-                    view.forward(request, response);
-                }
+                    userServer.update();
 
-            SendMail sendMail = new SendMail();
-            sendMail.sendMail(insurerID, pass1, email);
+                SendMail sendMail = new SendMail();
+                sendMail.sendMail(insurerID, pass1, email);
 
                 request.setAttribute("errmsg", "Успешен запис!");
-//            response.sendRedirect("admin/AdminPanelMsg.jsp");
-                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             }
         }
         else{
             request.setAttribute("errmsg", "Моля въведете еднакви пароли!");
-            RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
             view.forward(request, response);
         }
     }

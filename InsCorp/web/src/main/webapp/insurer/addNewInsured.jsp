@@ -9,18 +9,6 @@
 <html>
 <head>
     <%
-        //            String userName = null;
-//            Cookie[] cookies = request.getCookies();
-//            if(cookies != null) {
-//                for(Cookie cookie: cookies) {
-//                    if(cookie.getName().equals("user")) {
-//                        userName = cookie.getValue();
-//                    }
-//                }
-//            }
-//            if(userName == null) {
-//                response.sendRedirect("login.jsp");
-//            }
         String username = null;
         String password = null;
         if(!request.getSession().isNew()) {
@@ -95,71 +83,93 @@
 
 <div class="addInsured">
     <div class="shell">
+        <h3>Добавяне на нов клиент</h3>
         <form action="/addNewInsured" method="post">
-            Добавяне на нов клиент<br>
-            <label>Име</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Име" maxlength="50">
-            <label>Презиме</label>
-            <input type="text" id="secondName" name="secondName" placeholder="Презиме" maxlength="50">
-            <label>Фамилия</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Фамилия" maxlength="50"><br>
-
-            <label>Потребителско име</label>
-            <input type="text" id="username" name="username" placeholder="Потребителско име" maxlength="50">
-            <label>Парола</label>
-            <input type="password" id="pass1" name="pass1" placeholder="Парола" maxlength="50">
-            <label>Повторете парола</label>
-            <input type="password" id="pass2" name="pass2" placeholder="Повторете парола" maxlength="50">
-
-            <label>ЕГН</label>
-            <input type="number" id="EGN" name="EGN" placeholder="ЕГН" maxlength="10">
-            <label>Пощенски код</label>
-            <input type="number" id="postCode" name="postCode" placeholder="ПК">
-            <label>Държава</label>
-            <input type="text" id="country" name="country" placeholder="Държава" maxlength="50"><br>
-
-            <label>Град/Село</label>
-            <input type="text" id="city" name="city" placeholder="Град/Село" maxlength="50">
-            <label>Адрес</label>
-            <input type="text" id="address" name="address" placeholder="ж.к./ул/бл/вх/ет/ап" maxlength="100">
-
-            <br>
-            <label>Телефонен №</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Телефон" maxlength="10">
-            <label>Е-майл</label>
-            <input type="text" id="email" name="email" placeholder="Е-майл" maxlength="50"/>
-            <br>
-
-            <input type="submit" value="Добави">
+            <div class="form-section">
+                <div class="form-section">
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Име</label>
+                            <input type="text" class="field" id="firstName" name="firstName" placeholder="Име" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Презиме</label>
+                            <input type="text" class="field" id="secondName" name="secondName" placeholder="Презиме" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Фамилия</label>
+                            <input type="text" class="field" id="lastName" name="lastName" placeholder="Фамилия" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Потребителско име</label>
+                            <input type="text" class="field" id="username" name="username" placeholder="Потребителско име" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Парола</label>
+                            <input type="password" class="field" id="pass1" name="pass1" placeholder="Парола" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Повторете парола</label>
+                            <input type="password" class="field" id="pass2" name="pass2" placeholder="Повторете парола" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>ЕГН</label>
+                            <input type="number" class="field" id="EGN" name="EGN" placeholder="ЕГН" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Пощенски код</label>
+                            <input type="number" class="field" id="postCode" name="postCode" placeholder="ПК">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Държава</label>
+                            <input type="text" class="field" id="country" name="country" placeholder="Държава" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Град/Село</label>
+                            <input type="text" class="field" id="city" name="city" placeholder="Град/Село" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Адрес</label>
+                            <input type="text" class="field" id="address" name="address" placeholder="ж.к./ул/бл/вх/ет/ап" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Телефонен №</label>
+                            <input type="text" class="field" id="phoneNumber" name="phoneNumber" placeholder="Телефон" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Е-майл</label>
+                            <input type="text" class="field" id="email" name="email" placeholder="Е-майл" maxlength="50"/>
+                        </div>
+                    </div>
+                <input type="submit" value="Добави">
+            </div>
+          </div>
         </form>
     </div>
 </div>
 </body>
-<head>
-    <%
-//        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) { response.sendRedirect("login.jsp");}
-        int id = 0;
-        String username = null;
-        String password = null;
-        if(!request.getSession().isNew()) {
-            id = Integer.parseInt(session.getAttribute("id").toString());
-            username = session.getAttribute("username").toString();
-            password = session.getAttribute("password").toString();
-        }
-        else {
-            response.sendRedirect("login.jsp");
-        }
-    %>
-    <title><%=username %></title>
-        <link href = "../style.css" type="text/css" rel = "stylesheet"/>
-</head>
 </html>

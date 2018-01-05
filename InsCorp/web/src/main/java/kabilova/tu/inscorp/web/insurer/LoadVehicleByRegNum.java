@@ -34,7 +34,7 @@ public class LoadVehicleByRegNum extends HttpServlet {
             vehicle.setRegNum(regNum);
             VehicleServer vehicleServer = new VehicleServer(vehicle);
             request.setAttribute("result", vehicleServer.loadVehicle());
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("insurer/updateVehicle.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("insurer/updateVehicle.jsp");
             rd.forward(request, response);
         }
     }

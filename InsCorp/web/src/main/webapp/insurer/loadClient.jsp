@@ -98,11 +98,21 @@
     </div>
 </div>
 
-<form action="/loadClient" method="post">
-    <label>Собственик</label><br>
-    <label>ЕГН</label>
-    <input type="number" name="searchEGN" placeholder="ЕГН" maxlength="10">
-    <input type="submit" value="Зареди клиент"><br>
-</form>
+<div>
+    <div class="shell">
+        <h3>Търсене на клиент</h3>
+        <form action="/loadClient" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ЕГН</label>
+                        <input type="number" name="searchEGN" placeholder="ЕГН" maxlength="10">
+                    </div>
+                </div>
+                <input type="submit" value="Зареди клиент">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

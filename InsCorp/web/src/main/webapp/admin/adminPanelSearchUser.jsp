@@ -87,16 +87,18 @@
     </ul>
 </div>
 
-
 <div class="updateUser">
     <div class="shell">
-        <form action="/searchUser" method="get">
+        <h3>Търсене на застрахователен агент</h3>
+        <form action="/searchUser" method="post">
             <div class="form-section">
                 <div class="form-row">
-                    <label>ID на застраховател</label>
-                    <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
-                    <input type="submit" value="Търсене" name="searchUser">
+                    <div class="form-row-inner">
+                        <label>Потребителско име</label>
+                        <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
+                    </div>
                 </div>
+                <input type="submit" value="Търсене" name="searchUser">
             </div>
         </form>
     </div>

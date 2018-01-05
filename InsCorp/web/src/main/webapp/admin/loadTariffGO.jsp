@@ -104,17 +104,29 @@
 
 <div>
    <div class="shell">
+       <h3>Зареди тарифа - "ГО"</h3>
        <form action="/loadTariffGO" method="post">
-           <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
-           <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
-           <select class="field" id="zone" name="zone">
-                <option value=1>Зона 1</option>
-                <option value=2>Зона 2</option>
-                <option value=3>Зона 3</option>
-            </select>
-
-        <input type="submit" value="Зареди тарифа">
-           </form>
+           <div class="form-section">
+               <div class="form-row">
+                   <div class="form-row-inner">
+                       <label>Тип МПС</label>
+                       <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
+                   </div>
+                   <div class="form-row-inner">
+                       <label>Подтип МПС</label>
+                       <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
+                   </div>
+                   <div class="form-row-inner">
+                       <select class="field" id="zone" name="zone">
+                            <option value=1>Зона 1</option>
+                            <option value=2>Зона 2</option>
+                            <option value=3>Зона 3</option>
+                        </select>
+                   </div>
+                </div>
+                <input type="submit" value="Зареди тарифа">
+           </div>
+       </form>
    </div>
 </div>
 </body>

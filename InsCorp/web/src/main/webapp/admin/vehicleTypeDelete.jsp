@@ -76,17 +76,29 @@
     </ul>
 </div>
 
-<form action="/vehicleTypeDelete" method="post">
-    <label>Въведи тип МПС</label>
-    <select class="field" id="vehicleType" name="vehicleType">
-        <option disabled="" selected="value"></option>
-            <%
-            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
-            for(VehicleType vehicleType : vehicleTypeServer.read()) {
-            %>
-            <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
-            <% } %>
-        <input type="submit" value="Изтрий">
-</form>
+<div>
+    <div class="shell">
+        <h3>Изтриване на тип МПС</h3>
+        <form action="/vehicleTypeDelete" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Въведи тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType">
+                            <option disabled="" selected="value"></option>
+                                <%
+                                VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
+                                for(VehicleType vehicleType : vehicleTypeServer.read()) {
+                                %>
+                                <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
+                                <% } %>
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" value="Изтрий">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

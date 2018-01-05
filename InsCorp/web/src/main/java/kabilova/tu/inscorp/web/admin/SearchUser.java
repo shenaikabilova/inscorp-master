@@ -24,7 +24,7 @@ public class SearchUser extends HttpServlet{
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
 
         if(username.trim().equals("")) {
@@ -36,11 +36,8 @@ public class SearchUser extends HttpServlet{
             insurer.setUsername(username);
             UserServer userServer = new UserServer(insurer);
 
-//            List<Insurer> result = new ArrayList<>();
-//            result.add((Insurer) userServer.loadByUsername());
-
             request.setAttribute("result", userServer.loadByUsername());
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("admin/adminPanelUpdateUser.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("admin/adminPanelUpdateUser.jsp");
             rd.forward(request, response);
         }
     }

@@ -83,12 +83,23 @@
     </div>
 </div>
 
-<form action="/changeOwner" method="post">
-<label>Регистрационен №</label>
-<input type="text" id="regNum" name="regNum">
-<label>ЕГН на собственик</label>
-<input type="text" id="egn" name="egn">
-<input type="submit" value="Запиши">
-</form>
+<div>
+    <div class="shell">
+        <h3>Смяна на собственик</h3>
+        <form action="/changeOwner" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Регистрационен №</label>
+                        <input type="text" class="field" id="regNum" name="regNum">
+                        <label>ЕГН на собственик</label>
+                        <input type="text" class="field" id="egn" name="egn">
+                    </div>
+                </div>
+            <input type="submit" value="Запиши">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -86,14 +86,21 @@
         </ul>
     </div>
 
-        <div>
-            <div class="shell">
-                <form action="/adminPanelAddVehicleType" method="post">
-                    <label>Тип МПС</label>
-                    <input type="text" name="vehicleType" placeholder="Тип МПС" maxlength="50">
-                    <input type="submit" value="Добави">
-                </form>
+<div>
+    <div class="shell">
+        <h3>Добавяне на тип МПС</h3>
+        <form action="/adminPanelAddVehicleType" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип МПС</label>
+                        <input type="text" name="vehicleType" placeholder="Тип МПС" maxlength="50">
+                    </div>
+                </div>
+                <input type="submit" value="Добави">
             </div>
-        </div>
-    </body>
+        </form>
+    </div>
+</div>
+</body>
 </html>

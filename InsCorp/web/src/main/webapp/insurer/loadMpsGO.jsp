@@ -82,10 +82,21 @@
     </div>
 </div>
 
-<form action="/loadMpsGO" method="post">
-    <label>Намери МПС</label><br>
-    <input type="text" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
-    <input type="submit" value="Зареди МПС"><br>
-</form>
+<div>
+    <div class="shell">
+        <h3>Намери МПС</h3><br>
+        <form action="/loadMpsGO" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Регистрационен №</label>
+                        <input type="text" class="field" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
+                    </div>
+                </div>
+                <input type="submit" value="Зареди МПС">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

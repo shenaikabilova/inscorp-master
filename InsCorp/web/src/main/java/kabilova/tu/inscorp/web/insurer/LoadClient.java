@@ -37,11 +37,10 @@ public class LoadClient extends HttpServlet {
             request.setAttribute("result", insuredServer.loadByEgn());
             RequestDispatcher rd = null;
             if(request.getServletPath().equals("/loadClient")) {
-                rd = getServletContext().getRequestDispatcher("insurer/addNewMPS.jsp");
-
+                rd = request.getRequestDispatcher("insurer/addNewMPS.jsp");
             }
             else if(request.getServletPath().equals("/loadInsuredForUpdate")) {
-                rd = getServletContext().getRequestDispatcher("insurer/updateInsured.jsp");
+                rd = request.getRequestDispatcher("insurer/updateInsured.jsp");
             }
             rd.forward(request, response);
         }

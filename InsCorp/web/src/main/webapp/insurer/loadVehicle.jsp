@@ -96,12 +96,18 @@
     </div>
 </div>
 <div>
-    <form action="/loadVehicleByRegNum" method="post">
-        <label>Намери МПС по регистрационен №</label>
-        <label>Регистрационен №</label>
-        <input type="text" id="regNum" name="regNum" placeholder="Регистрационен №">
-        <input type="submit" value="Намери">
+    <div class="shell">
+        <h3>Намери МПС по регистрационен №</h3>
+        <form action="/loadVehicleByRegNum" method="post">
+            <div class="form-row">
+                <div class="form-row-inner">
+                    <label>Регистрационен №</label>
+                    <input type="text" id="regNum" name="regNum" placeholder="Регистрационен №">
+                </div>
+            </div>
+            <input type="submit" value="Намери">
     </form>
+    </div>
 </div>
 </body>
 </html>

@@ -76,22 +76,54 @@
     </ul>
 </div>
 
-<form action="/addTariffGO" method="post">
-    <%
-        TariffGO go = (TariffGO) request.getAttribute("result");
-    %>
-    <input type="text" id="tariffID" name="tariffID" value=<%=go.getTariffID()%>>
-    <select class="field" id="vehicleType" name="vehicleType">
-        <option value=<%=go.getVechileType().getId()%>> <%=go.getVechileType().getVehicleType()%> </option>
-    </select>
-    <select class="field" id="vehicleSubtype" name="vehicleSubtype">
-        <option value=<%=go.getVehicleSubtype().getId()%>> <%=go.getVehicleSubtype().getSubtype()%> </option>
-    </select>
-    <select class="field" id="zone" name="zone">
-        <option value=<%=go.getZone()%>> <%=go.getZone()%></option>
-    </select>
-    <input type="text" name="value" value=<%=go.getValue()%>>
-    <input type="submit" value="Промени">
-</form>
+<div>
+    <div class="shell">
+        <h3>Промени тарифа</h3>
+        <form action="/addTariffGO" method="post">
+        <%
+            TariffGO go = (TariffGO) request.getAttribute("result");
+        %>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=go.getTariffID()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType">
+                            <option value=<%=go.getVechileType().getId()%>> <%=go.getVechileType().getVehicleType()%> </option>
+                        </select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Подтип МПС</label>
+                        <select class="field" id="vehicleSubtype" name="vehicleSubtype">
+                            <option value=<%=go.getVehicleSubtype().getId()%>> <%=go.getVehicleSubtype().getSubtype()%> </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Зона</label>
+                        <select class="field" id="zone" name="zone" readonly>
+                            <option <%if(go.getZone()==1) { %> selected <% } %>>Зона І - София</option>
+                            <option <%if(go.getZone()==2) { %> selected <% } %>>Зона IІ - Пловдив, Варна и Бургас</option>
+                            <option <%if(go.getZone()==1) { %> selected <% } %>>Зона ІІІ - Други</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Стойност</label>
+                        <input type="text" class="field" name="value" value=<%=go.getValue()%>>
+                    </div>
+                </div>
+                <input type="submit" value="Промени">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

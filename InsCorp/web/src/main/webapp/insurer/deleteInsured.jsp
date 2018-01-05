@@ -96,11 +96,20 @@
 </div>
 
 <div>
-    <form action="/deleteInsured" method="post">
-        <label>ЕГН</label>
-        <input type="text" name="clientEGN" placeholder="ЕГН">
-        <input type="submit" value="Изтриване">
-    </form>
+    <div class="shell">
+        <h3>Изтриване на клиент</h3>
+        <form action="/deleteInsured" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ЕГН</label>
+                        <input type="text" name="clientEGN" placeholder="ЕГН">
+                    </div>
+                </div>
+                <input type="submit" value="Изтриване">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

@@ -76,25 +76,28 @@
     </ul>
 </div>
 
-<form>
-    <table border="1">
-        <th>Тип МПС</th>
-        <th>Подтоп МПС</th>
-        <th>Зона</th>
-        <th>Застрахователна стойност</th>
+<div class="viewInsurers shell">
+    <h3>Тарифиране - ГО </h3>
+    <form>
+        <table border="1">
+            <th>Тип МПС</th>
+            <th>Подтоп МПС</th>
+            <th>Зона</th>
+            <th>Застрахователна стойност</th>
 
-        <%
-            TariffGoServer tariffGoServer = new TariffGoServer(new TariffGO());
-            for(TariffGO go : tariffGoServer.loadAllTariffGO()) {
-        %>
-        <tr>
-            <td><%=go.getVechileType().getVehicleType()%></td>
-            <td><%=go.getVehicleSubtype().getSubtype()%></td>
-            <td><%=go.getZone()%></td>
-            <td><%=go.getValue()%></td>
-        </tr>
-        <% } %>
-    </table>
-</form>
+            <%
+                TariffGoServer tariffGoServer = new TariffGoServer(new TariffGO());
+                for(TariffGO go : tariffGoServer.loadAllTariffGO()) {
+            %>
+            <tr>
+                <td><%=go.getVechileType().getVehicleType()%></td>
+                <td><%=go.getVehicleSubtype().getSubtype()%></td>
+                <td><%=go.getZone()%></td>
+                <td><%=go.getValue()%></td>
+            </tr>
+            <% } %>
+        </table>
+    </form>
+</div>
 </body>
 </html>

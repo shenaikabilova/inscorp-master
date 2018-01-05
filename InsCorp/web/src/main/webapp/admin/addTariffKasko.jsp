@@ -76,19 +76,43 @@
     </ul>
 </div>
 
-<form action="/addTariffKasko" method="post">
-    <%
-        TariffKasko kasko = (TariffKasko) request.getAttribute("result");
-    %>
-    <input type="text" id="tariffID" name="tariffID" value=<%=kasko.getTariffID()%>>
-    <select class="field" id="vehicleType" name="vehicleType">
-        <option value=<%=kasko.getVechileType().getId()%>> <%=kasko.getVechileType().getVehicleType()%> </option>
-    </select>
-    <select class="field" id="vehicleSubtype" name="vehicleSubtype">
-        <option value=<%=kasko.getVehicleSubtype().getId()%>> <%=kasko.getVehicleSubtype().getSubtype()%> </option>
-    </select>
-    <input type="text" name="kaskoPercent" value=<%=kasko.getKaskoPercent()%>>
-    <input type="submit" value="Промени">
-</form>
+<div>
+    <div class="shell">
+        <h3>Промени тарифа</h3>
+        <form action="/addTariffKasko" method="post">
+        <%
+            TariffKasko kasko = (TariffKasko) request.getAttribute("result");
+        %>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=kasko.getTariffID()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType">
+                            <option value=<%=kasko.getVechileType().getId()%>> <%=kasko.getVechileType().getVehicleType()%> </option>
+                        </select>
+                    </div>
+                    <div class="form-row-inner">
+                        <select class="field" id="vehicleSubtype" name="vehicleSubtype">
+                            <option value=<%=kasko.getVehicleSubtype().getId()%>> <%=kasko.getVehicleSubtype().getSubtype()%> </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Стойност - %</label>
+                        <input type="text" class="field" name="kaskoPercent" value=<%=kasko.getKaskoPercent()%>>
+                    </div>
+                </div>
+                <input type="submit" value="Промени">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

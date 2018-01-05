@@ -107,13 +107,27 @@
 
 <div>
     <div class="shell">
+        <h3>Редактиране на подтип МПС</h3>
         <form action="/vehicleSubtypeUpdate" method="post">
-            <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
-            <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
-
-            <label>Промени подтип на:</label>
-            <input type="text" id="newVehicleSubtype" name="newVehicleSubtype">
-            <input type="submit" value="Промени">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Подтип МПС</label>
+                        <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Промени подтип на:</label>
+                        <input type="text" class="field" id="newVehicleSubtype" name="newVehicleSubtype">
+                    </div>
+                </div>
+                <input type="submit" value="Промени">
+            </div>
         </form>
     </div>
 </div>

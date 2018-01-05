@@ -87,18 +87,21 @@
         </ul>
     </div>
 
-        <div class="deleteUser">
-            <div class="shell">
-                <form action="/deleteUser" method="post">
-                    <div class="form-section">
-                        <div class="form-row">
-                            <label>ID на застраховател</label>
-                            <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
-                            <input type="submit" value="Изтрий">
-                        </div>
+<div class="deleteUser">
+    <div class="shell">
+        <h3>Изтриване на застрахователен агент</h3>
+        <form action="/deleteUser" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Служебен №</label>
+                        <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
                     </div>
-                </form>
+                </div>
+                <input type="submit" value="Изтрий">
             </div>
-        </div>
-    </body>
+        </form>
+    </div>
+</div>
+</body>
 </html>

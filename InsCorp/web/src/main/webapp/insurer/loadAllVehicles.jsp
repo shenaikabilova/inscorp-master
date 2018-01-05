@@ -86,7 +86,7 @@
         </ul>
     </div>
 </div>
-<div>
+<div class="searchInsurers viewInsurers shell">
     <form>
         <label>Списък на всички записани МПС</label>
         <table border="1">

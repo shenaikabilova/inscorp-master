@@ -95,67 +95,67 @@
 
 <div class="adminpanelSettings">
     <div class="shell">
+        <h3>Настройки на администратора</h3>
         <form action="adminPanelSettings" method="post">
-            <table width="100%">
-                <%
-                    MessageDigest m;
-                    BigInteger passEncrypt = null;
-                    try {
-                        m = MessageDigest.getInstance("MD5");
-                        m.update(password.getBytes(), 0, password.length());
-                        passEncrypt = new BigInteger(1, m.digest());
-                        System.out.println(String.format("%1$032x", passEncrypt));
-                    } catch (NoSuchAlgorithmException e1) {
-                        e1.printStackTrace();
-                    }
+        <%
+            Admin admin = new Admin();
+            admin.setUsername(username);
+            admin.setPassword(password);
+            UserServer userServer = new UserServer(admin);
 
-                    Admin admin = new Admin();
-                    admin.setUsername(username);
-                    admin.setPassword(String.format("%1$032x", passEncrypt));
-                    UserServer userServer = new UserServer(admin);
-
-                %>
-                <tr>
-                    <td></td>
-                    <td><h3>Настройки на администратора</h3></td>
-                </tr>
-                <tr>
-                    <td><label>ID</label></td>
-                    <td><input type="text" class="field" name="userID" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getId()%> ></td>
-                </tr>
-                <tr>
-                    <td><label>Потребителско име</label></td>
-                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getUsername()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Име</label></td>
-                    <td><input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getFirstName()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Презиме</label></td>
-                    <td><input type="text" class="field" name="secondName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getSecondName()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Фамилия</label>
-                    <td><input type="text" class="field" name="lastName" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getLastName()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Е-майл</label></td>
-                    <td><input type="text" class="field" name="userEmail" size="30" value=<%=userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getEmail()%>></td>
-                </tr>
-                <tr>
-                    <td><label>Парола</label></td>
-                    <td><input type="password" class="field" name="password1" size="30" ></td>
-                </tr>
-                <tr>
-                    <td><label>Повторете парола</label></td>
-                    <td><input type="password" class="field" name="password2" size="30"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Промени"></td>
-                </tr>
-            </table>
+        %>
+            <div class="form-section">
+               <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" name="userID" size="30" value=<%=userServer.loadUser(username, password).getId()%> >
+                    </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Потребителско име</label> 
+                      <input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getUsername()%>> 
+                    </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Име</label> 
+                      <input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getFirstName()%>>
+                   </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Презиме</label> 
+                      <input type="text" class="field" name="secondName" size="30" value=<%=userServer.loadUser(username, password).getSecondName()%>>
+                   </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Фамилия</label>
+                      <input type="text" class="field" name="lastName" size="30" value=<%=userServer.loadUser(username, password).getLastName()%>>
+                   </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Е-майл</label> 
+                      <input type="text" class="field" name="userEmail" size="30" value=<%=userServer.loadUser(username, password).getEmail()%>>
+                   </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Парола</label> 
+                      <input type="password" class="field" name="password1" size="30" >
+                   </div>
+               </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
+                      <label>Повторете парола</label> 
+                      <input type="password" class="field" name="password2" size="30">
+                   </div>
+               </div>
+                <input type="submit" value="Промени">
+               </div>
+            </div>
         </form>
     </div>
 </div>

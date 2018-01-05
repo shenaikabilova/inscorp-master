@@ -117,88 +117,156 @@
         </ul>
     </div>
 </div>
-<form action="/addNewMps" method="post">
-    <%
-        Vehicle vehicle = (Vehicle) request.getAttribute("result");
-    %>
-    Данни за собственик
 
-    <label>ID</label>
-    <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>>
-    <label>Име</label>
-    <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> maxlength="50">
-
-    <label>Презиме</label></td>
-    <input type="text" id="secondName" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="50" maxlength="50">
-
-    <label>Фамилия</label></td>
-    <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
-
-
-    <label>ЕГН</label>
-    <input type="number" id="EGN" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10">
-    <label>Държава</label>
-    <input type="text" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> maxlength="50"><br>
-    <label >Пощенски код</label>
-    <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%> size="20" maxlength="4">
-
-    <label>Град/Село</label>
-    <input type="text" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> maxlength="50">
-    <label>Адрес</label>
-    <input type="text" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
-
-    МПС
-    <label>Регистрационен №</label>
-    <input type="text" id="regNum" name="regNum" value=<%=vehicle.getRegNum()%> maxlength="7">
-    <label>Регистрирана в Град</label>
-    <input type="text" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%>>
-    <label>Зона</label>
-    <select class="field" id="zone" name="zone">
-        <option value=1>Зона 1</option>
-        <option value=2>Зона 2</option>
-        <option value=3>Зона 3</option>
-    </select>
-    <label>РАМА</label>
-    <input type="text" id="rama" name="rama" value=<%=vehicle.getRAMA()%> maxlength="17">
-
-    <label>Тип</label>
-    <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
-    <label>Подтип</label>
-    <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
-
-    <label>Регистрация</label>
-    <select name="country">
-        <option>България</option>
-        <option>Чужбина</option>
-    </select> <br>
-
-    <br>
-    <label>Марка</label>
-    <input type="text" id="brand" name="brand" value=<%=vehicle.getBrand()%>>
-    <label>Модел</label>
-    <input type="text" id="model" name="model" value=<%=vehicle.getModel()%>>
-
-    <label>Първа регистрация</label>
-    <input type="text" placeholder="Първа регистрация" id="datepicker1" name="firstReg">
-    <label>Години</label>
-    <input type="number" id="years" name="years" value=<%=vehicle.getYears()%>>
-    <br>
-
-    <label>Двигател</label>
-    <select id="engine" name="engine">
-        <option <%if(vehicle.getEngine() == 1.4) { %> selected <% }%> >1.4</option>
-        <option <%if(vehicle.getEngine() == 1.6) { %> selected <% }%> >1.6</option>
-        <option <%if(vehicle.getEngine() == 1.8) { %> selected <% }%> >1.8</option>
-        <option <%if(vehicle.getEngine() == 2.0) { %> selected <% }%> >2.0</option>
-    </select>
-    <label>Цвят</label>
-    <input type="text" id="color" name="color" value=<%=vehicle.getColor()%>
-    <label>Брой места</label>
-    <input type="number" id="placeNumber" name="placeNumber" placeholder="Брой места">
-    <br>
-
-    <input type="submit" value="Редактирай">
-</form>
+<div>
+    <div class="shell">
+        <h3>Редактиране на МПС</h3>
+        <form action="/addNewMps" method="post">
+        <%
+            Vehicle vehicle = (Vehicle) request.getAttribute("result");
+        %>
+            <div class="form-section">
+                <h4>Данни за собственик</h4>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ID</label>
+                        <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Име</label>
+                        <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> maxlength="50">
+                        <label>Презиме</label></td>
+                        <input type="text" class="field" id="secondName" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="50" maxlength="50">
+                        <label>Фамилия</label></td>
+                        <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ЕГН</label>
+                        <input type="number" class="field" id="EGN" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Държава</label>
+                        <input type="text" class="field" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> maxlength="50">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label >Пощенски код</label>
+                        <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%> size="20" maxlength="4">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Град/Село</label>
+                        <input type="text" class="field" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> maxlength="50">
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Адрес</label>
+                        <input type="text" class="field" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> maxlength="100">
+                    </div>
+                </div>
+            </div>
+            <div class="form-section">
+                <h4>МПС</h4>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Регистрационен №</label>
+                        <input type="text" class="field" id="regNum" name="regNum" value=<%=vehicle.getRegNum()%> maxlength="7">
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Регистрирана в Град</label>
+                        <input type="text" class="field" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Зона</label>
+                        <select class="field" id="zone" name="zone">
+                            <option value=1>Зона 1</option>
+                            <option value=2>Зона 2</option>
+                            <option value=3>Зона 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>РАМА</label>
+                        <input type="text" class="field" id="rama" name="rama" value=<%=vehicle.getRAMA()%> maxlength="17">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип</label>
+                        <select class="field" class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Подтип</label>
+                        <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Регистрация</label>
+                        <select class="field" name="country">
+                            <option>България</option>
+                            <option>Чужбина</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Марка</label>
+                        <input type="text" class="field" id="brand" name="brand" value=<%=vehicle.getBrand()%>>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Модел</label>
+                        <input type="text" class="field" id="model" name="model" value=<%=vehicle.getModel()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Първа регистрация</label>
+                        <input type="text" class="field" placeholder="Първа регистрация" id="datepicker1" name="firstReg">
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Години</label>
+                        <input type="number" class="field" id="years" name="years" value=<%=vehicle.getYears()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Двигател</label>
+                        <select class="field" id="engine" name="engine">
+                            <option <%if(vehicle.getEngine() == 1.4) { %> selected <% }%> >1.4</option>
+                            <option <%if(vehicle.getEngine() == 1.6) { %> selected <% }%> >1.6</option>
+                            <option <%if(vehicle.getEngine() == 1.8) { %> selected <% }%> >1.8</option>
+                            <option <%if(vehicle.getEngine() == 2.0) { %> selected <% }%> >2.0</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Цвят</label>
+                        <input type="text" class="field" id="color" name="color" value=<%=vehicle.getColor()%>>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Брой места</label>
+                        <input type="number" class="field" id="placeNumber" name="placeNumber" placeholder="Брой места">
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Редактирай">
+        </form>
+    </div>
+</div>
 </body>
 <script>
     // Fill main list

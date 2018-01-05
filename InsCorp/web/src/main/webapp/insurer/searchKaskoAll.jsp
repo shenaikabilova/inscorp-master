@@ -128,7 +128,7 @@
         <th>Дата до:</th>
         <th>Брой месеци</th>
         <th>Оценка на МПС</th>
-        <th>Застрахователна стойност</th>
+        <th>Застрахователна стойност - &</th>
         <th>Застрахователна премия</th>
 
         <%
@@ -164,7 +164,7 @@
             <td><%=simpleDateFormat.format(kasko.getDateTo().getTime())%></td>
             <td><%=kasko.getPeriod()%></td>
             <td><%=kasko.getVehicleValue()%></td>
-            <td><%=kasko.getTariffKasko().getValue()%></td>
+            <td><%=kasko.getTariffKasko().getKaskoPercent() + "%"%></td>
             <td><%=kasko.getValue()%></td>
         </tr>
         <% } %>

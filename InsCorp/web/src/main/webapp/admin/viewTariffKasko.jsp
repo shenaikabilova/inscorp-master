@@ -76,23 +76,26 @@
     </ul>
 </div>
 
-<form>
-    <table border="1">
-        <th>Тип МПС</th>
-        <th>Подтоп МПС</th>
-        <th>Застрахователна стойност</th>
+<div class="viewInsurers shell">
+    <h3>Тарифиране - Каско </h3>
+    <form>
+        <table border="1">
+            <th>Тип МПС</th>
+            <th>Подтоп МПС</th>
+            <th>Застрахователна стойност</th>
 
-        <%
-            TariffKaskoServer tariffGoServer = new TariffKaskoServer(new TariffKasko());
-            for(TariffKasko kasko : tariffGoServer.loadAllTariffKasko()) {
-        %>
-        <tr>
-            <td><%=kasko.getVechileType().getVehicleType()%></td>
-            <td><%=kasko.getVehicleSubtype().getSubtype()%></td>
-            <td><%=kasko.getKaskoPercent()%></td>
-        </tr>
-        <% } %>
-    </table>
-</form>
+            <%
+                TariffKaskoServer tariffGoServer = new TariffKaskoServer(new TariffKasko());
+                for(TariffKasko kasko : tariffGoServer.loadAllTariffKasko()) {
+            %>
+            <tr>
+                <td><%=kasko.getVechileType().getVehicleType()%></td>
+                <td><%=kasko.getVehicleSubtype().getSubtype()%></td>
+                <td><%=kasko.getKaskoPercent()%></td>
+            </tr>
+            <% } %>
+        </table>
+    </form>
+</div>
 </body>
 </html>

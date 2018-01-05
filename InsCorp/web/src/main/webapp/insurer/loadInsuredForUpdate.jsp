@@ -94,12 +94,21 @@
     </div>
 </div>
 
-<div>
-    <form action="/loadInsuredForUpdate" method="post">
-        <label>ЕГН</label>
-        <input type="text" name="clientEGN" placeholder="ЕГН">
-        <input type="submit" value="Търсене">
+<div class="loadInsuredForUpdate">
+    <div class="shell">
+        <h3>Търсене на застраховано лице за редакция</h3>
+        <form action="/loadInsuredForUpdate" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>ЕГН</label>
+                        <input type="text" name="searchEGN" placeholder="ЕГН">
+                    </div>
+                </div>
+                <input type="submit" value="Търсене">
+            </div>
     </form>
+    </div>
 </div>
 </body>
 </html>

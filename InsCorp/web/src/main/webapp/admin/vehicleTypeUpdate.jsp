@@ -77,20 +77,35 @@
     </ul>
 </div>
 
-<form action="/vehicleTypeUpdate" method="post">
-    <label>Въведи тип МПС</label>
-    <select class="field" id="vehicleType" name="vehicleType">
-        <option disabled="" selected="value"></option>
-        <%
-            VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
-            for(VehicleType vehicleType : vehicleTypeServer.read()) {
-        %>
-        <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
-        <% } %>
-    </select>
-    <label>Промени на:</label>
-    <input type="text" id="newVehicleType" name="newVehicleType">
-    <input type="submit" value="Промени">
-</form>
+<div>
+    <div class="shell">
+        <h3>Промяна тип МПС</h3>
+        <form action="/vehicleTypeUpdate" method="post">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Избери тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType">
+                            <option disabled="" selected="value"></option>
+                            <%
+                                VehicleTypeServer vehicleTypeServer = new VehicleTypeServer();
+                                for(VehicleType vehicleType : vehicleTypeServer.read()) {
+                            %>
+                            <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Промени на:</label>
+                        <input type="text" class="field" id="newVehicleType" name="newVehicleType">
+                    </div>
+                </div>
+                <input type="submit" value="Промени">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

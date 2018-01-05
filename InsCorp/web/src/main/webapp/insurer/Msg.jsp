@@ -82,7 +82,7 @@
         </ul>
     </div>
 </div>
-    <center class="msg"><% String message = (String) request.getAttribute("errmsg"); %>
+    <center class="msg"><% String message = (String) request.getAttribute("msg"); %>
         <%=message %></center>
 </body>
 </html>

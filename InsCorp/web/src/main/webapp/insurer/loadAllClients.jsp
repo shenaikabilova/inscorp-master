@@ -90,7 +90,9 @@
     </div>
 </div>
 
-<form method="post">
+<div class="searchInsurers viewInsurers shell">
+    <h3>Клиенти</h3>
+    <form method="post">
     <table border="1">
         <th>Име</th>
         <th>Презиме</th>
@@ -122,6 +124,7 @@
         </tr>
         <%}%>
     </table>
-</form>
+    </form>
+</div>
 </body>
 </html>

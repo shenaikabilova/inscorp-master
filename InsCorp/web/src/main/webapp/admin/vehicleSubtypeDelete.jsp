@@ -107,11 +107,21 @@
 
 <div>
     <div class="shell">
+        <h3>Изтриване на подтип МПС</h3>
         <form action="/vehicleSubtypeDelete" method="post">
-            <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
-            <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
-
-            <input type="submit" value="Изтрий">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Тип МПС</label>
+                        <select class="field" id="vehicleType" name="vehicleType" onchange="onTypeSelect(this)"></select>
+                    </div>
+                    <div class="form-row-inner">
+                        <label>Подтип МПС</label>
+                        <select id="vehicleSubtype" class="field" name="vehicleSubtype" ></select>
+                    </div>
+                </div>
+                <input type="submit" value="Изтрий">
+            </div>
         </form>
     </div>
 </div>
