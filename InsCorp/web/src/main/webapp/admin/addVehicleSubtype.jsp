@@ -88,10 +88,13 @@
             </ul>
         </div>
 
-        <div>
-            <div class="shell">
-                <form action="/adminPanelAddVehicleSubtype" method="post">
-
+<div>
+<div class="shell">
+    <h3>Добавяне на подтип МПС</h3>
+    <form action="/adminPanelAddVehicleSubtype" method="post">
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-row-inner">
                     <label>Тип МПС</label>
                     <select class="field" id="vehicleType" name="vehicleType">
                         <option disabled="" selected="value"></option>
@@ -102,12 +105,16 @@
                         <option value=<%=vehicleType.getId()%> ><%=vehicleType.getVehicleType()%></option>
                         <% } %>
                     </select>
-
+                </div>
+                <div class="form-row-inner">
                     <label>Подтип МПС</label>
-                    <input type="text" name="vehicleSubtype" placeholder="Подтип МПС" maxlength="50">
-                    <input type="submit" value="Добави">
-                </form>
+                    <input type="text" class="field" name="vehicleSubtype" placeholder="Подтип МПС" maxlength="50">
+                </div>
             </div>
+        <input type="submit" value="Добави">
         </div>
-    </body>
+    </form>
+</div>
+</div>
+</body>
 </html>

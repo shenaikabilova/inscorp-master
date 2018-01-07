@@ -106,7 +106,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>ЕГН</label>
-                        <input type="number" name="searchEGN" placeholder="ЕГН" maxlength="10">
+                        <input type="text" class="field" name="searchEGN" placeholder="ЕГН" maxlength="10">
                     </div>
                 </div>
                 <input type="submit" value="Зареди клиент">

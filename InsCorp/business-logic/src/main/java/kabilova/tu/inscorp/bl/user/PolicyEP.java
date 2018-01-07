@@ -33,21 +33,21 @@ public class PolicyEP {
 
     public void update() { dao.update(policy); }
 
-    public void delete() { dao.delete(policy); }
+    public void delete() throws InsCorpException { dao.delete(policy); }
 
     public List<GO> loadActivePoliciesGO(Insured insured, Calendar currentDate) { return dao.loadActivePoliciesGO(insured, currentDate); }
 
     public List<Kasko> loadActivePoliciesKasko(Insured insured, Calendar currentDate) { return dao.loadActivePoliciesKasko(insured, currentDate); }
 
-    public List<GO> loadPoliciesGO(User user) { return dao.loadPoliciesGO(user); }
+    public List<GO> loadPoliciesGO(User user) throws InsCorpException { return dao.loadPoliciesGO(user); }
 
-    public List<Kasko> loadPoliciesKasko(User user) { return dao.loadPoliciesKasko(user); }
+    public List<Kasko> loadPoliciesKasko(User user) throws InsCorpException { return dao.loadPoliciesKasko(user); }
 
-    public List<GO> loadAllGO() { return dao.loadAllGO(); }
+    public List<GO> loadAllGO() throws InsCorpException { return dao.loadAllGO(); }
 
     public List<Kasko> loadAllKasko() { return dao.loadAllKasko(); }
 
     public String getLastPolicyID() { return dao.getLastPolicyID(); }
 
-    public Policy getPolicyByPolicyNum() { return dao.getPolicaByPolicaNum(policy.getPolicaID()); }
+    public Policy getPolicyByPolicyNum() throws InsCorpException { return dao.getPolicaByPolicaNum(policy.getPolicaID()); }
 }

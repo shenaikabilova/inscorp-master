@@ -86,8 +86,7 @@
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=go.getTariffID()%>>
+                        <input type="hidden" class="field" id="tariffID" name="tariffID" value=<%=go.getTariffID()%>>
                     </div>
                 </div>
                 <div class="form-row">
@@ -107,10 +106,10 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Зона</label>
-                        <select class="field" id="zone" name="zone" readonly>
-                            <option <%if(go.getZone()==1) { %> selected <% } %>>Зона І - София</option>
-                            <option <%if(go.getZone()==2) { %> selected <% } %>>Зона IІ - Пловдив, Варна и Бургас</option>
-                            <option <%if(go.getZone()==1) { %> selected <% } %>>Зона ІІІ - Други</option>
+                        <select class="field" id="zone" name="zone">
+                            <option value=1 <%if(go.getZone()==1) { %> selected <% } %>>Зона І - София</option>
+                            <option value=2 <%if(go.getZone()==2) { %> selected <% } %>>Зона IІ - Пловдив, Варна и Бургас</option>
+                            <option value=3 <%if(go.getZone()==3) { %> selected <% } %>>Зона ІІІ - Други</option>
                         </select>
                     </div>
                 </div>

@@ -11,32 +11,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%
-//    String userName = null;
-//    Cookie[] cookies = request.getCookies();
-//    if(cookies != null) {
-//        for(Cookie cookie: cookies) {
-//            if(cookie.getName().equals("user")) {
-//                userName = cookie.getValue();
-//            }
-//        }
-//    }
-//    if(userName == null) {
-//        response.sendRedirect("login.jsp");
-//    }
-    String username = null;
-    String password = null;
-    if(!request.getSession().isNew()) {
-        username = session.getAttribute("username").toString();
-        password = session.getAttribute("password").toString();
-    }
-    else {
-        response.sendRedirect("/AdminLogin");
-    }
-%>
-
 <html>
 <head>
+    <%
+        String username = null;
+        String password = null;
+        if(!request.getSession().isNew() && session!=null) {
+            username = session.getAttribute("username").toString();
+            password = session.getAttribute("password").toString();
+        }
+        else {
+            response.sendRedirect("/AdminLogin");
+        }
+    %>
     <title><%=username %></title>
     <link href = "../style.css" type="text/css" rel = "stylesheet"/>
 </head>
@@ -96,7 +83,7 @@
 <div class="adminpanelSettings">
     <div class="shell">
         <h3>Настройки на администратора</h3>
-        <form action="adminPanelSettings" method="post">
+        <form action="/adminPanelSettings" method="post">
         <%
             Admin admin = new Admin();
             admin.setUsername(username);
@@ -107,20 +94,19 @@
             <div class="form-section">
                <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" name="userID" size="30" value=<%=userServer.loadUser(username, password).getId()%> >
+                        <input type="hidden" class="field" name="adminID" size="30" value=<%=userServer.loadUser(username, password).getId()%> >
                     </div>
                </div>
                <div class="form-row">
                    <div class="form-row-inner">
                       <label>Потребителско име</label> 
-                      <input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getUsername()%>> 
+                      <input type="text" class="field" name="username" size="30" value=<%=userServer.loadUser(username, password).getUsername()%>>
                     </div>
                </div>
                <div class="form-row">
                    <div class="form-row-inner">
                       <label>Име</label> 
-                      <input type="text" class="field" name="userName" size="30" value=<%=userServer.loadUser(username, password).getFirstName()%>>
+                      <input type="text" class="field" name="firstName" size="30" value=<%=userServer.loadUser(username, password).getFirstName()%>>
                    </div>
                </div>
                <div class="form-row">
@@ -138,19 +124,25 @@
                <div class="form-row">
                    <div class="form-row-inner">
                       <label>Е-майл</label> 
-                      <input type="text" class="field" name="userEmail" size="30" value=<%=userServer.loadUser(username, password).getEmail()%>>
+                      <input type="text" class="field" name="email" size="30" value=<%=userServer.loadUser(username, password).getEmail()%>>
                    </div>
                </div>
                <div class="form-row">
                    <div class="form-row-inner">
+                       <label>Телефонен №</label></td>
+                       <input type="text" class="field" id="phoneNumber" value=<%=userServer.loadUser(username,password).getPhoneNumber()%>>
+                    </div>
+                </div>
+               <div class="form-row">
+                   <div class="form-row-inner">
                       <label>Парола</label> 
-                      <input type="password" class="field" name="password1" size="30" >
+                      <input type="password" class="field" name="password1" size="30" placeholder="Парола">
                    </div>
                </div>
                <div class="form-row">
                    <div class="form-row-inner">
                       <label>Повторете парола</label> 
-                      <input type="password" class="field" name="password2" size="30">
+                      <input type="password" class="field" name="password2" size="30" placeholder="Повторете парола">
                    </div>
                </div>
                 <input type="submit" value="Промени">

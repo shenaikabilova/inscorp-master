@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.admin;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Admin;
 import kabilova.tu.inscorp.server.web.UserServer;
 
@@ -24,6 +25,8 @@ public class AdminLoginServlet extends HttpServlet{
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -44,16 +47,24 @@ public class AdminLoginServlet extends HttpServlet{
             }
 
             UserServer userServer = new UserServer(new Admin(username, String.format("%1$032x", passEncrypt)));
-            if (userServer.loadUser(username, String.format("%1$032x", passEncrypt)) instanceof Admin) {
+            try {
+                if (userServer.loadUser(username, String.format("%1$032x", passEncrypt)) instanceof Admin) {
 //            Cookie loginCookie = new Cookie("user", username);
 //            loginCookie.setMaxAge(60*60*24);
 //            response.addCookie(loginCookie);
-                HttpSession session = request.getSession(true);
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
-                response.sendRedirect("admin/adminPanel.jsp");
-            } else {
-                request.setAttribute("errmsg", "Грешно потребителско име или парола!");
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("id", userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getId());
+                    session.setAttribute("username", userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getUsername());
+                    session.setAttribute("password", userServer.loadUser(username, String.format("%1$032x", passEncrypt)).getPassword());
+                    response.sendRedirect("admin/adminPanel.jsp");
+                } else {
+                    request.setAttribute("errmsg", "Грешно потребителско име или парола!");
+                    RequestDispatcher view = request.getRequestDispatcher("admin/adminLoginError.jsp");
+                    view.forward(request, response);
+                }
+            } catch (InsCorpException e) {
+//                String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                request.setAttribute("errmsg", e.getMessage() + " Неправилно въведени потребителско име и парола!");
                 RequestDispatcher view = request.getRequestDispatcher("admin/adminLoginError.jsp");
                 view.forward(request, response);
             }

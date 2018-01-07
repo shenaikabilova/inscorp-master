@@ -24,6 +24,8 @@ public class LoadTariffKasko extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         int vehicleSubtypeID = Integer.parseInt(request.getParameter("vehicleSubtype"));
 
         if(vehicleSubtypeID==0){

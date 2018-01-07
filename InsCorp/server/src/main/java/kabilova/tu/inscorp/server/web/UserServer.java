@@ -26,15 +26,15 @@ public class UserServer {
 
     public List readAll() { return userEP.readUsers(); }
 
-    public User loadUser(String username, String password) {
+    public User loadUser(String username, String password) throws InsCorpException {
         return userEP.loadUser(username, password);
     }
 
     public void update() { userEP.update(); }
 
-    public void delete() { userEP.delete(); }
+    public void delete() throws InsCorpException { userEP.delete(); }
 
-    public User loadByUsername() { return userEP.loadByUsername(); }
+    public User loadByUsername() throws InsCorpException  { return userEP.loadByUsername(); }
 
     public List<Insurer> readInsurers() { return userEP.readInsurers(); }
 }

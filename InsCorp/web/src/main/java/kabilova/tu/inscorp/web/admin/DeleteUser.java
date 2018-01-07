@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.admin;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.server.web.UserServer;
 
@@ -34,8 +35,21 @@ public class DeleteUser extends HttpServlet {
             insurer.setUsername(username);
             UserServer userServer = new UserServer(insurer);
 
-            insurer.setId(userServer.loadByUsername().getId());
-            userServer.delete();
+            try {
+                insurer.setId(userServer.loadByUsername().getId());
+            } catch (InsCorpException e) {
+//                String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
+            try {
+                userServer.delete();
+            } catch (InsCorpException e) {
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
 
             request.setAttribute("errmsg", "Застрахователният агент е изтрит!");
             RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");

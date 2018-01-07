@@ -2,11 +2,13 @@ package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.VehicleDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 
@@ -15,13 +17,15 @@ import java.util.List;
  */
 public class VehicleDaoImpl implements VehicleDao {
     @Override
-    public void create(Vehicle vehicle) {
+    public void create(Vehicle vehicle) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         try {
             session.save(vehicle);
             session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+            throw new InsCorpException("Съществуваща уникална стойност!");
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {

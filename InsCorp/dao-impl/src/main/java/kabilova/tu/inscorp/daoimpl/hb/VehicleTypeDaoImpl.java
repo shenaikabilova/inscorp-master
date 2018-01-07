@@ -2,9 +2,11 @@ package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.CrudDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 
@@ -14,13 +16,15 @@ import java.util.List;
 public class VehicleTypeDaoImpl implements CrudDao<VehicleType> {
 
     @Override
-    public void create(VehicleType vehicleType) {
+    public void create(VehicleType vehicleType) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         try {
             session.save(vehicleType);
             session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+            throw new InsCorpException("Съществуваща уникална стойност!");
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {

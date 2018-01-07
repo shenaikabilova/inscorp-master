@@ -1,6 +1,7 @@
 package kabilova.tu.inscorp.bl.user;
 
 import kabilova.tu.inscorp.dao.UserDao;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class InsuredEP extends UserEP {
         this.dao = dao;
     }
 
-    public Insured loadByEgn () {
+    public Insured loadByEgn () throws InsCorpException {
         return (Insured) dao.loadByEGN(insured.getEgn());
     }
 

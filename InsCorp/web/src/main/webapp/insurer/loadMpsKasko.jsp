@@ -89,7 +89,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Регистрационен №</label>
-                        <input type="text" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
+                        <input type="text" class="field" name="searchVehicleRegNum" placeholder="Регистрационен №" maxlength="10">
                     </div>
                 </div>
                 <input type="submit" value="Зареди МПС"><br>

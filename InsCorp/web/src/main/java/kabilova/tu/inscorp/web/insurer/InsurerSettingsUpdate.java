@@ -40,9 +40,9 @@ public class InsurerSettingsUpdate extends HttpServlet {
             String phoneNumber = request.getParameter("phoneNumber");
             String email = request.getParameter("e-mail");
 
-            if (id==0 || insurerID == 0 || firstName.trim().equals("") || secondName.trim().equals("") || lastName.trim().equals("") ||
-                    username.trim().equals("") || phoneNumber.trim().equals("") || email.trim().equals("")) {
-                request.setAttribute("errmsg", "Моля, попълнете всички полета!");
+            if (id==0 || insurerID == 0 || firstName.trim().equals("") || secondName.trim().equals("") ||
+                    lastName.trim().equals("") || username.trim().equals("") || phoneNumber.trim().equals("") || email.trim().equals("")) {
+                request.setAttribute("msg", "Моля, попълнете всички полета!");
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             } else {
@@ -52,7 +52,6 @@ public class InsurerSettingsUpdate extends HttpServlet {
                     m = MessageDigest.getInstance("MD5");
                     m.update(pass1.getBytes(), 0, pass1.length());
                     passEncrypt = new BigInteger(1, m.digest());
-                    System.out.println(String.format("%1$032x", passEncrypt));
                 } catch (NoSuchAlgorithmException e1) {
                     e1.printStackTrace();
                 }
@@ -62,15 +61,15 @@ public class InsurerSettingsUpdate extends HttpServlet {
                     userServer.update();
 
                 SendMail sendMail = new SendMail();
-                sendMail.sendMail(insurerID, pass1, email);
+                sendMail.sendMail(username, pass1, email);
 
-                request.setAttribute("errmsg", "Успешен запис!");
+                request.setAttribute("msg", "Успешен запис!");
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             }
         }
         else{
-            request.setAttribute("errmsg", "Моля въведете еднакви пароли!");
+            request.setAttribute("msg", "Моля въведете еднакви пароли!");
             RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
             view.forward(request, response);
         }

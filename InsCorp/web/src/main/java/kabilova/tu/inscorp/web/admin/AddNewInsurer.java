@@ -31,8 +31,8 @@ public class AddNewInsurer extends HttpServlet{
 
         String pass1 = request.getParameter("password1");
         String pass2 = request.getParameter("password2");
-        if(pass1.equals(pass2)) {
-            int insurerID = Integer.parseInt(request.getParameter("insurerID"));
+        if(pass1.equals(pass2) && !pass1.trim().equals("") && !pass2.trim().equals("") ) {
+            int insurerID = request.getParameter("insurerID") != "" ? Integer.parseInt(request.getParameter("insurerID")) : 0;
             String firstName = request.getParameter("insurerFirstName");
             String secondName = request.getParameter("insurerSecondName");
             String lastName = request.getParameter("insurerLastName");
@@ -52,7 +52,6 @@ public class AddNewInsurer extends HttpServlet{
                     m = MessageDigest.getInstance("MD5");
                     m.update(pass1.getBytes(), 0, pass1.length());
                     passEncrypt = new BigInteger(1, m.digest());
-                    System.out.println(String.format("%1$032x", passEncrypt));
                 } catch (NoSuchAlgorithmException e1) {
                     e1.printStackTrace();
                 }
@@ -62,17 +61,16 @@ public class AddNewInsurer extends HttpServlet{
                 try {
                     userServer.createUser();
                 } catch (InsCorpException e) {
-                    request.setAttribute("errmsg", "Неуспешен запис: " + e.getMessage() + " Проверете стойностите на полетата: " +
-                            "служебен №, телефонен номер и/или имейл адрес.");
+                    String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                    request.setAttribute("errmsg", "Неуспешен запис: " + errorMsg);
                     RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
                     view.forward(request, response);
                 }
 
-            SendMail sendMail = new SendMail();
-            sendMail.sendMail(insurerID, pass1, email);
+                SendMail sendMail = new SendMail();
+                sendMail.sendMail(username, pass1, email);
 
                 request.setAttribute("errmsg", "Успешен запис!");
-//            response.sendRedirect("admin/AdminPanelMsg.jsp");
                 RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
                 view.forward(request, response);
             }

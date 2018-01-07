@@ -25,9 +25,9 @@ public class PolicyServer {
 
     public void update() { policyEP.update(); }
 
-    public void delete() { policyEP.delete(); }
+    public void delete() throws InsCorpException { policyEP.delete(); }
 
     public String getLastPolicyID() { return policyEP.getLastPolicyID(); }
 
-    public Policy getPolicyByPolicyNum() { return policyEP.getPolicyByPolicyNum();}
+    public Policy getPolicyByPolicyNum() throws InsCorpException { return policyEP.getPolicyByPolicyNum();}
 }

@@ -86,8 +86,7 @@
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=kasko.getTariffID()%>>
+                        <input type="hidden" class="field" id="tariffID" name="tariffID" value=<%=kasko.getTariffID()%>>
                     </div>
                 </div>
                 <div class="form-row">

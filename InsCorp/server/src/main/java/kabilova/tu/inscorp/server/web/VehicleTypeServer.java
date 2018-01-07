@@ -31,6 +31,6 @@ public class VehicleTypeServer {
 
     public void update() { vehicleTypeEP.update();}
 
-    public void delete() { vehicleTypeEP.delete(); }
+    public void delete() throws InsCorpException { vehicleTypeEP.delete(); }
 
 }

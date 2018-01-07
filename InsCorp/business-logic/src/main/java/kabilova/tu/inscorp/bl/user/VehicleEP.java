@@ -28,7 +28,7 @@ public class VehicleEP {
 
     public void update() { dao.update(vehicle); }
 
-    public void delete() { dao.delete(vehicle); }
+    public void delete() throws InsCorpException { dao.delete(vehicle); }
 
     public Vehicle loadVehicle() { return dao.loadVehicle(vehicle.getRegNum()); }
 

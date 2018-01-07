@@ -74,15 +74,15 @@ public class AddNewKasko extends HttpServlet {
                     insured, vehicle, tariff, kaskoType, period, value, vehicleValue));
             try {
                 policyKaskoServer.create();
+
+                request.setAttribute("msg", "Успешен запис");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
             } catch (InsCorpException e) {
                 request.setAttribute("msg", e.getMessage());
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             }
-
-            request.setAttribute("msg", "Успешен запис");
-            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-            view.forward(request, response);
         }
     }
 }

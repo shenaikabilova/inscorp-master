@@ -98,8 +98,7 @@
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" name="id" size="30" value=<%=insurer.getId()%> readonly="readonly">
+                        <input type="hidden" class="field" name="id" size="30" value=<%=insurer.getId()%> readonly="readonly">
                     </div>
                 </div>
                 <div class="form-row">
@@ -135,7 +134,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Парола</label>
-                        <input type="password" class="field" name="password1" size="30" maxlength="50">
+                        <input type="password" class="field" name="password1" size="30" placeholder="Парола" maxlength="50">
                     </div>
                 </div>
                 <div class="form-row">

@@ -30,7 +30,7 @@ public class VehicleTypeEP {
         dao.update(vehicleType);
     }
 
-    public void delete() {
+    public void delete() throws InsCorpException {
         dao.delete(vehicleType);
     }
 }

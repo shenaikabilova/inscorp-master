@@ -9,16 +9,6 @@
 <html>
 <head>
     <%
-        //        String userName = null;
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null) {
-//            for(Cookie cookie: cookies) {
-//                if(cookie.getName().equals("user")) {
-//                    userName = cookie.getValue();
-//                }
-//            }
-//        }
-//        if(userName == null) { response.sendRedirect("login.jsp");}
         int id = 0;
         String username = null;
         String password = null;
@@ -65,7 +55,7 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="insurer/searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -99,8 +89,7 @@
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" id="insuredID" name="insuredID" value=<%=insured.getId()%> >
+                        <input type="hidden" class="field" id="insuredID" name="insuredID" value=<%=insured.getId()%> >
                     </div>
                 </div>
                 <div class="form-row">

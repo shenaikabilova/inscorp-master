@@ -94,7 +94,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Тип МПС</label>
-                        <input type="text" name="vehicleType" placeholder="Тип МПС" maxlength="50">
+                        <input type="text" class="field" name="vehicleType" placeholder="Тип МПС" maxlength="50">
                     </div>
                 </div>
                 <input type="submit" value="Добави">

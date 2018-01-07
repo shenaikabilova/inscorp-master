@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import kabilova.tu.inscorp.bl.mail.SendMail;
 import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.server.web.UserServer;
@@ -30,13 +31,13 @@ public class AddNewInsured extends HttpServlet {
 
         String pass1 = request.getParameter("pass1");
         String pass2 = request.getParameter("pass2");
-        if(pass1.equals(pass2)) {
+        if(pass1.equals(pass2) && !pass1.trim().equals("") && !pass2.trim().equals("") ) {
             String firstName = request.getParameter("firstName");
             String secondName = request.getParameter("secondName");
             String lastName = request.getParameter("lastName");
             String username = request.getParameter("username");
             String EGN = request.getParameter("EGN");
-            int postCode = Integer.parseInt(request.getParameter("postCode"));
+            int postCode = request.getParameter("postCode") != "" ? Integer.parseInt(request.getParameter("postCode")) : 0;
             String country = request.getParameter("country");
             String city = request.getParameter("city");
             String address = request.getParameter("address");
@@ -56,7 +57,6 @@ public class AddNewInsured extends HttpServlet {
                     m = MessageDigest.getInstance("MD5");
                     m.update(pass1.getBytes(), 0, pass1.length());
                     passEncrypt = new BigInteger(1, m.digest());
-                    System.out.println(String.format("%1$032x", passEncrypt));
                 } catch (NoSuchAlgorithmException e1) {
                     e1.printStackTrace();
                 }
@@ -66,10 +66,14 @@ public class AddNewInsured extends HttpServlet {
                 try {
                     userServer.createUser();
                 } catch (InsCorpException e) {
+//                    String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
                     request.setAttribute("msg", e.getMessage());
                     RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                     view.forward(request, response);
                 }
+
+                SendMail sendMail = new SendMail();
+                sendMail.sendMail(username, pass1, email);
 
                 request.setAttribute("msg", "Успешен запис");
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");

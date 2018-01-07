@@ -31,6 +31,7 @@ public class UpdateKasko extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        int id = Integer.parseInt(request.getParameter("polID"));
         String policaID = request.getParameter("policaN");
         int insurerID = Integer.parseInt(request.getParameter("insID"));
         int insuredID = Integer.parseInt(request.getParameter("insuredID"));
@@ -69,7 +70,7 @@ public class UpdateKasko extends HttpServlet {
             vehicle.setVehicleID(vehicleID);
             tariff.setTariffID(tariffID);
 
-            PolicyServer policyKaskoServer = new PolicyServer(new Kasko(policaID, calendarFromDate, calendarToDate, insurer,
+            PolicyServer policyKaskoServer = new PolicyServer(new Kasko(id, policaID, calendarFromDate, calendarToDate, insurer,
                     insured, vehicle, tariff, kaskoType, period, value, vehicleValue));
 
             policyKaskoServer.update();

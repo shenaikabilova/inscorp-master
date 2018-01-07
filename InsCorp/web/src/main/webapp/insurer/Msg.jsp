@@ -13,7 +13,7 @@
         int id = 0;
         String username = null;
         String password = null;
-        if(!request.getSession().isNew()) {
+        if(!request.getSession().isNew() && session!=null) {
             id = Integer.parseInt(session.getAttribute("id").toString());
             username = session.getAttribute("username").toString();
             password = session.getAttribute("password").toString();
@@ -57,14 +57,14 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="insurer/searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Каско</a>
                         <ul>
-                            <li><a href="insurer/searchInsKaskoByID.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchKaskoByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/searchKaskoByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchKaskoAll.jsp">Изведи всички</a></li>
                         </ul>

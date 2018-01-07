@@ -30,6 +30,7 @@ public class AddTariffGO extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("tariffID"));
         int vehicleTypeID = Integer.parseInt(request.getParameter("vehicleType"));
         int vehicleSubtypeID = Integer.parseInt(request.getParameter("vehicleSubtype"));
+        System.out.println(request.getParameter("zone"));
         int zone = Integer.parseInt(request.getParameter("zone"));
         double value = Double.parseDouble(request.getParameter("value"));
 

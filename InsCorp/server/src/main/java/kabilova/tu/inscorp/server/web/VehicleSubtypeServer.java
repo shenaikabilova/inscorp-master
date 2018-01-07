@@ -27,6 +27,6 @@ public class VehicleSubtypeServer {
 
     public void update() { vehicleSubtypeEP.update();}
 
-    public void delete() { vehicleSubtypeEP.delete(); }
+    public void delete() throws InsCorpException { vehicleSubtypeEP.delete(); }
 
 }

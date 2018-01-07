@@ -11,5 +11,5 @@ public interface CrudDao<T> {
     void create (T t) throws InsCorpException;
     List read();
     void update(T t);
-    void delete(T t);
+    void delete(T t) throws InsCorpException;
 }

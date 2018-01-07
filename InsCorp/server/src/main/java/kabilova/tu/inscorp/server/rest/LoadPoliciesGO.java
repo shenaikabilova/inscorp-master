@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import kabilova.tu.inscorp.daoimpl.hb.PolicyDaoImpl;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
@@ -26,7 +27,12 @@ public class LoadPoliciesGO {
         insured.setId(user);
 
         PolicyEP policyEP = new PolicyEP(new PolicyDaoImpl());
-        List<GO> policies =  policyEP.loadPoliciesGO(insured);
+        List<GO> policies = null;
+        try {
+            policies = policyEP.loadPoliciesGO(insured);
+        } catch (InsCorpException e) {
+            e.printStackTrace();
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         try {

@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;
 import kabilova.tu.inscorp.server.web.PolicyServer;
@@ -38,13 +39,37 @@ public class SearchPolicyByID extends HttpServlet {
                 GO go = new GO();
                 go.setPolicaID(policyID);
                 policyServer = new PolicyServer(go);
-                request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                try {
+                    if(policyServer.getPolicyByPolicyNum() instanceof GO) {
+                        request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                    } else{
+                        request.setAttribute("msg", "Не е намерена полица!");
+                        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                        view.forward(request, response);
+                    }
+                } catch (InsCorpException e) {
+                    request.setAttribute("msg", e.getMessage());
+                    RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                    view.forward(request, response);
+                }
                 rd = request.getRequestDispatcher("insurer/searchGOByIdResult.jsp");
             } else if (request.getServletPath().equals("/searchKaskoByID")) {
                 Kasko kasko = new Kasko();
                 kasko.setPolicaID(policyID);
                 policyServer = new PolicyServer(kasko);
-                request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                try {
+                    if(policyServer.getPolicyByPolicyNum() instanceof Kasko) {
+                            request.setAttribute("result", policyServer.getPolicyByPolicyNum());
+                    } else{
+                        request.setAttribute("msg", "Не е намерена полица!");
+                        RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                        view.forward(request, response);
+                    }
+                } catch (InsCorpException e) {
+                    request.setAttribute("msg", e.getMessage());
+                    RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                    view.forward(request, response);
+                }
                 rd = request.getRequestDispatcher("insurer/searchKaskoByIdResult.jsp");
             }
 

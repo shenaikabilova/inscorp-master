@@ -94,8 +94,8 @@
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>Служебен №</label>
-                        <input class="field" type="text" name="username" placeholder="Въведете № на застраховател" >
+                        <label>Потребителско име</label>
+                        <input class="field" type="text" name="username" placeholder="Потребителско име" >
                     </div>
                 </div>
                 <input type="submit" value="Изтрий">

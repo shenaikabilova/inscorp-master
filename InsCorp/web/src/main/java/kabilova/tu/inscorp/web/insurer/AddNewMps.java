@@ -28,6 +28,8 @@ public class AddNewMps extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         int insuredID = Integer.parseInt(request.getParameter("insuredID"));
         String regNum = request.getParameter("regNum");
         String regCity = request.getParameter("regCity");
@@ -39,10 +41,10 @@ public class AddNewMps extends HttpServlet {
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         String firstReg =  request.getParameter("firstReg");
-        int years = Integer.parseInt(request.getParameter("years"));
+        int years = request.getParameter("years") != "" ? Integer.parseInt(request.getParameter("years")) : 0;
         double engine = Double.parseDouble(request.getParameter("engine"));
         String color = request.getParameter("color");
-        int placeNumber = Integer.parseInt(request.getParameter("placeNumber"));
+        int placeNumber = request.getParameter("placeNumber") != "" ? Integer.parseInt(request.getParameter("placeNumber")) : 0;
 
         if(insuredID==0 || regNum.trim().equals("") || regCity.trim().equals("") || zone==0 || rama.trim().equals("") ||
            typeID==0 || subtypeID==0 || country.trim().equals("") || brand.trim().equals("") || model.trim().equals("") ||
@@ -51,14 +53,13 @@ public class AddNewMps extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
             view.forward(request, response);
         } else {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Calendar calendar = Calendar.getInstance();
             try {
                 calendar.setTime(simpleDateFormat.parse(firstReg));
             } catch (ParseException e) {
                 System.out.println("Exception :" + e);
             }
-
 
             Insured insured = new Insured();
             insured.setId(insuredID);
@@ -73,6 +74,7 @@ public class AddNewMps extends HttpServlet {
             try {
                 vehicleServer.create();
             } catch (InsCorpException e) {
+//                String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
                 request.setAttribute("msg", e.getMessage());
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);

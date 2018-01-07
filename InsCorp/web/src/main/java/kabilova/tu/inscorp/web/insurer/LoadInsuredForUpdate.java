@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.server.web.InsuredServer;
 import kabilova.tu.inscorp.model.user.Insured;
 
@@ -20,6 +21,8 @@ public class LoadInsuredForUpdate extends HttpServlet{
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String searchByEgn = request.getParameter("clientEGN");
 
         if(searchByEgn.trim().equals("")) {
@@ -32,9 +35,18 @@ public class LoadInsuredForUpdate extends HttpServlet{
             insured.setEgn(searchByEgn);
             InsuredServer insuredServer = new InsuredServer(insured);
 
-            request.setAttribute("result", insuredServer.loadByEgn());
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("insurer/updateInsured.jsp");
-            rd.forward(request, response);
+            try {
+                request.setAttribute("result", insuredServer.loadByEgn());
+
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("insurer/updateInsured.jsp");
+                rd.forward(request, response);
+
+            } catch (InsCorpException e) {
+                //                String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
+            }
         }
     }
 }

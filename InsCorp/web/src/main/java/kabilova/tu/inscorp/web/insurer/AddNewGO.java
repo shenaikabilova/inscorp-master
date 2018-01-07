@@ -36,14 +36,18 @@ public class AddNewGO extends HttpServlet {
         int insurerID = Integer.parseInt(request.getParameter("insID"));
         int insuredID = Integer.parseInt(request.getParameter("insuredID"));
         int vehicleID = Integer.parseInt(request.getParameter("vehicleID"));
+        String strFromDate = request.getParameter("fromDate");
+        String strToDate = request.getParameter("toDate");
+        int tariffID = Integer.parseInt(request.getParameter("tariffID"));
+        int period = Integer.parseInt(request.getParameter("period"));
+        double value = Double.parseDouble(request.getParameter("value"));
 
-        if(policaID.trim().equals("") || insuredID==0 || insurerID==0 || vehicleID==0) {
+        if(policaID.trim().equals("") || insuredID==0 || insurerID==0 || vehicleID==0 || strFromDate.trim().equals("")
+                || strToDate.trim().equals("") || tariffID==0 || period==0 || value==0) {
             request.setAttribute("msg", "Моля, попълнете всички полета!");
             RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
             view.forward(request, response);
         } else {
-            String strFromDate = request.getParameter("fromDate");
-            String strToDate = request.getParameter("toDate");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Calendar calendarFromDate = Calendar.getInstance();
             Calendar calendarToDate = Calendar.getInstance();
@@ -53,11 +57,6 @@ public class AddNewGO extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            System.out.println(calendarFromDate.getTime());
-
-            int tariffID = Integer.parseInt(request.getParameter("tariffID"));
-            int period = Integer.parseInt(request.getParameter("period"));
-            double value = Double.parseDouble(request.getParameter("value"));
 
             Insurer insurer = new Insurer();
             Insured insured = new Insured();
@@ -72,15 +71,15 @@ public class AddNewGO extends HttpServlet {
                     insured, vehicle, tariff, period, value));
             try {
                 policyGOServer.create();
+
+                request.setAttribute("msg", "Успешен запис");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
             } catch (InsCorpException e) {
                 request.setAttribute("msg", e.getMessage());
                 RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
                 view.forward(request, response);
             }
-
-            request.setAttribute("msg", "Успешен запис");
-            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-            view.forward(request, response);
         }
     }
 }

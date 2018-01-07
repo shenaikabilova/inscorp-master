@@ -27,7 +27,7 @@ public class VehicleServer {
 
     public void update() { vehicleEP.update(); }
 
-    public void delete() { vehicleEP.delete(); }
+    public void delete() throws InsCorpException{ vehicleEP.delete(); }
 
     public Vehicle loadVehicle() { return vehicleEP.loadVehicle(); }
 

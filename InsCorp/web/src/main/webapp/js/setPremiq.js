@@ -22,12 +22,22 @@ function setGOPremiq() {
 
 function setKaskoPremiq() {
     var vehicleValue = document.getElementById("vehicleValue").value;
-    var vehicleInsValue = document.getElementById("vehicleInsValue").value/100;
+    var vehicleInsValue = document.getElementById("kaskoPercent").value/100;
     var otstapki = document.getElementById("insOtstapki").value;
     var nadbavki = document.getElementById("insNadbavki").value;
 
     if(vehicleValue == null || vehicleValue == ""){
-        document.getElementById("vehicleValue").value = 0;
+        //document.getElementById("vehicleValue").value = 0;
         document.getElementById("value").value = parseFloat(vehicleValue)*parseFloat(vehicleInsValue);
     }
+    if(nadbavki == null || nadbavki == "") {
+        document.getElementById("insNadbavki").value = 0;
+        document.getElementById("value").value = (parseFloat(premiq)-parseFloat(otstapki)+parseFloat(nadbavki));
+    }
+    if(otstapki == null || otstapki == "") {
+        document.getElementById("insOtstapki").value = 0;
+        document.getElementById("value").value = (parseFloat(premiq)-parseFloat(otstapki)+parseFloat(nadbavki));
+    }
+
+    document.getElementById("value").value = (parseFloat(vehicleValue)*parseFloat(vehicleInsValue))-parseFloat(otstapki)+parseFloat(nadbavki);
 }

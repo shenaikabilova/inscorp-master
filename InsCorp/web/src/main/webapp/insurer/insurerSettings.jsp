@@ -17,13 +17,13 @@
         int id = 0;
         String username = null;
         String password = null;
-        if(!request.getSession().isNew()) {
+        if(!request.getSession().isNew() && session!=null) {
             id = Integer.parseInt(session.getAttribute("id").toString());
             username = session.getAttribute("username").toString();
             password = session.getAttribute("password").toString();
         }
         else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("insurer/login.jsp");
         }
     %>
     <title><%=username %></title>
@@ -101,8 +101,7 @@
             %>
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" id="insID" name="insID" value=<%=insurer.getId()%>>
+                        <input type="hidden" class="field" id="insID" name="insID" value=<%=insurer.getId()%> readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -156,7 +155,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Телефонен №</label>
-                        <input type="number" class="field" id="phoneNumber" value=<%=insurer.getPhoneNumber()%>>
+                        <input type="text" class="field" id="phoneNumber" name="phoneNumber" value=<%=insurer.getPhoneNumber()%> maxlength="10">
                     </div>
                 </div>
                 <% } %>

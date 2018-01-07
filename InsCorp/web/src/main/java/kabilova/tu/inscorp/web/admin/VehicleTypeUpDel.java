@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.admin;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.server.web.VehicleTypeServer;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
@@ -57,7 +58,14 @@ public class VehicleTypeUpDel extends HttpServlet {
                 }
 
                 if (canDelete) {
-                    vehicleTypeServer.delete();
+                    try {
+                        vehicleTypeServer.delete();
+                    } catch (InsCorpException e) {
+                        String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                        request.setAttribute("msg", errorMsg);
+                        RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                        view.forward(request, response);
+                    }
 
                     request.setAttribute("errmsg", "Успешен запис!");
                     RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");

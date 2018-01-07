@@ -42,11 +42,7 @@ public class AddVehicleSubtype extends HttpServlet{
             VehicleSubtypeServer vehicleSubtypeServer = new VehicleSubtypeServer(vehicleSubtype);
             try {
                 vehicleSubtypeServer.create();
-            } catch (InsCorpException e) {
-                request.setAttribute("errmsg", e.getMessage());
-                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
-                view.forward(request, response);
-            }
+
 
             TariffGO tariffGO = new TariffGO();
             tariffGO.setVechileType(vehicleType);
@@ -78,6 +74,12 @@ public class AddVehicleSubtype extends HttpServlet{
             request.setAttribute("errmsg", "Успешен запис!");
             RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
             view.forward(request, response);
+
+            } catch (InsCorpException e) {
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("admin/AdminPanelMsg.jsp");
+                view.forward(request, response);
+            }
         }
     }
 }

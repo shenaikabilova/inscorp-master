@@ -102,7 +102,7 @@
             <div class="form-row">
                 <div class="form-row-inner">
                     <label>Регистрационен №</label>
-                    <input type="text" id="regNum" name="regNum" placeholder="Регистрационен №">
+                    <input type="text" class="field" id="regNum" name="regNum" placeholder="Регистрационен №">
                 </div>
             </div>
             <input type="submit" value="Намери">

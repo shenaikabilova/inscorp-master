@@ -31,7 +31,7 @@ public class TariffServer {
         tariffEP.update();
     }
 
-    public void delete() {
+    public void delete() throws InsCorpException {
         tariffEP.delete();
     }
 }

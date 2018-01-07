@@ -16,19 +16,6 @@
 <html>
 <head>
     <%
-//    String userName = null;
-//    Cookie[] cookies = request.getCookies();
-//    if(cookies != null) {
-//    for(Cookie cookie: cookies) {
-//    if(cookie.getName().equals("user")) {
-//    userName = cookie.getValue();
-//    }
-//    }
-//    }
-//    if(userName == null) {
-//    response.sendRedirect("login.jsp");
-//    }
-
         int id = 0;
         String username = null;
         String password = null;
@@ -105,7 +92,7 @@
                 <ul>
                     <li><a href="#">Гражданска отговорност</a>
                         <ul>
-                            <li><a href="insurer/searchGO.jsp">Търсене по №</a></li>
+                            <li><a href="insurer/searchGOByID.jsp">Търсене по №</a></li>
                             <li><a href="insurer/seachGOByInsurer.jsp">Търсене по текущ застраховател</a></li>
                             <li><a href="insurer/searchGOAll.jsp">Изведи всички</a></li>
                         </ul>
@@ -142,46 +129,45 @@
                     <h4>Данни за собственик</h4>
                     <div class="form-row">
                         <div class="form-row-inner">
-                            <label>ID</label>
-                            <input type="text" class="field" name="insuredID" value=<%=insured.getId()%>>
+                            <input type="hidden" class="field" name="insuredID" value=<%=insured.getId()%> readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Име</label>
-                            <input type="text" class="field" name="insuredFirstName" value=<%=insured.getFirstName()%> maxlength="50">
+                            <input type="text" class="field" name="insuredFirstName" value=<%=insured.getFirstName()%> maxlength="50" readonly>
                             <label>Презиме</label></td>
-                            <input type="text" class="field" id="secondName" name="insuredSecondName" value=<%=insured.getSecondName()%> size="50" maxlength="50">
+                            <input type="text" class="field" id="secondName" name="insuredSecondName" value=<%=insured.getSecondName()%> size="50" maxlength="50" readonly>
                             <label>Фамилия</label></td>
-                            <input type="text" class="field" name="insuredLastName" value=<%=insured.getLastName()%> size="30" maxlength="50">
+                            <input type="text" class="field" name="insuredLastName" value=<%=insured.getLastName()%> size="30" maxlength="50" readonly>
                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>ЕГН</label>
-                            <input type="number" class="field" id="EGN" name="EGN" value=<%=insured.getEgn()%> maxlength="10">
+                            <input type="number" class="field" id="EGN" name="EGN" value=<%=insured.getEgn()%> maxlength="10" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Държава</label>
-                            <input type="text" class="field" id="country" name="country" value=<%=insured.getCountry()%> maxlength="50">
+                            <input type="text" class="field" id="country" name="country" value=<%=insured.getCountry()%> maxlength="50" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label >Пощенски код</label>
-                            <input type="text" class="field" name="pKod" value=<%=insured.getPostCode()%> size="20" maxlength="4">
+                            <input type="text" class="field" name="pKod" value=<%=insured.getPostCode()%> size="20" maxlength="4" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Град/Село</label>
-                            <input type="text" class="field" id="city" name="city" value=<%=insured.getCity()%> maxlength="50">
+                            <input type="text" class="field" id="city" name="city" value=<%=insured.getCity()%> maxlength="50" readonly>
                         </div>
                         <div class="form-row-inner">
                             <label>Адрес</label>
-                            <input type="text" class="field" id="address" name="address" value=<%=insured.getAddress()%> maxlength="100">
+                            <input type="text" class="field" id="address" name="address" value=<%=insured.getAddress()%> maxlength="100" readonly>
                         </div>
                     </div>
                 </div>

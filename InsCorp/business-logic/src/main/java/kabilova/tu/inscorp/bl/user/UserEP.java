@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by ShenaiKabilova
  */
-public class UserEP<T> {
+public class UserEP {
     private User user;
     private UserDao dao;
 
@@ -21,7 +21,7 @@ public class UserEP<T> {
         this.dao = dao;
     }
 
-    public User loadUser(String username, String password) {
+    public User loadUser(String username, String password) throws InsCorpException {
         return dao.loadUser(username, password);
     }
 
@@ -37,11 +37,11 @@ public class UserEP<T> {
         dao.update(user);
     }
 
-    public void delete() {
+    public void delete() throws InsCorpException {
         dao.delete(user);
     }
 
-    public User loadByUsername() { return dao.loadByUsername(user.getUsername()); }
+    public User loadByUsername()throws InsCorpException  { return dao.loadByUsername(user.getUsername()); }
 
     public List<Insurer> readInsurers() { return dao.readInsurers(); }
 }

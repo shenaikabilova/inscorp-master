@@ -102,7 +102,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>ЕГН</label>
-                        <input type="text" name="searchEGN" placeholder="ЕГН">
+                        <input type="text" class="field" name="searchEGN" placeholder="ЕГН">
                     </div>
                 </div>
                 <input type="submit" value="Търсене">

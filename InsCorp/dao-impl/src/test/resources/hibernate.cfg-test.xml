@@ -9,11 +9,16 @@
         <property name="test.db.rebuildSchema">true</property>
         <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
         <property name="hibernate.connection.url">jdbc:hsqldb:mem:testmemdb;ifexists=false</property>
-        <property name="hibernate.connection.username">INSCORP</property>
-        <property name="hibernate.connection.password">INSCORP</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">""</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.show_sql">true</property>
 
         <mapping resource="hbm/User.hbm.xml"/>
+        <mapping resource="hbm/Vehicle.hbm.xml"/>
+        <mapping resource="hbm/VehicleType.hbm.xml"/>
+        <mapping resource="hbm/VehicleSubtype.hbm.xml"/>
+        <mapping resource="hbm/Policy.hbm.xml"/>
+        <mapping resource="hbm/Tariff.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

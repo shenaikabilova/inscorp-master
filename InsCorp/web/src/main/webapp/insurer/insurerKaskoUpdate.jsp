@@ -1,4 +1,5 @@
-<%@ page import="kabilova.tu.inscorp.model.policy.Kasko" %><%--
+<%@ page import="kabilova.tu.inscorp.model.policy.Kasko" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: AcerPC
   Date: 20.10.2017 г.
@@ -30,9 +31,9 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="js/Kasko/calendarKasko.js"></script>
     <script type="text/javascript" src="js/Kasko/setKaskoSettings.js"></script>
-    <script src="js/Kasko/setKaskoValue.js"></script>
-    <script src="js/validate.js"></script>
-    <script src="js/GO/calendarGO.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/setPremiq.js"></script>
+    <script src="../js/validate.js"></script>
 </head>
 
 <body onload="addList()">
@@ -94,78 +95,85 @@
 
 <div class="newKasko">
     <div class="shell">
-        <h3>Сключване на застраховка "Каско"</h3>
+        <h3>Редактиране на застраховка "Каско"</h3>
         <form action="/updateKasko" method="post">
             <%
                 Kasko kasko = (Kasko) request.getAttribute("policy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             %>
             <div class="form-section">
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <input type="hidden" class="field" id="insID" name="insID" value=<%=id%> readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>Застраховател</label>
+                        <input class="field" type="text" value=<%=username%> name="userName" maxlength="6" readonly>
+                    </div>
+                </div>
                 <h4>Застрахователна полица ГО на МПС</h4>
-                    <div class="form-row">
-                        <div class="form-row-inner">
-                            <label>№ на полица</label>
-                            <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6" value=<%=kasko.getPolicaID()%> readonly>
-                        </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <input type="hidden" class="field" id="polID" name="polID" value=<%=kasko.getId()%> readonly>
                     </div>
-                    <div class="form-row">
-                        <div class="form-row-inner">
-                            <label>Застраховател ID</label>
-                            <input type="text" class="field" id="insID" name="insID" value=<%=id%>>
-                        </div>
-                        <div class="form-row-inner">
-                            <label>Застраховател</label>
-                            <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row-inner">
+                        <label>№ на полица</label>
+                        <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6" value=<%=kasko.getPolicaID()%> readonly>
                     </div>
+                </div>
+
             </div>
             <div class="form-section">
                 <h4>Застрахован</h4>
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>ID</label>
-                        <input type="text" class="field" name="insuredID" value=<%=kasko.getVehicle().getInsured().getId()%>>
+                        <input type="hidden" class="field" name="insuredID" value=<%=kasko.getVehicle().getInsured().getId()%> readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Собственик</label>
-                        <input type="text" class="field" name="insuredFirstName" value=<%=kasko.getInsured().getFirstName()%> size="30" maxlength="50">
-                        <input type="text" class="field" name="insuredSecondName" value=<%=kasko.getInsured().getSecondName()%> size="30" maxlength="50">
-                        <input type="text" class="field" name="insuredLastName" value=<%=kasko.getInsured().getLastName()%> size="30" maxlength="50">
+                        <input type="text" class="field" name="insuredFirstName" value=<%=kasko.getInsured().getFirstName()%> size="30" maxlength="50" readonly>
+                        <input type="text" class="field" name="insuredSecondName" value=<%=kasko.getInsured().getSecondName()%> size="30" maxlength="50" readonly>
+                        <input type="text" class="field" name="insuredLastName" value=<%=kasko.getInsured().getLastName()%> size="30" maxlength="50" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>ЕГН</label>
-                        <input type="text" id="EGN" class="field" name="EGN" value=<%=kasko.getVehicle().getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
+                        <input type="text" id="EGN" class="field" name="EGN" value=<%=kasko.getVehicle().getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Държава</label>
-                        <input type="text" class="field" id="country" name="country" value=<%=kasko.getVehicle().getInsured().getCountry()%> maxlength="50"><br>
+                        <input type="text" class="field" id="country" name="country" value=<%=kasko.getVehicle().getInsured().getCountry()%> maxlength="50" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Пощенски код</label>
-                        <input type="text" class="field" name="pKod" value=<%=kasko.getVehicle().getInsured().getPostCode()%> size="20" maxlength="4">
+                        <input type="text" class="field" name="pKod" value=<%=kasko.getVehicle().getInsured().getPostCode()%> size="20" maxlength="4" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Град/Село</label>
-                        <input type="text" class="field" id="city" name="city" value=<%=kasko.getVehicle().getInsured().getCity()%> maxlength="50">
+                        <input type="text" class="field" id="city" name="city" value=<%=kasko.getVehicle().getInsured().getCity()%> maxlength="50" readonly>
                     </div>
                     <div class="form-row-inner">
                         <label>Адрес</label>
-                        <input type="text" class="field" id="address" name="address" value=<%=kasko.getVehicle().getInsured().getAddress()%> maxlength="100">
+                        <input type="text" class="field" id="address" name="address" value=<%=kasko.getVehicle().getInsured().getAddress()%> maxlength="100" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Мобилен телефон</label>
-                        <input type="text" class="field" name="mobilePhone" value=<%=kasko.getVehicle().getInsured().getPhoneNumber()%> size="30" maxlength="10">
+                        <input type="text" class="field" name="mobilePhone" value=<%=kasko.getVehicle().getInsured().getPhoneNumber()%> size="30" maxlength="10" readonly>
                     </div>
                 </div>
             </div>
@@ -173,27 +181,26 @@
                 <h4>Данни за МПС</h4>
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>МПС - id</label>
-                        <input type="text" class="field" id="vehicleID" name="vehicleID" value=<%=kasko.getVehicle().getVehicleID()%>>
+                        <input type="hidden" class="field" id="vehicleID" name="vehicleID" value=<%=kasko.getVehicle().getVehicleID()%> readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="registrationNumber">Регистрационен №</label>
-                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" value=<%=kasko.getVehicle().getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
+                        <input type="text" id="registrationNumber" class="field" name="registrationNumber" value=<%=kasko.getVehicle().getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8" readonly>
                     </div>
                     <div class="form-row-inner">
                         <label>Град</label>
-                        <input type="text" class="field" id="regCity" name="regCity" value=<%=kasko.getVehicle().getRegCity()%>>
+                        <input type="text" class="field" id="regCity" name="regCity" value=<%=kasko.getVehicle().getRegCity()%> readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label for="zone">Зона</label>
                         <select id="zone" class="field" name="zone" onchange="sum();">
-                            <option value="1">Зона І - София</option>
-                            <option value="2">Зона IІ - Пловдив, Варна и Бургас</option>
-                            <option value="3">Зона ІІІ - Други</option>
+                            <option <%if(kasko.getVehicle().getZone()==1) {%> selected <% } %>>Зона І - София</option>
+                            <option <%if(kasko.getVehicle().getZone()==2) {%> selected <% } %>>Зона IІ - Пловдив, Варна и Бургас</option>
+                            <option <%if(kasko.getVehicle().getZone()==3) {%> selected <% } %>>Зона ІІІ - Други</option>
                         </select>
                     </div>
                 </div>
@@ -214,7 +221,7 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Рама №</label>
-                        <input type="text" class="field" name="ramaN" value=<%=kasko.getVehicle().getRAMA()%> size="30" maxlength="17">
+                        <input type="text" class="field" name="ramaN" value=<%=kasko.getVehicle().getRAMA()%> size="30" maxlength="17" readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -226,7 +233,7 @@
                     </div>
                     <div class="form-row-inner">
                         <label>Модел</label>
-                        <input type="text" class="field" name="vehicleModel" value=<%=kasko.getVehicle().getModel()%> size="30" maxlength="50">
+                        <input type="text" class="field" name="vehicleModel" value=<%=kasko.getVehicle().getModel()%> size="30" maxlength="50" readonly>
                     </div>
                     <div class="form-row-inner">
                         <label>Двигател</label>
@@ -244,11 +251,11 @@
                 <div class="form-row">
                     <div class="form-row-inner">
                         <label>Начало</label>
-                        <input class="field" type="text" placeholder="Начална дата" id="datepicker1" name="fromDate">
+                        <input class="field" type="text" placeholder="Начална дата" id="datepicker1" name="fromDate" value=<%=simpleDateFormat.format(kasko.getDateFrom().getTime())%>>
                     </div>
                     <div class="form-row-inner">
                         <label>Край</label>
-                        <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate">
+                        <input class="field" type="text" placeholder="Крайна дата" id="datepicker2" name="toDate" value=<%=simpleDateFormat.format(kasko.getDateTo().getTime())%>>
                     </div>
                 </div>
                 <div class="form-row">
@@ -264,15 +271,15 @@
                <h4>Данни по полица</h4>
                <div class="form-row">
                    <div class="form-row-inner">
-                        <label>Тарифа ID</label>
-                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=kasko.getTariffKasko().getTariffID()%>>
+                        <input type="hidden" class="field" id="tariffID" name="tariffID" value=<%=kasko.getTariffKasko().getTariffID()%> readonly>
                    </div>
                </div>
                <div class="form-row">
                    <div class="form-row-inner">
                         <label>Оценка на МПС</label>
                         <input type="text" class="field" id="vehicleValue" name="vehicleValue" placeholder="Оценка на МПС"
-                           onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();">
+                           onchange="setKaskoPremiq();" onkeypress="onchange();" onpaste="this.onchange();" oninput="onchange();"
+                           value=<%=kasko.getVehicleValue()%> >
                     </div>
                </div>
                <div class="form-row">

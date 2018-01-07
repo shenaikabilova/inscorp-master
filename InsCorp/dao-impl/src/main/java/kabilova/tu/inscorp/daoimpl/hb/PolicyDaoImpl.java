@@ -2,6 +2,7 @@ package kabilova.tu.inscorp.daoimpl.hb;
 
 import kabilova.tu.inscorp.dao.PolicyDao;
 import kabilova.tu.inscorp.daoimpl.hbconfig.HibernateUtil;
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.policy.Policy;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.User;
@@ -12,6 +13,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.Calendar;
 import java.util.List;
@@ -86,9 +88,6 @@ public class PolicyDaoImpl implements PolicyDao {
                 .add(Restrictions.ge("dateTo", Calendar.getInstance()))
                 .list();
 
-        if(policies.size() < 1) {
-            throw  new IllegalArgumentException("cannot find policies");
-        }
         return policies;
     }
 
@@ -103,14 +102,11 @@ public class PolicyDaoImpl implements PolicyDao {
                 .add(Restrictions.ge("dateTo", Calendar.getInstance()))
                 .list();
 
-        if(policies.size() < 1) {
-            throw  new IllegalArgumentException("cannot find policies");
-        }
         return policies;
     }
 
     @Override
-    public List<GO> loadPoliciesGO(User user) {
+    public List<GO> loadPoliciesGO(User user) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -128,13 +124,13 @@ public class PolicyDaoImpl implements PolicyDao {
                     .list();
         }
         if(policies.size() < 1) {
-            throw  new IllegalArgumentException("cannot find policies");
+            throw new InsCorpException("Съществуваща уникална стойност!");
         }
         return policies;
     }
 
     @Override
-    public List<Kasko> loadPoliciesKasko(User user) {
+    public List<Kasko> loadPoliciesKasko(User user) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -151,13 +147,13 @@ public class PolicyDaoImpl implements PolicyDao {
                     .list();
         }
         if(policies.size() < 1) {
-            throw  new IllegalArgumentException("cannot find policies");
+            throw new InsCorpException("Съществуваща уникална стойност!");
         }
         return policies;
     }
 
     @Override
-    public List<GO> loadAllGO() {
+    public List<GO> loadAllGO() throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -165,7 +161,7 @@ public class PolicyDaoImpl implements PolicyDao {
                     .createCriteria(GO.class)
                     .list();
         if(policies.size() < 1) {
-            throw  new IllegalArgumentException("cannot find policies");
+            throw new InsCorpException("Съществуваща уникална стойност!");
         }
         return policies;
     }
@@ -198,7 +194,7 @@ public class PolicyDaoImpl implements PolicyDao {
     }
 
     @Override
-    public Policy getPolicaByPolicaNum(String policaNum) {
+    public Policy getPolicaByPolicaNum(String policaNum) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -208,7 +204,7 @@ public class PolicyDaoImpl implements PolicyDao {
                 .list();
 
         if (policies.size() < 1) {
-            throw new IllegalArgumentException("cannot find policies"); //TODO
+            throw new InsCorpException("Не е намерена полица!");
         }
         return policies.get(0);
     }

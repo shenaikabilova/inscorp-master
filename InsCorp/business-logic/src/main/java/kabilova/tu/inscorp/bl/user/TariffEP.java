@@ -32,7 +32,7 @@ public class TariffEP {
         dao.update(tariff);
     }
 
-    public void delete() {
+    public void delete() throws InsCorpException {
         dao.delete(tariff);
     }
 }

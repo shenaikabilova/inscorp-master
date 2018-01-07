@@ -1,5 +1,6 @@
 package kabilova.tu.inscorp.web.insurer;
 
+import kabilova.tu.inscorp.model.exception.InsCorpException;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.server.web.InsuredServer;
@@ -39,15 +40,24 @@ public class ChangeOwner extends HttpServlet {
             Vehicle vehicle = new Vehicle();
             vehicle.setRegNum(regNum);
             InsuredServer insuredServer = new InsuredServer(insured);
-            insured.setId(insuredServer.loadByEgn().getId());
-            vehicle.setInsured(insured);
+            try {
+                insured.setId(insuredServer.loadByEgn().getId());
 
-            VehicleServer vehicleServer = new VehicleServer();
-            vehicleServer.update();
+                vehicle.setInsured(insured);
 
-            request.setAttribute("msg", "Успешен запис");
-            RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
-            view.forward(request, response);
+                VehicleServer vehicleServer = new VehicleServer();
+                vehicleServer.update();
+
+                request.setAttribute("msg", "Успешен запис");
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
+
+            } catch (InsCorpException e) {
+//                                String errorMsg = new String(e.getMessage().getBytes(), "UTF-8");
+                request.setAttribute("errmsg", e.getMessage());
+                RequestDispatcher view = request.getRequestDispatcher("insurer/Msg.jsp");
+                view.forward(request, response);
+            }
         }
     }
 }

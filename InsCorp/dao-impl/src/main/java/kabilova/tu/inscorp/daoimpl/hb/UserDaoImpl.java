@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public User loadUser(String username, String password) {
+    public User loadUser(String username, String password) throws InsCorpException {
         if (username == null || username.equals("")) {
             throw new IllegalArgumentException("Invalid username");
         }
@@ -35,8 +35,8 @@ public class UserDaoImpl implements UserDao {
                                 .add(Restrictions.like("password", password))
                                 .list();
 
-        if (user.size() > 1) {
-            throw new IllegalArgumentException("..."); //TODO
+        if (user.size() < 1) {
+            throw new InsCorpException("Няма намерен потребител!");
         }
 
         return user.get(0);
@@ -86,13 +86,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws InsCorpException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         try {
             session.delete(user);
             session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+            throw new InsCorpException("Невъзможно изтриване на потребител, който има заведени застраховки!");
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -101,7 +103,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User loadByUsername(String username) {
+    public User loadByUsername(String username) throws InsCorpException {
         if (username == null || username.equals("")) {
             throw new IllegalArgumentException("Invalid username");
         }
@@ -114,15 +116,15 @@ public class UserDaoImpl implements UserDao {
                 .add(Restrictions.like("username", username))
                 .list();
 
-        if (user.size() > 1) {
-            throw new IllegalArgumentException("..."); //TODO
+        if (user.size() < 1) {
+            throw new InsCorpException("Няма намерен потребител!");
         }
 
         return user.get(0);
     }
 
     @Override
-    public User loadByEGN(String egn) {
+    public User loadByEGN(String egn) throws InsCorpException {
         if (egn == null || egn.equals("")) {
             throw new IllegalArgumentException("Invalid egn");
         }
@@ -135,8 +137,8 @@ public class UserDaoImpl implements UserDao {
                 .add(Restrictions.like("egn", egn))
                 .list();
 
-        if (user.size() > 1) {
-            throw new IllegalArgumentException("cound not find user");
+        if (user.size() < 1) {
+            throw new InsCorpException("Няма намерен потребител!");
         }
 
         return user.get(0);

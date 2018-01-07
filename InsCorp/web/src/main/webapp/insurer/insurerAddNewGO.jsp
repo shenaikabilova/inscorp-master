@@ -101,6 +101,17 @@
         <form action="/addNewGO" method="post">
             <div class="form-section">
                 <div class="form-section">
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <input type="hidden" class="field" id="insID" name="insID" value=<%=id%> readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-inner">
+                            <label>Застрахователен агент</label>
+                            <input class="field" type="text" value=<%=username%> name="userName" maxlength="6" readonly>
+                        </div>
+                    </div>
                     <h4>Застрахователна полица ГО на МПС</h4>
                     <div class="form-row">
                         <div class="form-row-inner">
@@ -108,32 +119,11 @@
                         <%
                             PolicyServer policyServer = new PolicyServer(new GO());
                             String policyLastID = policyServer.getLastPolicyID();
-                            int countZeros=0;
-                            int max=0;
-                            for(int i=0; i<policyLastID.length(); i++) {
-                                char c = policyLastID.charAt(i);
-                                if(c == '0') {
-                                    countZeros++;
-                                    max=countZeros;
-                                }
-                                else countZeros=0;
-                            }
-                            int i = Integer.parseInt(policyLastID);
-                            i++;
-                            max = max + String.valueOf(i).length();
-                            String newPolicyID = String.format("%0"+max+"d", i);
+
+                            int i = Integer.parseInt(policyServer.getLastPolicyID());
+                            String newPolicyID = String.format("%0"+String.valueOf(policyLastID).length()+"d", ++i);
                         %>
                         <input class="field" id="policaN" type="text" name="policaN" readonly="readonly" maxlength="6" value=<%=newPolicyID%> readonly>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-row-inner">
-                            <label>Застраховател ID</label>
-                            <input type="text" class="field" id="insID" name="insID" value=<%=id%>>
-                         </div>
-                        <div class="form-row-inner">
-                            <label>Застраховател</label>
-                            <input class="field" type="text" value=<%=username%> name="userName" readonly="readonly" maxlength="6">
                         </div>
                     </div>
                 </div>
@@ -145,54 +135,53 @@
                     %>
                     <div class="form-row">
                         <div class="form-row-inner">
-                            <label>ID</label>
-                            <input type="text" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%>>
+                            <input type="hidden" class="field" name="insuredID" value=<%=vehicle.getInsured().getId()%> readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Собственик</label>
-                            <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50">
-                            <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="30" maxlength="50">
-                            <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50">
+                            <input type="text" class="field" name="insuredFirstName" value=<%=vehicle.getInsured().getFirstName()%> size="30" maxlength="50" readonly>
+                            <input type="text" class="field" name="insuredSecondName" value=<%=vehicle.getInsured().getSecondName()%> size="30" maxlength="50" readonly>
+                            <input type="text" class="field" name="insuredLastName" value=<%=vehicle.getInsured().getLastName()%> size="30" maxlength="50" readonly>
                         </div>
                       </div>
                     <div class="form-row">
                         <label>ЕГН</label>
-                        <input type="text" id="EGN" class="field" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();">
+                        <input type="text" id="EGN" class="field" name="EGN" value=<%=vehicle.getInsured().getEgn()%> maxlength="10" onchange="isValidateEGN();" readonly>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Държава</label>
-                            <input type="text" class="field" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%>>
+                            <input type="text" class="field" id="country" name="country" value=<%=vehicle.getInsured().getCountry()%> readonly>
                         </div>
                     </div>
                    <div class="form-row">
                        <div class="form-row-inner">
                             <label>Град/Село</label>
-                            <input type="text" class="field" id="city" name="city" value=<%=vehicle.getInsured().getCity()%>>
+                            <input type="text" class="field" id="city" name="city" value=<%=vehicle.getInsured().getCity()%> readonly>
                        </div>
                        <div class="form-row-inner">
                            <label>Адрес</label>
-                            <input type="text" class="field" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%>>
+                            <input type="text" class="field" id="address" name="address" value=<%=vehicle.getInsured().getAddress()%> readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Пощенски код</label>
-                            <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%>  maxlength="4">
+                            <input type="text" class="field" name="pKod" value=<%=vehicle.getInsured().getPostCode()%>  maxlength="4" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Мобилен телефон</label>
-                            <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> maxlength="10">
+                            <input type="text" class="field" name="mobilePhone" value=<%=vehicle.getInsured().getPhoneNumber()%> maxlength="10" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>E-mail</label>
-                            <input type="text" class="field" name="email" value=<%=vehicle.getInsured().getEmail()%>>
+                            <input type="text" class="field" name="email" value=<%=vehicle.getInsured().getEmail()%> readonly>
                         </div>
                     </div>
                 </div>
@@ -202,23 +191,23 @@
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>МПС - id</label>
-                            <input type="text" class="field" id="vehicleID" name="vehicleID" value=<%=vehicle.getVehicleID()%>>
+                            <input type="text" class="field" id="vehicleID" name="vehicleID" value=<%=vehicle.getVehicleID()%> readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label for="registrationNumber">Регистрационен №</label>
-                            <input type="text" class="field" id="registrationNumber" name="registrationNumber" value=<%=vehicle.getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8">
+                            <input type="text" class="field" id="registrationNumber" name="registrationNumber" value=<%=vehicle.getRegNum()%> size="20" onchange="isValidRegNumber();" maxlength="8" readonly>
                         </div>
                         <div class="form-row-inner">
                             <label>Град</label>
-                            <input type="text" class="field" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%>>
+                            <input type="text" class="field" id="regCity" name="regCity" value=<%=vehicle.getRegCity()%> readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label for="zone">Зона</label>
-                            <select id="zone" class="field" name="zone">
+                            <select id="zone" class="field" name="zone" readonly>
                                 <option <%if(vehicle.getZone()==1) {%> selected <% } %>>Зона І - София</option>
                                 <option <%if(vehicle.getZone()==2) {%> selected <% } %>>Зона IІ - Пловдив, Варна и Бургас</option>
                                 <option <%if(vehicle.getZone()==3) {%> selected <% } %>>Зона ІІІ - Други</option>
@@ -228,13 +217,13 @@
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label for="vehicleType">Вид МПС</label>
-                            <select id="vehicleType" class="field" name="vehicleType">
+                            <select id="vehicleType" class="field" name="vehicleType" readonly>
                                 <option value=<%=vehicle.getVehicleType().getId()%>><%=vehicle.getVehicleType().getVehicleType()%></option>
                             </select>
                         </div>
                         <div class="form-row-inner">
                             <label>Подтип</label>
-                            <select id="vehicleSubtype" class="field" name="vehicleSubtype">
+                            <select id="vehicleSubtype" class="field" name="vehicleSubtype" readonly>
                                 <option value=<%=vehicle.getVehicleSubtype().getId()%>><%=vehicle.getVehicleSubtype().getSubtype()%></option>
                             </select>
                         </div>
@@ -242,23 +231,23 @@
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Рама №</label>
-                            <input type="text" class="field" name="ramaN" value=<%=vehicle.getRAMA()%> size="30" maxlength="17">
+                            <input type="text" class="field" name="ramaN" value=<%=vehicle.getRAMA()%> size="30" maxlength="17" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-inner">
                             <label>Марка</label>
-                            <select id="vehicleBrand" class="field" name="vehicleBrand">
+                            <select id="vehicleBrand" class="field" name="vehicleBrand" readonly>
                                 <option><%=vehicle.getBrand()%></option>
                             </select>
                         </div>
                         <div class="form-row-inner">
                             <label>Модел</label>
-                            <input type="text" class="field" name="vehicleModel" value=<%=vehicle.getModel()%> size="30" maxlength="50">
+                            <input type="text" class="field" name="vehicleModel" value=<%=vehicle.getModel()%> size="30" maxlength="50" readonly>
                         </div>
                         <div class="form-row-inner">
                             <label>Двигател</label>
-                            <select id="engine" name="engine">
+                            <select id="engine" name="engine" readonly>
                                 <option <%if(vehicle.getEngine() == 1.4) { %> selected <% }%> >1.4</option>
                                 <option <%if(vehicle.getEngine() == 1.6) { %> selected <% }%> >1.6</option>
                                 <option <%if(vehicle.getEngine() == 1.8) { %> selected <% }%> >1.8</option>
@@ -266,7 +255,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+            </div>
             <div class="form-section">
                 <h4>Дата на сключване</h4>
                 <div class="form-row">
@@ -293,8 +282,7 @@
                 <h4>Застрахователна сума</h4>
                 <div class="form-row">
                     <div class="form-row-inner">
-                        <label>Тарифа ID</label>
-                        <input type="text" class="field" id="tariffID" name="tariffID" value=<%=tariffGO.getTariffID()%>>
+                        <input type="hidden" class="field" id="tariffID" name="tariffID" value=<%=tariffGO.getTariffID()%> readonly>
                     </div>
                 </div>
                 <div class="form-row">
