@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.kabilova.model.ParcelableInsured;
 import com.kabilova.model.ParcelablePolicyKasko;
-import com.kabilova.model.ParcelableTariffGO;
 import com.kabilova.model.ParcelableTariffKasko;
 import com.kabilova.model.ParcelableVehicle;
 import com.kabilova.model.ParcelableVehicleSubtype;
@@ -34,19 +33,16 @@ import java.util.Calendar;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.policy.Kasko;
-import kabilova.tu.inscorp.model.tariff.Tariff;
-import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 
-public class ActiveKaskoActivity extends AppCompatActivity {
-    final String URL_PATH = "http://10.0.2.2:4000/inscorp/loadActivePoliciesKasko";
-    ListView activePolicies;
+public class KaskoActivity extends AppCompatActivity {
+    final String URL_PATH = "http://10.0.2.2:4000/inscorp/loadPoliciesKasko";
+    ListView policies;
     List<String> list;
     List<Kasko> policiesKasko = new ArrayList<>();
     private Insured insured;
@@ -54,19 +50,18 @@ public class ActiveKaskoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_active_kasko);
-
+        setContentView(R.layout.activity_kasko);
         insured = getIntent().getParcelableExtra("insured");
-        activePolicies = (ListView) findViewById(R.id.lvActiveKasko);
+        policies = (ListView) findViewById(R.id.lvKasko);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("insured", insured.getId());
         invokeWS(requestParams);
 
-        activePolicies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        policies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ActiveKaskoActivity.this, PolicyKaskoActivity.class);
+                Intent intent = new Intent(KaskoActivity.this, PolicyKaskoActivity.class);
 
                 ParcelablePolicyKasko parcelablePolicyKasko = new ParcelablePolicyKasko();
                 parcelablePolicyKasko.setPolicaID(policiesKasko.get(position).getPolicaID());
@@ -148,6 +143,7 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                             Insured insured = new Insured();
                             insured.setId(insObj.getInt("id"));
 
+
                             JSONObject vObj = new JSONObject(jsonObject.getString("vehicle"));
                             Vehicle vehicle = new Vehicle();
                             vehicle.setVehicleID(vObj.getInt("vehicleID"));
@@ -173,6 +169,7 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                             vehicle.setPlaceNumber(vObj.getInt("placeNumber"));
 
                             kasko.setVehicle(vehicle);
+
                             kasko.setValue(jsonObject.getDouble("value"));
                             JSONObject vTariffKasko = new JSONObject(jsonObject.getString("tariffKasko"));
                             TariffKasko tariffKasko = new TariffKasko();
@@ -197,7 +194,7 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                activePolicies.setAdapter(adapter);
+                policies.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
 //                    new Handler().postDelayed(new Runnable() {
@@ -233,21 +230,21 @@ public class ActiveKaskoActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_home:
-                intent = new Intent(ActiveKaskoActivity.this, AfterLoginActivity.class);
+                intent = new Intent(KaskoActivity.this, AfterLoginActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
             case R.id.action_vehicles:
-                intent = new Intent(ActiveKaskoActivity.this, LoadVehiclesActivity.class);
+                intent = new Intent(KaskoActivity.this, LoadVehiclesActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
             case R.id.action_ins:
-                intent = new Intent(ActiveKaskoActivity.this, LoadPoliciesActivity.class);
+                intent = new Intent(KaskoActivity.this, LoadPoliciesActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
             case R.id.action_settings:
-                intent = new Intent(ActiveKaskoActivity.this, SettingsActivity.class);
+                intent = new Intent(KaskoActivity.this, SettingsActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;

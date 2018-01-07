@@ -1,15 +1,20 @@
 package com.kabilova.inscorpclient;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.kabilova.model.ParcelableInsured;
 import com.kabilova.model.ParcelablePolicyGO;
+import com.kabilova.model.ParcelableTariffGO;
 import com.kabilova.model.ParcelableVehicle;
 import com.kabilova.model.ParcelableVehicleSubtype;
 import com.kabilova.model.ParcelableVehicleType;
@@ -31,6 +36,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import kabilova.tu.inscorp.model.policy.GO;
 import kabilova.tu.inscorp.model.tariff.Tariff;
+import kabilova.tu.inscorp.model.tariff.TariffGO;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.user.Insurer;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
@@ -42,14 +48,15 @@ public class ActiveGOActivity extends AppCompatActivity {
     ListView activePolicies;
     List<String> list;
     List<GO> policiesGO = new ArrayList<>();
+    private Insured insured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_go);
 
-        final Insured insured = getIntent().getParcelableExtra("insured");
-        activePolicies = (ListView) findViewById(R.id.lvActivePolicies);
+        insured = getIntent().getParcelableExtra("insured");
+        activePolicies = (ListView) findViewById(R.id.lvActiveGO);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("insured", insured.getId());
@@ -76,14 +83,11 @@ public class ActiveGOActivity extends AppCompatActivity {
                 parcelableVehicleSubtype.setSubtype(policiesGO.get(position).getVehicle().getVehicleSubtype().getSubtype());
 
                 parcelableVehicle.setVehicleID(policiesGO.get(position).getVehicle().getVehicleID());
-//                parcelableVehicle.setInsured(((Insured) in.readParcelable(Insurer.class.getClassLoader())));
-//                parcelableVehicle.setVehicleType((VehicleType) in.readParcelable(VehicleType.class.getClassLoader()));
                 parcelableVehicle.setVehicleSubtype(parcelableVehicleSubtype);
                 parcelableVehicle.setRegNum(policiesGO.get(position).getVehicle().getRegNum());
                 parcelableVehicle.setRAMA(policiesGO.get(position).getVehicle().getRAMA());
                 parcelableVehicle.setBrand(policiesGO.get(position).getVehicle().getBrand());
                 parcelableVehicle.setModel(policiesGO.get(position).getVehicle().getModel());
-//                parcelableVehicle.setFirstReg((Calendar) in.readValue(getClass().getClassLoader()));
                 parcelableVehicle.setYears(policiesGO.get(position).getVehicle().getYears());
                 parcelableVehicle.setEngine(policiesGO.get(position).getVehicle().getEngine());
                 parcelableVehicle.setColor(policiesGO.get(position).getVehicle().getColor());
@@ -91,8 +95,13 @@ public class ActiveGOActivity extends AppCompatActivity {
 
                 parcelablePolicyGO.setVehicle(parcelableVehicle);
                 parcelablePolicyGO.setInsured(insured);
-//                parcelablePolicyGO.setTariff(policiesKasko.get(position).getTariff());
-                System.out.println("vehicle: " + policiesGO.get(position).getVehicle() );
+
+                ParcelableTariffGO parcelableTariffGO = new ParcelableTariffGO();
+                parcelableTariffGO.setZone(policiesGO.get(position).getTariffGO().getZone());
+                parcelableTariffGO.setValue(policiesGO.get(position).getTariffGO().getValue());
+
+                parcelablePolicyGO.setTariffGO(parcelableTariffGO);
+                intent.putExtra("insured", getParcelableInsured());
                 intent.putExtra("go", parcelablePolicyGO);
                 startActivity(intent);
             }
@@ -117,7 +126,7 @@ public class ActiveGOActivity extends AppCompatActivity {
                         System.out.println(jsonObject);
 
                         GO go = new GO();
-                        go.setPolicaID(jsonObject.getInt("policaID"));
+                        go.setPolicaID(jsonObject.getString("policaID"));
                         Calendar dateFrom = Calendar.getInstance();
                         Calendar dateTo = Calendar.getInstance();
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -125,13 +134,11 @@ public class ActiveGOActivity extends AppCompatActivity {
                         go.setDateFrom(dateFrom);
                         dateTo.setTime(simpleDateFormat.parse(jsonObject.getString("dateTo")));
                         go.setDateTo(dateTo);
-//                        list.add(String.valueOf(jsonObject.getString("policytype")) + " " + jsonObject.getString("dateTo"));
 
                         try {
                             JSONObject insObj = new JSONObject(jsonObject.getString("insured"));
                             Insured insured = new Insured();
                             insured.setId(insObj.getInt("id"));
-
 
                             JSONObject vObj = new JSONObject(jsonObject.getString("vehicle"));
                             Vehicle vehicle = new Vehicle();
@@ -158,10 +165,12 @@ public class ActiveGOActivity extends AppCompatActivity {
                             vehicle.setPlaceNumber(vObj.getInt("placeNumber"));
 
                             go.setVehicle(vehicle);
-
-//                            Tariff tariff = new Tariff();
-//                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
-//                            go.setTariff(tariff);
+                            JSONObject vTariffGO = new JSONObject(jsonObject.getString("tariffGO"));
+                            TariffGO tariffGO = new TariffGO();
+                            tariffGO.setTariffID(vTariffGO.getInt("tariffID"));
+                            tariffGO.setValue(vTariffGO.getDouble("value"));
+                            tariffGO.setZone(vTariffGO.getInt("zone"));
+                            go.setTariffGO(tariffGO);
 
                             policiesGO.add(go);
                             list.add(String.valueOf(jsonObject.getString("policytype")) + " " + vObj.getString("regNum"));
@@ -180,11 +189,11 @@ public class ActiveGOActivity extends AppCompatActivity {
                 activePolicies.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
-//                    new Handler().postDelayed(new Runnable() {
-//                        public void run() {
-//                            invokeWS(requestParams);
-//                        }
-//                    }, 10000);
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        invokeWS(requestParams);
+                    }
+                }, 10000);
 
             }
 
@@ -200,5 +209,58 @@ public class ActiveGOActivity extends AppCompatActivity {
                 else Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                intent = new Intent(ActiveGOActivity.this, AfterLoginActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+            case R.id.action_vehicles:
+                intent = new Intent(ActiveGOActivity.this, LoadVehiclesActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+                break;
+            case R.id.action_ins:
+                intent = new Intent(ActiveGOActivity.this, LoadPoliciesActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+                break;
+            case R.id.action_settings:
+                intent = new Intent(ActiveGOActivity.this, SettingsActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
+
+    private ParcelableInsured getParcelableInsured() {
+        ParcelableInsured parcelableInsured = new ParcelableInsured();
+        parcelableInsured.setId(insured.getId());
+        parcelableInsured.setFirstName(insured.getFirstName());
+        parcelableInsured.setSecondName(insured.getSecondName());
+        parcelableInsured.setLastName(insured.getLastName());
+        parcelableInsured.setUsername(insured.getUsername());
+        parcelableInsured.setPassword(insured.getPassword());
+        parcelableInsured.setPhoneNumber(insured.getPhoneNumber());
+        parcelableInsured.setEmail(insured.getEmail());
+        parcelableInsured.setEgn(insured.getEgn());
+        parcelableInsured.setPostCode(insured.getPostCode());
+        parcelableInsured.setCountry(insured.getCountry());
+        parcelableInsured.setCity(insured.getCity());
+        parcelableInsured.setAddress(insured.getAddress());
+        return parcelableInsured;
     }
 }

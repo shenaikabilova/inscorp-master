@@ -1,34 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_after_login"
+    android:id="@+id/activity_load_policies"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.kabilova.inscorpclient.AfterLoginActivity">
-
-    <TextView
-        android:text="Клиент:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="14dp"
-        android:id="@+id/tvWelcomeText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tvWelcomeText"
-        android:layout_marginStart="26dp"
-        android:id="@+id/etVehicleOwnerName" />
+    tools:context="com.kabilova.inscorpclient.LoadPoliciesActivity">
 
     <TextView
         android:text="Видове застраховки"
@@ -46,15 +26,22 @@
         android:layout_below="@+id/textView18"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:id="@+id/bGO" />
+        android:id="@+id/bAllGO" />
+
+    <TextView
+        android:text="История на застраховктие"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWelcomeText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Каско"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:id="@+id/bKasko"
-        android:layout_below="@+id/bGO"
+        android:layout_marginTop="16dp"
+        android:id="@+id/bAllKasko"
+        android:layout_below="@+id/bAllGO"
         android:layout_centerHorizontal="true" />
-
 </RelativeLayout>

@@ -5,37 +5,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
 
 import com.kabilova.model.ParcelableInsured;
 
 import kabilova.tu.inscorp.model.user.Insured;
 
-public class SettingsActivity extends AppCompatActivity {
+public class LoadPoliciesActivity extends AppCompatActivity {
     private Insured insured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_load_policies);
 
         insured = getIntent().getParcelableExtra("insured");
 
-        EditText etName = (EditText) findViewById(R.id.etName);
-        EditText etEGN = (EditText) findViewById(R.id.etEGN);
-        EditText etCounty = (EditText) findViewById(R.id.etUserCounty);
-        EditText etCity = (EditText) findViewById(R.id.etCity);
-        EditText etPK = (EditText) findViewById(R.id.etPK);
-        EditText etPhone = (EditText) findViewById(R.id.etPhone);
-        EditText etEmail = (EditText) findViewById(R.id.etEmail);
+        Button bAllGO = (Button) findViewById(R.id.bAllGO);
+        Button bAllKasko = (Button) findViewById(R.id.bAllKasko);
 
-        etName.setText(insured.getFirstName() + " " + insured.getSecondName() + " " + insured.getLastName());
-        etEGN.setText(insured.getEgn());
-        etCounty.setText(insured.getCountry());
-        etCity.setText(insured.getCity());
-        etPK.setText(Integer.toString(insured.getPostCode()));
-        etPhone.setText(insured.getPhoneNumber());
-        etEmail.setText(insured.getEmail());
+        bAllGO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoadPoliciesActivity.this, GOActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+            }
+        });
+
+        bAllKasko.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoadPoliciesActivity.this, KaskoActivity.class);
+                intent.putExtra("insured", getParcelableInsured());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,16 +55,16 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_home:
-                intent = new Intent(SettingsActivity.this, AfterLoginActivity.class);
+                intent = new Intent(LoadPoliciesActivity.this, AfterLoginActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
             case R.id.action_vehicles:
-                intent = new Intent(SettingsActivity.this, LoadVehiclesActivity.class);
+                intent = new Intent(LoadPoliciesActivity.this, LoadVehiclesActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
-            case R.id.action_ins:
-                intent = new Intent(SettingsActivity.this, LoadPoliciesActivity.class);
+            case R.id.action_settings:
+                intent = new Intent(LoadPoliciesActivity.this, SettingsActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;

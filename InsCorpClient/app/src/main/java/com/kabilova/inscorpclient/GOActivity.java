@@ -12,9 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.kabilova.model.ParcelableInsured;
-import com.kabilova.model.ParcelablePolicyKasko;
+import com.kabilova.model.ParcelablePolicyGO;
 import com.kabilova.model.ParcelableTariffGO;
-import com.kabilova.model.ParcelableTariffKasko;
 import com.kabilova.model.ParcelableVehicle;
 import com.kabilova.model.ParcelableVehicleSubtype;
 import com.kabilova.model.ParcelableVehicleType;
@@ -35,81 +34,76 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import kabilova.tu.inscorp.model.policy.GO;
-import kabilova.tu.inscorp.model.policy.Kasko;
-import kabilova.tu.inscorp.model.tariff.Tariff;
 import kabilova.tu.inscorp.model.tariff.TariffGO;
-import kabilova.tu.inscorp.model.tariff.TariffKasko;
 import kabilova.tu.inscorp.model.user.Insured;
 import kabilova.tu.inscorp.model.vehicle.Vehicle;
 import kabilova.tu.inscorp.model.vehicle.VehicleSubtype;
 import kabilova.tu.inscorp.model.vehicle.VehicleType;
 
-public class ActiveKaskoActivity extends AppCompatActivity {
-    final String URL_PATH = "http://10.0.2.2:4000/inscorp/loadActivePoliciesKasko";
-    ListView activePolicies;
+public class GOActivity extends AppCompatActivity {
+    final String URL_PATH = "http://10.0.2.2:4000/inscorp/loadPoliciesGO";
+    ListView policies;
     List<String> list;
-    List<Kasko> policiesKasko = new ArrayList<>();
+    List<GO> policiesGO = new ArrayList<>();
     private Insured insured;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_active_kasko);
-
+        setContentView(R.layout.activity_go);
         insured = getIntent().getParcelableExtra("insured");
-        activePolicies = (ListView) findViewById(R.id.lvActiveKasko);
+        policies = (ListView) findViewById(R.id.lvGO);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("insured", insured.getId());
         invokeWS(requestParams);
 
-        activePolicies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        policies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ActiveKaskoActivity.this, PolicyKaskoActivity.class);
+                Intent intent = new Intent(GOActivity.this, PolicyGOActivity.class);
 
-                ParcelablePolicyKasko parcelablePolicyKasko = new ParcelablePolicyKasko();
-                parcelablePolicyKasko.setPolicaID(policiesKasko.get(position).getPolicaID());
-                parcelablePolicyKasko.setDateFrom(policiesKasko.get(position).getDateFrom());
-                parcelablePolicyKasko.setDateTo(policiesKasko.get(position).getDateTo());
+                ParcelablePolicyGO parcelablePolicyGO = new ParcelablePolicyGO();
+                parcelablePolicyGO.setPolicaID(policiesGO.get(position).getPolicaID());
+                parcelablePolicyGO.setDateFrom(policiesGO.get(position).getDateFrom());
+                parcelablePolicyGO.setDateTo(policiesGO.get(position).getDateTo());
 
                 ParcelableVehicle parcelableVehicle = new ParcelableVehicle();
                 ParcelableVehicleSubtype parcelableVehicleSubtype = new ParcelableVehicleSubtype();
                 ParcelableVehicleType parcelableVehicleType = new ParcelableVehicleType();
 
-                parcelableVehicleType.setVehicleType(policiesKasko.get(position).getVehicle().getVehicleSubtype().getVehicleType().getVehicleType());
+                parcelableVehicleType.setVehicleType(policiesGO.get(position).getVehicle().getVehicleSubtype().getVehicleType().getVehicleType());
 
-                parcelableVehicleSubtype.setId(policiesKasko.get(position).getVehicle().getVehicleSubtype().getId());
+                parcelableVehicleSubtype.setId(policiesGO.get(position).getVehicle().getVehicleSubtype().getId());
                 parcelableVehicleSubtype.setVehicleType(parcelableVehicleType);
-                parcelableVehicleSubtype.setSubtype(policiesKasko.get(position).getVehicle().getVehicleSubtype().getSubtype());
+                parcelableVehicleSubtype.setSubtype(policiesGO.get(position).getVehicle().getVehicleSubtype().getSubtype());
 
-                parcelableVehicle.setVehicleID(policiesKasko.get(position).getVehicle().getVehicleID());
+                parcelableVehicle.setVehicleID(policiesGO.get(position).getVehicle().getVehicleID());
 //                parcelableVehicle.setInsured(((Insured) in.readParcelable(Insurer.class.getClassLoader())));
 //                parcelableVehicle.setVehicleType((VehicleType) in.readParcelable(VehicleType.class.getClassLoader()));
                 parcelableVehicle.setVehicleSubtype(parcelableVehicleSubtype);
-                parcelableVehicle.setRegNum(policiesKasko.get(position).getVehicle().getRegNum());
-                parcelableVehicle.setRAMA(policiesKasko.get(position).getVehicle().getRAMA());
-                parcelableVehicle.setBrand(policiesKasko.get(position).getVehicle().getBrand());
-                parcelableVehicle.setModel(policiesKasko.get(position).getVehicle().getModel());
+                parcelableVehicle.setRegNum(policiesGO.get(position).getVehicle().getRegNum());
+                parcelableVehicle.setRAMA(policiesGO.get(position).getVehicle().getRAMA());
+                parcelableVehicle.setBrand(policiesGO.get(position).getVehicle().getBrand());
+                parcelableVehicle.setModel(policiesGO.get(position).getVehicle().getModel());
 //                parcelableVehicle.setFirstReg((Calendar) in.readValue(getClass().getClassLoader()));
-                parcelableVehicle.setYears(policiesKasko.get(position).getVehicle().getYears());
-                parcelableVehicle.setEngine(policiesKasko.get(position).getVehicle().getEngine());
-                parcelableVehicle.setColor(policiesKasko.get(position).getVehicle().getColor());
-                parcelableVehicle.setPlaceNumber(policiesKasko.get(position).getVehicle().getPlaceNumber());
+                parcelableVehicle.setYears(policiesGO.get(position).getVehicle().getYears());
+                parcelableVehicle.setEngine(policiesGO.get(position).getVehicle().getEngine());
+                parcelableVehicle.setColor(policiesGO.get(position).getVehicle().getColor());
+                parcelableVehicle.setPlaceNumber(policiesGO.get(position).getVehicle().getPlaceNumber());
 
-                parcelablePolicyKasko.setVehicle(parcelableVehicle);
-                parcelablePolicyKasko.setInsured(insured);
+                parcelablePolicyGO.setVehicle(parcelableVehicle);
+                parcelablePolicyGO.setInsured(insured);
 
-                ParcelableTariffKasko parcelableTariffKasko = new ParcelableTariffKasko();
-                parcelableTariffKasko.setKaskoPercent(policiesKasko.get(position).getTariffKasko().getKaskoPercent());
+                ParcelableTariffGO parcelableTariffGO = new ParcelableTariffGO();
+                parcelableTariffGO.setZone(policiesGO.get(position).getTariffGO().getZone());
+                parcelableTariffGO.setValue(policiesGO.get(position).getTariffGO().getValue());
 
-                parcelablePolicyKasko.setTariffKasko(parcelableTariffKasko);
-                parcelablePolicyKasko.setKaskoType(policiesKasko.get(position).getKaskoType());
-                parcelablePolicyKasko.setVehicleValue(policiesKasko.get(position).getVehicleValue());
-                parcelablePolicyKasko.setValue(policiesKasko.get(position).getValue());
-
+                parcelablePolicyGO.setTariffGO(parcelableTariffGO);
+                System.out.println("vehicle: " + policiesGO.get(position).getVehicle() );
                 intent.putExtra("insured", getParcelableInsured());
-                intent.putExtra("kasko", parcelablePolicyKasko);
+                intent.putExtra("go", parcelablePolicyGO);
                 startActivity(intent);
             }
         });
@@ -132,21 +126,22 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                         JSONObject jsonObject=jsonArray.getJSONObject(i);
                         System.out.println(jsonObject);
 
-                        Kasko kasko = new Kasko();
-                        kasko.setPolicaID(jsonObject.getString("policaID"));
+                        GO go = new GO();
+                        go.setPolicaID(jsonObject.getString("policaID"));
                         Calendar dateFrom = Calendar.getInstance();
                         Calendar dateTo = Calendar.getInstance();
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                         dateFrom.setTime(simpleDateFormat.parse(jsonObject.getString("dateFrom")));
-                        kasko.setDateFrom(dateFrom);
+                        go.setDateFrom(dateFrom);
                         dateTo.setTime(simpleDateFormat.parse(jsonObject.getString("dateTo")));
-                        kasko.setDateTo(dateTo);
+                        go.setDateTo(dateTo);
 //                        list.add(String.valueOf(jsonObject.getString("policytype")) + " " + jsonObject.getString("dateTo"));
 
                         try {
                             JSONObject insObj = new JSONObject(jsonObject.getString("insured"));
                             Insured insured = new Insured();
                             insured.setId(insObj.getInt("id"));
+
 
                             JSONObject vObj = new JSONObject(jsonObject.getString("vehicle"));
                             Vehicle vehicle = new Vehicle();
@@ -172,18 +167,20 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                             vehicle.setColor(vObj.getString("color"));
                             vehicle.setPlaceNumber(vObj.getInt("placeNumber"));
 
-                            kasko.setVehicle(vehicle);
-                            kasko.setValue(jsonObject.getDouble("value"));
-                            JSONObject vTariffKasko = new JSONObject(jsonObject.getString("tariffKasko"));
-                            TariffKasko tariffKasko = new TariffKasko();
-                            tariffKasko.setTariffID(vTariffKasko.getInt("tariffID"));
-                            tariffKasko.setKaskoPercent(vTariffKasko.getInt("kaskoPercent"));
-                            kasko.setTariffKasko(tariffKasko);
+                            go.setVehicle(vehicle);
 
-                            kasko.setKaskoType(jsonObject.getString("kaskoType"));
-                            kasko.setVehicleValue(jsonObject.getDouble("vehicleValue"));
+//                            Tariff tariff = new Tariff();
+//                            tariff.setValue(new JSONObject(jsonObject.getString("tariff")).getDouble("value"));
+//                            go.setTariff(tariff);
 
-                            policiesKasko.add(kasko);
+                            JSONObject vTariffGO = new JSONObject(jsonObject.getString("tariffGO"));
+                            TariffGO tariffGO = new TariffGO();
+                            tariffGO.setTariffID(vTariffGO.getInt("tariffID"));
+                            tariffGO.setValue(vTariffGO.getDouble("value"));
+                            tariffGO.setZone(vTariffGO.getInt("zone"));
+                            go.setTariffGO(tariffGO);
+
+                            policiesGO.add(go);
                             list.add(String.valueOf(jsonObject.getString("policytype")) + " " + vObj.getString("regNum"));
                         } catch(JSONException e){
                             e.printStackTrace();
@@ -197,7 +194,7 @@ public class ActiveKaskoActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                activePolicies.setAdapter(adapter);
+                policies.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
 //                    new Handler().postDelayed(new Runnable() {
@@ -233,21 +230,21 @@ public class ActiveKaskoActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_home:
-                intent = new Intent(ActiveKaskoActivity.this, AfterLoginActivity.class);
+                intent = new Intent(GOActivity.this, AfterLoginActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
             case R.id.action_vehicles:
-                intent = new Intent(ActiveKaskoActivity.this, LoadVehiclesActivity.class);
+                intent = new Intent(GOActivity.this, LoadVehiclesActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
             case R.id.action_ins:
-                intent = new Intent(ActiveKaskoActivity.this, LoadPoliciesActivity.class);
+                intent = new Intent(GOActivity.this, LoadPoliciesActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
             case R.id.action_settings:
-                intent = new Intent(ActiveKaskoActivity.this, SettingsActivity.class);
+                intent = new Intent(GOActivity.this, SettingsActivity.class);
                 intent.putExtra("insured", getParcelableInsured());
                 startActivity(intent);
                 break;
@@ -275,3 +272,4 @@ public class ActiveKaskoActivity extends AppCompatActivity {
         return parcelableInsured;
     }
 }
+

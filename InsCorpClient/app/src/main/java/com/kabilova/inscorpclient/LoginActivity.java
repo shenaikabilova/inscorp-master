@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
                     String str = new String(responseBody, "UTF-8");
-
+                    System.out.println("str: " + str);
                     JSONObject myObject = new JSONObject(str);
                     Intent intent;
 
